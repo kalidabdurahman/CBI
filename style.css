@@ -1905,11 +1905,23 @@ button.order-button:hover {
   position: absolute;
   top: 30px;
   right: 30px;
-  font-size: 2.5em;
+  /* make it a bit smaller */
+  font-size: 1.8em;
+  /* force the “×” to be pure black */
+  color: #000;
+  /* if your font supports it, use a lighter weight for a thinner look */
+  font-weight: 300;
+  /* tighten the line-height so it doesn’t feel too tall */
+  line-height: 1;
   background: none;
   border: none;
   cursor: pointer;
 }
+
+.addons-checkboxes { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; }
+.addons-checkboxes label { display: flex; align-items: center; font-weight: normal; }
+.addons-checkboxes input { margin-right: 6px; }
+
 
 .mobile-socials {
   margin-top: 40px;

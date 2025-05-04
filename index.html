@@ -396,6 +396,12 @@
                         <option value="delivery">Delivery</option>
                     </select>
                 </div>
+                <div id="deliveryInfo" 
+                    class="delivery-info" 
+                    style="display:none; font-size:0.8em; color:#666; margin-top:4px;">
+                 ~ $3/mile from New Brighton/Mounds View area <br>
+                </div>
+
         
                 <!-- Pickup Date -->
                 <div class="form-group">
@@ -453,7 +459,6 @@
                     <select id="size" name="size" required>
                       <option value="" disabled selected>Select a size</option>
                     </select>
-                    <div id="sizeInfo" class="size-info" style="margin-top: 8px; font-size: 0.9em; color: #444;"></div>
                   </div>
                   
             
@@ -474,23 +479,23 @@
                 </select>
                 </div>
 
-                <div class="form-group">
-                    <label for="addons">Add-Ons <span class="optional-note"></span></label>
-                    <select id="addons" name="addons">
-                      <option value="">None</option>
-                      <option value="Heavy Glitter">Heavy Glitter</option>
-                      <option value="Cherries">Cherries</option>
-                      <option value="Bows">Bows</option>
-                      <option value="Pearl Details">Hand-Placed Pearl Details</option>
-                      <option value="Fondant Details">Other Fondant Detailing</option>
-                      <option value="Vinyl Lettering">Vinyl Cursive Lettering</option>
-                      <option value="Flowers/Balls">Flowers or Colored Balls</option>
-                      <option value="Grad Caps">Graduation Caps (Paper)</option>
-                      <option value="Edible Images">Edible Images</option>
-                      <option value="Acrylic Topper">Acrylic Topper</option>
-                      <option value="Other">Other (please specify in notes)</option>
-                    </select>
-                  </div>                  
+                  <div class="form-group">
+                    <label>Add-Ons (Select as much as preferred) <span class="optional-note"></span></label> <br>
+                    <div class="addons-checkboxes">
+                      <label> Heavy Glitter<input type="checkbox" name="addons" value="Heavy Glitter"></label>
+                      <label> Cherries<input type="checkbox" name="addons" value="Cherries"></label>
+                      <label> Bows<input type="checkbox" name="addons" value="Bows"></label>
+                      <label> Hand-Placed Pearl Details<input type="checkbox" name="addons" value="Pearl Details"></label>
+                      <label> Other Fondant Detailing<input type="checkbox" name="addons" value="Fondant Details"></label>
+                      <label> Vinyl Cursive Lettering<input type="checkbox" name="addons" value="Vinyl Lettering"></label>
+                      <label> Flowers or Colored Balls<input type="checkbox" name="addons" value="Flowers/Balls"></label>
+                      <label> Graduation Caps (Paper)<input type="checkbox" name="addons" value="Grad Caps"></label>
+                      <label> Edible Images<input type="checkbox" name="addons" value="Edible Images"></label>
+                      <label> Acrylic Topper<input type="checkbox" name="addons" value="Acrylic Topper"></label>
+                      <label> Other (please specify in notes)<input type="checkbox" name="addons" value="Other"></label>
+                    </div>
+                  </div>
+                  
 
                 <div class="form-group">
                     <label>Upload Inspiration Picture(s)<span class="required-asterisk">*</span>  <span style="font-size: 0.8em;">(up to 3)</span></label>
@@ -500,11 +505,28 @@
                     <button type="button" id="addImageBtn" class="order-button" style="margin-top: 10px;">+ Add Another Image</button>
                     <div id="previewContainer" class="preview-container" style="margin-top: 10px;"></div>
                     </div>
+
+                    <div class="form-group">
+                        <label for="cakeDetails">
+                          Describe any specific details you'd like for your cake 
+                          <span class="required-asterisk">*</span>
+                        </label>
+                        <textarea
+                          id="cakeDetails"
+                          name="cakeDetails"
+                          rows="4"
+                          placeholder="Be as specific as possible about colors, theme, flavors, etc."
+                          required
+                        ></textarea>
+                      </div>
+                      
                                   
                 <div class="form-group">
                 <label for="notes">Any extra notes or requests?</label>
                 <textarea id="notes" name="notes" rows="4" placeholder="Anything else you'd like to include?"></textarea>
                 </div>
+
+                <div id="sizeInfo" class="size-info" style="margin-top: 8px; font-size: 0.9em; color: #444;"></div>
             
                 <button type="button" class="order-button prev-step">Back</button>
                 <button type="submit" class="order-button">Submit</button>

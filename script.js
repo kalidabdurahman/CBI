@@ -541,6 +541,17 @@ function updatePreview() {
     minDate.setDate(minDate.getDate() + 6);
     pickupDateField.min = minDate.toISOString().split("T")[0];
 
+    const deliverySelect = document.getElementById("deliveryOption");
+    const deliveryInfo   = document.getElementById("deliveryInfo"); // your hidden div :contentReference[oaicite:0]{index=0}:contentReference[oaicite:1]{index=1}
+
+    deliverySelect.addEventListener("change", e => {
+      if (e.target.value === "delivery") {
+        deliveryInfo.style.display = "block";
+      } else {
+        deliveryInfo.style.display = "none";
+      }
+    });
+
 
     const addImageBtn = document.getElementById("addImageBtn");
     const imageInputsContainer = document.getElementById("imageInputsContainer");
@@ -582,7 +593,7 @@ function updatePreview() {
     
         if (sizeDetails[selectedSize]) {
           const { price, serves } = sizeDetails[selectedSize];
-          infoDiv.innerHTML = `${price} – <em>${serves}</em>`;
+          infoDiv.innerHTML = `~${price} – <em>${serves}</em>`;
         } else {
           infoDiv.innerHTML = "";
         }
@@ -801,7 +812,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbxELWNUMYVPoi1-ryccEk_dGU1FtnY7BYsE5iIngulyzphd0uckHWT75afj0Sc7Rimx/exec';
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbx6eh_ZJWWV-F9pwlcIXUUzIJwFr-mMEp7bG_lxsWBx06xC5zRMHgVTSuBWMG2w5Y1-/exec';
 
     const submitBtn = form.querySelector("button[type='submit']");
     submitBtn.disabled = true;
