@@ -607,16 +607,16 @@ function updatePreview() {
 
 
 const flavorOptions = [
-    "Vanilla", "Chocolate", "Marble", "Confetti",
+    "French Vanilla", "Double Chocolate", "Marble", "Confetti",
     "Strawberry", "Red Velvet", "Cookies & Cream"
   ];
   
   const frostingOptions = [
-    "Vanilla Buttercream", "Chocolate Buttercream", "Cream Cheese"
+    "Vanilla Buttercream", "Chocolate Buttercream", "Whipped Cream", "Vanilla Ganache", "Chocolate Ganache"
   ];
   
   const fillingOptions = [
-    "Strawberries", "Strawberries & Cream", "Chocolate Fudge",
+    "Cream Cheese","Strawberries", "Strawberries & Cream", "Chocolate Fudge",
     "Cookies & Cream", "Lotus Biscoff", "Reese's Peanut Butter"
   ];
   
