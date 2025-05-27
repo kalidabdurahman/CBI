@@ -897,7 +897,7 @@ h2, h3 {
 
 /* Flavors Section */
 #flavors {
-  background: url('images/iftu/sprinkle-desktop.png') no-repeat center top;
+  /* background: url('images/iftu/sprinkle-desktop.png') no-repeat center top; */
   background-size: cover;
   background-attachment: fixed;
   padding: 60px 20px;
@@ -944,7 +944,7 @@ h2, h3 {
 /* Mobile adjustment */
 @media (max-width: 768px) {
   #flavors {
-    background-image: url('images/iftu/sprinkle.png');
+    /* background-image: url('images/iftu/sprinkle.png'); */
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
