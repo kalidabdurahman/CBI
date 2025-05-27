@@ -53,27 +53,6 @@ document.querySelectorAll('.nav-link').forEach(link => {
 });
   
 
-document.querySelector('.order-button').addEventListener('click', function(event) {
-    event.preventDefault();
-  
-    const wasAlreadyOnOrderPage = document.querySelector('#order').classList.contains('active');
-    navigateToPage('order');
-  
-    // Check again *after* short delay to allow page switch
-    setTimeout(() => {
-      const nowOnOrderPage = document.querySelector('#order').classList.contains('active');
-      if (!wasAlreadyOnOrderPage && nowOnOrderPage) {
-        const modal = document.getElementById('orderModal');
-        modal.style.display = 'flex';
-        setTimeout(() => {
-          modal.classList.add('show');
-        }, 10);
-      }
-    }, 20);
-  });
-  
-  
-
 
 // Function to initially reveal gallery items with a staggered animation
 function revealGalleryItems() {
@@ -102,6 +81,28 @@ function revealOnScroll() {
         }
     });
 }
+
+// ▼ Back to Top button on Gallery ▼
+const backToTopBtn = document.getElementById("backToTop");
+
+window.addEventListener("scroll", () => {
+  // Only show when Gallery page is active AND scrolled down
+  const galleryActive = document
+    .getElementById("gallery")
+    .classList.contains("active");
+
+  if (galleryActive && window.scrollY > 50) {
+    backToTopBtn.style.display = "block";
+  } else {
+    backToTopBtn.style.display = "none";
+  }
+});
+
+backToTopBtn.addEventListener("click", () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+// ▲ end Back to Top ▼
+
 
 // Add event listener for scroll events
 window.addEventListener('scroll', revealOnScroll);
@@ -171,6 +172,11 @@ function navigateToPage(targetPage) {
   } else {
       revealGalleryItems();
   }
+
+  const heroBtns = document.querySelector(".hero-top-right");
+  if (heroBtns) {
+    heroBtns.style.display = targetPage === "home" ? "flex" : "none";
+  }
 }
 
 
@@ -204,6 +210,24 @@ document.querySelectorAll('.cake-type-button').forEach(button => {
         }
     });
 });
+
+// ▼ open “Order Rules” modal when clicking the inline link ▼
+const showRulesLink = document.getElementById("showRulesLink");
+const orderModal    = document.getElementById("orderModal");
+
+showRulesLink.addEventListener("click", e => {
+  e.preventDefault();
+  orderModal.style.display = "flex";
+  setTimeout(() => orderModal.classList.add("show"), 10);
+});
+
+// reuse your existing “I Agree” button to close the modal
+document.getElementById("agreeButton").addEventListener("click", () => {
+  orderModal.classList.remove("show");
+  setTimeout(() => (orderModal.style.display = "none"), 300);
+});
+
+
 
 
 
@@ -399,15 +423,6 @@ function updatePreview() {
   });
   
 
-  // Show the order modal with animation when the order page is opened
-    document.querySelector('.nav-link[data-page="order"]').addEventListener('click', function(event) {
-        event.preventDefault();
-        const modal = document.getElementById('orderModal');
-        modal.style.display = 'flex'; // Show the modal
-        setTimeout(() => {
-            modal.classList.add('show'); // Add the scaling animation
-        }, 10); // Short delay to trigger CSS transition
-    });
 
 
 
@@ -465,6 +480,26 @@ function updatePreview() {
 
       nextBtns.forEach(btn => {
         btn.addEventListener('click', () => {
+          // ▼ Prevent advancing from Step 1 if date is invalid ▼
+          if (currentStep === 0) {
+            const dateVal = document.getElementById("pickupDate").value;
+            // If they haven’t chosen a date yet, let the required-field logic handle it
+            if (dateVal) {
+              const chosen = new Date(dateVal + "T00:00");
+              const today  = new Date();
+              const diffDays = (chosen - today) / (1000 * 60 * 60 * 24);
+              // Monday is getDay() === 1, and we need at least 6 days lead time
+              if (diffDays < 6 || chosen.getDay() === 1) {
+                showFormError(
+                  "⚠️ Please choose a valid date: at least one week notice and not a Monday."
+                );
+                return; // stop here—won’t move to Step 2
+              }
+            }
+          }
+          // ▲ end date-validation guard ▲
+
+
           const currentStepFields = formSteps[currentStep].querySelectorAll('input, select, textarea');
           let allValid = true;
           let firstInvalidField = null;
@@ -541,6 +576,18 @@ function updatePreview() {
     minDate.setDate(minDate.getDate() + 6);
     pickupDateField.min = minDate.toISOString().split("T")[0];
 
+    // ▽ block out Mondays ▽
+    pickupDateField.addEventListener("change", function(e) {
+      const val = e.target.value;
+      if (!val) return;                   // nothing chosen
+      const chosen = new Date(val + "T00:00");
+      if (chosen.getDay() === 1) {        // Monday === 1
+        e.target.value = "";              // clear the illegal choice
+      }
+    });
+    // ▲ end Monday blocker ▲
+
+
     const deliverySelect = document.getElementById("deliveryOption");
     const deliveryInfo   = document.getElementById("deliveryInfo"); // your hidden div :contentReference[oaicite:0]{index=0}:contentReference[oaicite:1]{index=1}
 
@@ -612,11 +659,11 @@ const flavorOptions = [
   ];
   
   const frostingOptions = [
-    "Vanilla Buttercream", "Chocolate Buttercream", "Whipped Cream", "Vanilla Ganache", "Chocolate Ganache"
+    "Vanilla Buttercream", "Chocolate Buttercream", "Vanilla Ganache", "Chocolate Ganache"
   ];
   
   const fillingOptions = [
-    "Cream Cheese","Strawberries", "Strawberries & Cream", "Chocolate Fudge",
+    "Cream Cheese","Whipped Cream", "Strawberries", "Strawberries & Cream", "Chocolate Fudge",
     "Cookies & Cream", "Lotus Biscoff", "Reese's Peanut Butter"
   ];
   
@@ -735,6 +782,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.getElementById("orderForm").addEventListener("submit", async function (e) {
     e.preventDefault();
+
+      // ▼ Require the “I agree to Order Rules” checkbox ▼
+  const agreeCheckbox = document.getElementById("agreeRules");
+  if (!agreeCheckbox.checked) {
+    showFormError("⚠️ You must agree to the Order Rules before submitting.");
+    agreeCheckbox.focus();
+    return;  // stop submission
+  }
+  // ▲ end checkbox guard ▲
+
 
     const cakeType = document.getElementById("cakeType").value;
     const size     = document.getElementById("size").value;
@@ -869,23 +926,6 @@ document.addEventListener("DOMContentLoaded", () => {
       alert("⚠️ Submission failed. Try again or contact on Instagram.");
     }
   });
-  
-    // Show modal when homepage "Order Now!" button is clicked
-    const heroOrderBtn = document.getElementById("heroOrderBtn");
-    if (heroOrderBtn) {
-    heroOrderBtn.addEventListener("click", function (e) {
-        e.preventDefault();
-        navigateToPage("order");
-
-        setTimeout(() => {
-        const modal = document.getElementById("orderModal");
-        modal.style.display = "flex";
-        setTimeout(() => {
-            modal.classList.add("show");
-        }, 10);
-        }, 50);
-    });
-    }
 
 // mobile nav links
 document.querySelectorAll('.mobile-nav-links a').forEach(link => {
