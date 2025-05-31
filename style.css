@@ -2951,3 +2951,15 @@ body.home-active .hero-top-right {
 
 
 
+/* ——————————————————————————————
+   Availability Note under Order header
+   Smaller text, subtle color
+   —————————————————————————————— */
+   .availability-note {
+    font-family: 'Viaoda Libre', serif;
+    font-size: 0.9em;       /* slightly smaller than normal body text */
+    color: #555;            /* medium‐dark gray so it’s readable but not too bold */
+    margin: 0.5rem 0 1rem;  /* some space above/below to separate from header and form */
+    line-height: 1.4;       /* a bit more breathing room if it wraps */
+  }
+  

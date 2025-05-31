@@ -576,16 +576,36 @@ function updatePreview() {
     minDate.setDate(minDate.getDate() + 6);
     pickupDateField.min = minDate.toISOString().split("T")[0];
 
-    // ▽ block out Mondays ▽
-    pickupDateField.addEventListener("change", function(e) {
-      const val = e.target.value;
-      if (!val) return;                   // nothing chosen
-      const chosen = new Date(val + "T00:00");
-      if (chosen.getDay() === 1) {        // Monday === 1
-        e.target.value = "";              // clear the illegal choice
-      }
-    });
-    // ▲ end Monday blocker ▲
+// ▽ block out Mondays AND specific dates ▽
+pickupDateField.addEventListener("change", function(e) {
+  const val = e.target.value;
+  if (!val) return; // no date chosen, so do nothing
+
+  // Parse the chosen date (assumes "YYYY-MM-DD")
+  const chosen = new Date(val + "T00:00");
+  const dayOfWeek = chosen.getDay(); // 0=Sunday, 1=Monday, …, 6=Saturday
+
+  // 1) Block all Mondays
+  if (dayOfWeek === 1) {
+    showFormError("⚠️ Mondays are unavailable. Please pick another day.");
+    e.target.value = "";
+    return;
+  }
+
+  // 2) Block these exact dates: June 11, 12, 14, 2025
+  //    (format: "YYYY-MM-DD")
+  const invalidDates = ["2025-06-11", "2025-06-12", "2025-06-14"];
+  if (invalidDates.includes(val)) {
+    showFormError("⚠️ That date is unavailable. Please choose another day.");
+    e.target.value = "";
+    return;
+  }
+
+  // If we reach here, the date is allowed—clear any previous error
+  clearFormError();
+});
+// ▲ end Monday & specific-date blocker ▲
+
 
 
     const deliverySelect = document.getElementById("deliveryOption");
