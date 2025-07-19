@@ -98,6 +98,18 @@
         <section id="gallery" class="page">
             <h2 class="section-heading">GALLERY</h2>
             <div class="gallery">
+                <img src="images/gallery/cake36.png" alt="Cake 36" class="gallery-item">
+                <img src="images/gallery/cake37.png" alt="Cake 37" class="gallery-item">
+                <img src="images/gallery/cake38.png" alt="Cake 38" class="gallery-item">
+                <img src="images/gallery/cake39.png" alt="Cake 39" class="gallery-item">
+                <img src="images/gallery/cake40.png" alt="Cake 40" class="gallery-item">
+                <img src="images/gallery/cake41.png" alt="Cake 41" class="gallery-item">
+                <img src="images/gallery/cake42.png" alt="Cake 42" class="gallery-item">
+                <img src="images/gallery/cake43.png" alt="Cake 43" class="gallery-item">
+                <img src="images/gallery/cake44.png" alt="Cake 44" class="gallery-item">
+                <img src="images/gallery/cake45.png" alt="Cake 45" class="gallery-item">
+                <img src="images/gallery/cake46.png" alt="Cake 46" class="gallery-item">
+                <img src="images/gallery/cake47.png" alt="Cake 47" class="gallery-item">
                 <img src="images/gallery/cake2.png" alt="Cake 2" class="gallery-item">
                 <img src="images/gallery/cake3.png" alt="Cake 3" class="gallery-item">
                 <img src="images/gallery/cake4.png" alt="Cake 4" class="gallery-item">
@@ -364,92 +376,10 @@
             </div> 
             <div id="formError" style="display: none;" class="form-error"></div>
             <form id="orderForm">
-                <div class="form-step active"> <!-- ✅ ADD THIS DIV -->
-                    <div id="formErrorStep1" class="form-error" style="display: none;"></div>
-                    <!-- Step 1 --> 
-                <!-- Customer Name -->
-                <div class="form-group">
-                    <label for="firstName">First Name<span class="required-asterisk">*</span> </label>
-                    <input type="text" id="firstName" name="firstName" placeholder="Your First Name" required>
-                </div>
-                <div class="form-group">
-                    <label for="lastName">Last Name<span class="required-asterisk">*</span> </label>
-                    <input type="text" id="lastName" name="lastName" placeholder="Your Last Name" required>
-                </div>
-        
-                <!-- Preferred Form of Contact -->
-                <div class="form-group">
-                    <label for="contactPreference">Preferred Form of Contact<span class="required-asterisk">*</span> </label>
-                    <select id="contactPreference" name="contactPreference" required>
-                        <option value="" disabled selected>Select a Contact Method<span class="required-asterisk">*</span> </option>
-                        <option value="instagram">Instagram DM</option>
-                        <option value="text">Text Message</option>
-                        <option value="email">Email</option>
-                        <option value="other">Other (specify)</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="contactInfo">Info for Contact (e.g., Instagram handle, phone, or email) <span class="required-asterisk">*</span> </label>
-                    <input type="text" id="contactInfo" name="contactInfo" placeholder="Your Contact Info" required>
-                </div>
-        
-                <!-- Pickup or Delivery -->
-                <div class="form-group">
-                    <label for="deliveryOption">Would you like the cake picked up or delivered?<span class="required-asterisk">*</span> </label>
-                    <select id="deliveryOption" name="deliveryOption" required>
-                        <option value="" disabled selected>Select an Option</option>
-                        <option value="pickup">Pick Up</option>
-                        <option value="delivery">Delivery</option>
-                    </select>
-                </div>
-                <div id="deliveryInfo" 
-                    class="delivery-info" 
-                    style="display:none; font-size:0.8em; color:#666; margin-top:4px;">
-                 ~ $3/mile from New Brighton/Mounds View area <br>
-                </div>
 
-        
-                <!-- Pickup Date -->
-                <div class="form-group">
-                    <label for="pickupDate">
-                        What day would you like your cake?
-                        <span class="required-asterisk">*</span>
-                        <span style="font-size: 0.8em;"><i>Monday's Unavailable</i></span>
-                      </label>                      
-                    <input type="date" id="pickupDate" name="pickupDate" min="" required>
-                </div>
-
-                <!-- Payment Type -->
-                <div class="form-group">
-                    <label for="paymentType">Payment Type<span class="required-asterisk">*</span></label>
-                    <select id="paymentType" name="paymentType" required>
-                    <option value="" disabled selected>Select a payment method</option>
-                    <option value="cashapp">CashApp</option>
-                    <option value="venmo">Venmo</option>
-                    <option value="apple_cash">Apple Cash</option>
-                    </select>
-                </div>  
-        
-                <!-- Occasion -->
-                <div class="form-group">
-                    <label for="occasion">Occasion<span class="required-asterisk">*</span> </label>
-                    <input type="text" id="occasion" name="occasion" placeholder="e.g., Birthday, Wedding, Graduation Party" required>
-                </div>
-        
-                <!-- How Did You Hear About Cakes by Iftu -->
-                <div class="form-group">
-                    <label for="referralSource">How did you hear about CakesByIftu?</label>
-                    <input type="text" id="referralSource" name="referralSource" placeholder="e.g., Instagram, Friend, etc.">
-                </div>
-        
-                <!-- Next Button -->
-                <button type="button" id="nextButton" class="order-button next-step">Next</button>
-
-            </div> <!-- ✅ CLOSE the step -->
-
-            <!-- Step 2 -->
-            <div class="form-step">
-                <div id="formErrorStep2" class="form-error" style="display: none;"></div>
+             <!-- CAKE DETAILS: now the first, active step, with formErrorStep1 -->
+             <div class="form-step active">
+                <div id="formErrorStep1" class="form-error" style="display: none;"></div>
                 <div class="form-group">
                 <label for="cakeType">What type of cake would you like? <span class="required-asterisk">*</span> </label>
                 <select id="cakeType" name="cakeType" required>
@@ -538,12 +468,115 @@
 
                 <div id="sizeInfo" class="size-info" style="margin-top: 8px; font-size: 0.9em; color: #444;"></div>
             
-                <button type="button" class="order-button prev-step">Back</button>
+                <button type="button" class="order-button next-step">Next - Contact Info</button>
+            </div> 
+            
 
-                <div class="form-group terms"> <label> <input type="checkbox" id="agreeRules" name="agreeRules" required/> I agree to the <a href="#" id="showRulesLink">Order Rules <span class="required-asterisk">*</span></a>  </label> </div>
-                  
+            <!-- PERSONAL INFO: second step, no active, with formErrorStep2 -->
+            <div class="form-step">
+                <div id="formErrorStep2" class="form-error" style="display: none;"></div>
+
+                <!-- Customer Name -->
+                <div class="form-group">
+                    <label for="firstName">First Name<span class="required-asterisk">*</span> </label>
+                    <input type="text" id="firstName" name="firstName" placeholder="Your First Name" required>
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name<span class="required-asterisk">*</span> </label>
+                    <input type="text" id="lastName" name="lastName" placeholder="Your Last Name" required>
+                </div>
+        
+                <!-- Preferred Form of Contact -->
+                <div class="form-group">
+                    <label for="contactPreference">Preferred Form of Contact<span class="required-asterisk">*</span> </label>
+                    <select id="contactPreference" name="contactPreference" required>
+                        <option value="" disabled selected>Select a Contact Method<span class="required-asterisk">*</span> </option>
+                        <option value="instagram">Instagram DM</option>
+                        <option value="text">Text Message</option>
+                        <option value="email">Email</option>
+                        <option value="other">Other (specify)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="contactInfo">Info for Contact (e.g., Instagram handle, phone, or email) <span class="required-asterisk">*</span> </label>
+                    <input type="text" id="contactInfo" name="contactInfo" placeholder="Your Contact Info" required>
+                </div>
+        
+                <!-- Pickup or Delivery -->
+                <div class="form-group">
+                    <label for="deliveryOption">Would you like the cake picked up or delivered?<span class="required-asterisk">*</span> </label>
+                    <select id="deliveryOption" name="deliveryOption" required>
+                        <option value="" disabled selected>Select an Option</option>
+                        <option value="pickup">Pick Up</option>
+                        <option value="delivery">Delivery</option>
+                    </select>
+                </div>
+                <div id="deliveryInfo" 
+                    class="delivery-info" 
+                    style="display:none; font-size:0.8em; color:#666; margin-top:4px;">
+                 ~ $3/mile from New Brighton/Mounds View area <br>
+                </div>
+
+        
+                <!-- Pickup Date -->
+                <div class="form-group">
+                    <label for="pickupDate">
+                        What day would you like your cake?
+                        <span class="required-asterisk">*</span>
+                        <span style="font-size: 0.8em;"><i>Monday's Unavailable</i></span>
+                      </label>                      
+                    <input type="date" id="pickupDate" name="pickupDate" min="" required>
+                </div>
+
+                <!-- Payment Type -->
+                <div class="form-group">
+                    <label for="paymentType">Payment Type<span class="required-asterisk">*</span></label>
+                    <select id="paymentType" name="paymentType" required>
+                    <option value="" disabled selected>Select a payment method</option>
+                    <option value="cashapp">CashApp</option>
+                    <option value="venmo">Venmo</option>
+                    <option value="apple_cash">Apple Cash</option>
+                    </select>
+                </div>  
+        
+                <!-- Occasion -->
+                <div class="form-group">
+                    <label for="occasion">Occasion<span class="required-asterisk">*</span> </label>
+                    <input type="text" id="occasion" name="occasion" placeholder="e.g., Birthday, Wedding, Graduation Party" required>
+                </div>
+        
+                <!-- How Did You Hear About Cakes by Iftu -->
+                <div class="form-group">
+                    <label for="referralSource">How did you hear about CakesByIftu?</label>
+                    <input type="text" id="referralSource" name="referralSource" placeholder="e.g., Instagram, Friend, etc.">
+                </div>
+        
+                <button type="button" class="order-button prev-step">Back - Cake Details</button>
+                <!-- Next Button -->
+                <button type="button" id="nextButton" class="order-button next-step">Next - Review Your Order</button>
+
+            </div> <!-- ✅ CLOSE the step -->
+
+
+            <!-- ===== STEP 3: REVIEW YOUR ORDER ===== -->
+            <div class="form-step">
+                <h3>Review Your Order</h3>
+            
+                <!-- summary will go here -->
+                <div id="orderReviewSummary"></div>
+            
+                <!-- move your checkbox & link here -->
+                <div class="form-group terms">
+                <label>
+                    <input type="checkbox" id="agreeRules" name="agreeRules" required/>
+                    I agree to the <a href="#" id="showRulesLink">Order Agreement<span class="required-asterisk">*</span></a>
+                </label>
+                </div>
+            
+                <button type="button" class="order-button prev-step">Back - Contact Info</button>
                 <button type="submit" class="order-button">Submit</button>
-            </div>  
+            </div>
+            <!-- ===== end STEP 3 ===== -->
             </form>
 
             <div id="confirmationMessage" class="confirmation-message" style="display: none;">

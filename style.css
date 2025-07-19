@@ -484,7 +484,7 @@ h2, h3 {
 /* Contact Section */
 #contact {
   position: relative;
-  background: url('images/iftu/heart-desktop.png') no-repeat center bottom;
+  /* background: url('images/iftu/heart-desktop.png') no-repeat center bottom; */
   background-size: cover;
   background-attachment: scroll;
   background-color: #eadaf8;
@@ -511,7 +511,7 @@ h2, h3 {
 /* Mobile: still cover the whole screen */
 @media (max-width: 768px) {
   #contact {
-    background: url('images/iftu/heart.png') no-repeat center center;
+    /* background: url('images/iftu/heart.png') no-repeat center center; */
     background-size: cover; /* 🔥 switch back to full screen for mobile */
     background-attachment: scroll;
     background-position: center center;
@@ -743,7 +743,7 @@ h2, h3 {
 
 
 #reviews {
-    background: url('images/iftu/glasses.png') no-repeat center top;
+    /* background: url('images/iftu/glasses.png') no-repeat center top; */
     background-size: cover;
     background-attachment: fixed;
     padding: 60px 40px;
@@ -1235,9 +1235,9 @@ h2, h3 {
 /* Order Section */
 /* Desktop */
 #order {
-  background: url('images/iftu/double-desktop.png') no-repeat center bottom;
+  /* background: url('images/iftu/double-desktop.png') no-repeat center bottom;
   background-size: cover;
-  background-attachment: scroll;
+  background-attachment: scroll; */
   min-height: 100vh;
   text-align: center;
   position: relative;
@@ -1261,11 +1261,11 @@ h2, h3 {
 
 /* Mobile */
 @media (max-width: 768px) {
-  #order {
+  /* #order {
     background: url('images/iftu/double-mobile.png') no-repeat center center;
     background-size: cover;
     background-attachment: scroll;
-  }
+  } */
 }
 
 
@@ -2963,3 +2963,26 @@ body.home-active .hero-top-right {
     line-height: 1.4;       /* a bit more breathing room if it wraps */
   }
   
+
+  /* — Review page summary list — */
+#orderReviewSummary ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem;
+}
+#orderReviewSummary li {
+  margin-bottom: 0.5rem;
+}
+
+
+/* ─── Override Order & Contact to use the lilac background ─── */
+#order,
+#contact {
+  background-color: var(--iftu-lilac) !important;
+}
+
+/* ─── Kill the white “haze” overlay ─── */
+#order::before,
+#contact::before {
+  background-color: transparent !important;
+}

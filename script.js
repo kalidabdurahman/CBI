@@ -423,6 +423,43 @@ function updatePreview() {
   });
   
 
+    // ▼ build the HTML for Step 3 review ▼
+  function generateReviewSummary() {
+    const summaryDiv = document.getElementById("orderReviewSummary");
+    const formData   = new FormData(document.getElementById("orderForm"));
+    // list each field in order:
+    const fields = [
+      { label: "First Name",         name: "firstName" },
+      { label: "Last Name",          name: "lastName" },
+      { label: "Contact Preference", name: "contactPreference" },
+      { label: "Contact Info",       name: "contactInfo" },
+      { label: "Delivery Option",    name: "deliveryOption" },
+      { label: "Pickup Date",        name: "pickupDate" },
+      { label: "Payment Type",       name: "paymentType" },
+      { label: "Occasion",           name: "occasion" },
+      { label: "Referral Source",    name: "referralSource" },
+      { label: "Cake Type",          name: "cakeType" },
+      { label: "Size",               name: "size" },
+      { label: "Flavor",             name: "flavor" },
+      { label: "Frosting",           name: "frosting" },
+      { label: "Filling",            name: "filling" },
+      { label: "Add-Ons",            name: "addons" },
+      { label: "Cake Details",       name: "cakeDetails" },
+      { label: "Extra Notes",        name: "notes" }
+    ];
+
+    let html = "<ul style='list-style:none;padding:0;'>";
+    fields.forEach(f => {
+      const vals = formData.getAll(f.name);
+      const disp = vals.length > 1
+        ? vals.join(", ")
+        : formData.get(f.name) || "—";
+      html += `<li><strong>${f.label}:</strong> ${disp}</li>`;
+    });
+    html += "</ul>";
+    summaryDiv.innerHTML = html;
+  }
+  // ▲ end summary helper ▲
 
 
 
@@ -436,7 +473,7 @@ function updatePreview() {
           stepDiv.classList.toggle('active', index === step);
         });
       
-        if (step === 1) {
+        if (step === 0) {
           const cakeType = document.getElementById("cakeType").value;
           if (cakeType) {
             // 1. Populate first
@@ -475,13 +512,17 @@ function updatePreview() {
             }
           }
         }
+
+        if (step === 2) {
+          generateReviewSummary();
+        }
       }     
       
 
       nextBtns.forEach(btn => {
         btn.addEventListener('click', () => {
-          // ▼ Prevent advancing from Step 1 if date is invalid ▼
-          if (currentStep === 0) {
+          // ▼ Prevent advancing from PERSONAL-INFO (step 1) if date is invalid ▼
+          if (currentStep === 1) {
             const dateVal = document.getElementById("pickupDate").value;
             // If they haven’t chosen a date yet, let the required-field logic handle it
             if (dateVal) {
@@ -504,8 +545,8 @@ function updatePreview() {
           let allValid = true;
           let firstInvalidField = null;
       
-          // Special case for step 2 inspiration image validation
-          if (currentStep === 1) {
+          // ▼ Special case for CAKE-DETAILS (step 0) to require at least one image ▼
+          if (currentStep === 0) {
             const imageInputs = document.querySelectorAll("input[name='inspirationPic']");
             const hasImage = Array.from(imageInputs).some(input => input.files.length > 0);
       
@@ -533,21 +574,21 @@ function updatePreview() {
             currentStep++;
             showStep(currentStep);
       
-            // Repopulate dropdowns in Step 2
-            if (currentStep === 1) {
-              const cakeType = document.getElementById("cakeType").value;
-              if (cakeType) {
-                populateSelect(document.getElementById("flavor"), flavorOptions, "Select a flavor");
-                populateSelect(document.getElementById("frosting"), frostingOptions, "Select a frosting");
-                populateSelect(document.getElementById("filling"), fillingOptions, "Select a filling (optional)", true);
-                populateSelect(document.getElementById("size"), sizeOptions[cakeType] || [], "Select a size");
+            // // Repopulate dropdowns in Step 2
+            // if (currentStep === 1) {
+            //   const cakeType = document.getElementById("cakeType").value;
+            //   if (cakeType) {
+            //     populateSelect(document.getElementById("flavor"), flavorOptions, "Select a flavor");
+            //     populateSelect(document.getElementById("frosting"), frostingOptions, "Select a frosting");
+            //     populateSelect(document.getElementById("filling"), fillingOptions, "Select a filling (optional)", true);
+            //     populateSelect(document.getElementById("size"), sizeOptions[cakeType] || [], "Select a size");
       
-                const selectedSize = document.getElementById("size").value;
-                if (selectedSize && sizeDetails[selectedSize]) {
-                  document.getElementById("sizeInfo").innerHTML = `${sizeDetails[selectedSize].price} – <em>${sizeDetails[selectedSize].serves}</em>`;
-                }
-              }
-            }
+            //     const selectedSize = document.getElementById("size").value;
+            //     if (selectedSize && sizeDetails[selectedSize]) {
+            //       document.getElementById("sizeInfo").innerHTML = `${sizeDetails[selectedSize].price} – <em>${sizeDetails[selectedSize].serves}</em>`;
+            //     }
+            //   }
+            // }
           } else {
             if (firstInvalidField) {
               const label = firstInvalidField.closest(".form-group")?.querySelector("label")?.textContent || "a required field";
