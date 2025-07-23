@@ -1517,9 +1517,10 @@ button.order-button:hover {
 
 .modal-content {
     background-color: #fff;
-    padding: 40px;
+    padding: 20px;
     width: 90%;
-    max-width: 800px;
+    max-width: 900px;
+    padding: 30px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     text-align: center;
@@ -1533,16 +1534,8 @@ button.order-button:hover {
 
 .modal-content h3 {
     font-family: 'Viaoda Libre', serif;
-    font-size: 2em;
+    font-size: 1.25em;
     margin-bottom: 20px;
-}
-
-.modal-content ul {
-    text-align: left;
-    list-style: disc;
-    padding-left: 20px;
-    margin-bottom: 20px;
-    font-size: 1.2em;
 }
 
 .modal-content p {
@@ -1553,19 +1546,28 @@ button.order-button:hover {
   
 
 .modal-content,
-.modal-content h3,
+.modal-content ol,
 .modal-content ul,
 .modal-content li {
+    font-size: 0.9em;
+    line-height: 1.3;
+    text-align: left; 
+    margin-bottom: 0.75em;
     font-family: 'Viaoda Libre', serif;
+    list-style-type: decimal inside;
+    padding-left: 20px;
+    font-size: 0.95em;
 }
 
 
 .agree-button {
     font-family: 'Viaoda Libre', serif;
-    padding: 15px 30px;
+    display: block;
+    margin: 20px auto 0;
+    padding: 10px 15px;
     background-color: #e1d5f5;
     color: black;
-    font-size: 1.2em;
+    font-size: 1.0em;
     border: none;
     border-radius: 8px;
     cursor: pointer;
@@ -2907,24 +2909,23 @@ body.home-active .hero-top-right {
 /* Mobile: smaller Order-Rules modal text */
 @media (max-width: 768px) {
   .modal-content {
-    padding: 20px !important;       /* tighten the padding on small screens */
+    padding: 15px !important;       /* tighten the padding on small screens */
+    max-width: 90%;
   }
   .modal-content h3 {
     font-size: 1.25em !important;     /* down from 2em :contentReference[oaicite:0]{index=0} */
-    margin-bottom: 15px !important;
-  }
-  .modal-content ul {
-    font-size: 0.85em !important;       /* down from 1.2em :contentReference[oaicite:1]{index=1} */
     margin-bottom: 15px !important;
   }
   .modal-content p {
     font-size: 0.85em !important;       /* down from 1.3em :contentReference[oaicite:2]{index=2} */
     margin-bottom: 10px !important;
   }
-  /* if you have list items styled separately: */
+
+  .modal-content ol,
+  .modal-content ul,
   .modal-content li {
-    font-size: 0.85em !important;
-    margin-bottom: 8px;
+    font-size: 0.8em !important;
+    margin-bottom: 0.6em;
   }
 }
 
