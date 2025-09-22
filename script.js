@@ -636,9 +636,8 @@ pickupDateField.addEventListener("change", function(e) {
   // 2) Block these exact dates: June 11, 12, 14, 2025
   //    (format: "YYYY-MM-DD")
   const invalidDates = [
-    "2025-09-14",
-    "2025-09-20",
-    "2025-09-21"
+    "2025-10-04",
+    "2025-10-12",
   ];
   if (invalidDates.includes(val)) {
     showFormError("⚠️ That date is unavailable. Please choose another day.");
