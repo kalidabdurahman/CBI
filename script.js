@@ -637,6 +637,7 @@ pickupDateField.addEventListener("change", function(e) {
   //    (format: "YYYY-MM-DD")
   const invalidDates = [
     "2025-10-04",
+    "2025-10-10",
     "2025-10-12",
   ];
   if (invalidDates.includes(val)) {
@@ -651,17 +652,6 @@ pickupDateField.addEventListener("change", function(e) {
 // ▲ end Monday & specific-date blocker ▲
 
 
-
-    const deliverySelect = document.getElementById("deliveryOption");
-    const deliveryInfo   = document.getElementById("deliveryInfo"); // your hidden div :contentReference[oaicite:0]{index=0}:contentReference[oaicite:1]{index=1}
-
-    deliverySelect.addEventListener("change", e => {
-      if (e.target.value === "delivery") {
-        deliveryInfo.style.display = "block";
-      } else {
-        deliveryInfo.style.display = "none";
-      }
-    });
 
 
     const addImageBtn = document.getElementById("addImageBtn");
@@ -723,11 +713,11 @@ const flavorOptions = [
   ];
   
   const frostingOptions = [
-    "Vanilla Buttercream", "Chocolate Buttercream", "Vanilla Ganache", "Chocolate Ganache"
+    "Vanilla Buttercream", "Chocolate Buttercream", "Chocolate Ganache"
   ];
   
   const fillingOptions = [
-    "Cream Cheese","Whipped Cream", "Strawberries", "Strawberries & Cream", "Chocolate Fudge",
+    "Cream Cheese","Vanilla Ganache", "Whipped Cream", "Strawberries", "Strawberries & Cream", "Chocolate Fudge",
     "Cookies & Cream", "Lotus Biscoff", "Reese's Peanut Butter"
   ];
   
