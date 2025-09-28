@@ -506,9 +506,9 @@ function updatePreview() {
       
               // Set the size info too
               if (sizeDetails[preservedSize]) {
-                const { price, serves } = sizeDetails[preservedSize];
-                document.getElementById("sizeInfo").innerHTML = `${price} – <em>${serves}</em>`;
+                renderSizeInfo(preservedSize);
               }
+              
             }
           }
         }
@@ -690,15 +690,8 @@ pickupDateField.addEventListener("change", function(e) {
     
       document.getElementById("size").addEventListener("change", function () {
         const selectedSize = this.value;
-        const infoDiv = document.getElementById("sizeInfo");
-    
-        if (sizeDetails[selectedSize]) {
-          const { price, serves } = sizeDetails[selectedSize];
-          infoDiv.innerHTML = `~${price} – <em>${serves}</em>`;
-        } else {
-          infoDiv.innerHTML = "";
-        }
-      });
+        renderSizeInfo(selectedSize);
+      });      
   
     // Handle first file input preview
     imageInputsContainer.querySelector("input[type='file']").addEventListener("change", updatePreview);
@@ -755,7 +748,24 @@ const flavorOptions = [
     "2 Dozen (24)": { price: "$55", serves: "24 Cupcakes" }
   };
   
+  function sizePriceRangeHTML(sizeKey) {
+    const { price, serves } = sizeDetails[sizeKey];     // price like "$100"
+    const base = parseInt(price.replace(/[^0-9]/g, ""), 10);
+    const max  = base + 30;
+    return `$${base}–$${max} – <em>${serves}</em>`;
+  }
   
+  
+  function renderSizeInfo(sizeKey) {
+  const bars = document.querySelectorAll('.size-info');
+  if (sizeDetails[sizeKey]) {
+    const html = sizePriceRangeHTML(sizeKey); // already returns "$min–$max – <em>serves</em>"
+    bars.forEach(el => el.innerHTML = html);
+  } else {
+    bars.forEach(el => el.innerHTML = '');
+  }
+}
+
   
   
   function populateSelect(selectElement, options, placeholderText = "Select an option", includeEmpty = false) {
@@ -885,8 +895,9 @@ document.addEventListener("DOMContentLoaded", () => {
               
                   const selectedSize = document.getElementById("size").value;
                   if (selectedSize && sizeDetails[selectedSize]) {
-                    document.getElementById("sizeInfo").innerHTML = `${sizeDetails[selectedSize].price} – <em>${sizeDetails[selectedSize].serves}</em>`;
-                  }
+                    renderSizeInfo(selectedSize);
+                  }                  
+                  
                 }
               
                 return; // Cancel form submission
@@ -960,7 +971,9 @@ document.addEventListener("DOMContentLoaded", () => {
       document.getElementById("frosting").innerHTML = "";
       document.getElementById("filling").innerHTML = "";
       document.getElementById("size").innerHTML = "";
-      document.getElementById("sizeInfo").innerHTML = "";
+      
+      document.querySelectorAll('.size-info').forEach(el => el.innerHTML = '');
+
 
       // Remove uploaded image inputs and preview
       const imageInputsContainer = document.getElementById("imageInputsContainer");

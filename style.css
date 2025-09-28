@@ -2987,3 +2987,10 @@ body.home-active .hero-top-right {
 #contact::before {
   background-color: transparent !important;
 }
+
+.size-info-banner{
+  margin-top: 8px;
+  font-size: 0.9em;
+  color: #444;
+  text-align: center;
+}
