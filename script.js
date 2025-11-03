@@ -636,7 +636,7 @@ pickupDateField.addEventListener("change", function(e) {
   // 2) Block these exact dates: June 11, 12, 14, 2025
   //    (format: "YYYY-MM-DD")
   const invalidDates = [
-    
+
   ];
   if (invalidDates.includes(val)) {
     showFormError("⚠️ That date is unavailable. Please choose another day.");
@@ -719,8 +719,8 @@ const flavorOptions = [
       "4\" + 6\" Tiered",
       "6\" + 8\" Tiered",
       "8\" + 10\" Tiered",
-      "4\" + 6\" + 8\" Tiered",
-      "6\" + 8\" + 10\" Tiered"
+      // "4\" + 6\" + 8\" Tiered",
+      // "6\" + 8\" + 10\" Tiered"
     ],
     cupcake: ["1/2 Dozen (6)", "1 Dozen (12)", "2 Dozen (24)"]
   };
@@ -738,8 +738,8 @@ const flavorOptions = [
     '4" + 6" Tiered': { price: "$145", serves: "Feeds 20–30" },
     '6" + 8" Tiered': { price: "$220", serves: "Feeds 50–60" },
     '8" + 10" Tiered': { price: "$280", serves: "Feeds 90–100" },
-    '4" + 6" + 8" Tiered': { price: "$290", serves: "Feeds 70–80" },
-    '6" + 8" + 10" Tiered': { price: "$380", serves: "Feeds 115–135" },
+    // '4" + 6" + 8" Tiered': { price: "$290", serves: "Feeds 70–80" },
+    // '6" + 8" + 10" Tiered': { price: "$380", serves: "Feeds 115–135" },
   
     "1/2 Dozen (6)": { price: "$25", serves: "6 Cupcakes" },
     "1 Dozen (12)": { price: "$35", serves: "12 Cupcakes" },
