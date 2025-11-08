@@ -521,20 +521,20 @@ function updatePreview() {
 
       nextBtns.forEach(btn => {
         btn.addEventListener('click', () => {
-          // ▼ Prevent advancing from PERSONAL-INFO (step 1) if date is invalid ▼
           if (currentStep === 1) {
-            const dateVal = document.getElementById("pickupDate").value;
-            // If they haven’t chosen a date yet, let the required-field logic handle it
+            const dateVal  = document.getElementById("pickupDate").value;
+            const cakeType = document.getElementById("cakeType").value;
             if (dateVal) {
               const chosen = new Date(dateVal + "T00:00");
               const today  = new Date();
               const diffDays = (chosen - today) / (1000 * 60 * 60 * 24);
-              // Monday is getDay() === 1, and we need at least 6 days lead time
-              if (diffDays < 6 || chosen.getDay() === 1) {
+              const requiredDays = (cakeType === "tiered") ? 14 : 6;
+          
+              if (chosen.getDay() === 1 || diffDays < requiredDays) {
                 showFormError(
-                  "⚠️ Please choose a valid date: at least one week notice and not a Monday."
+                  `⚠️ Please choose a valid date: ${requiredDays === 14 ? "at least 2 weeks" : "at least one week"} notice and not a Monday.`
                 );
-                return; // stop here—won’t move to Step 2
+                return;
               }
             }
           }
@@ -856,51 +856,41 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     const cakeType = document.getElementById("cakeType").value;
-    const size     = document.getElementById("size").value;
-    // Only enforce on the two 3‑tiered options:
-    const needsNotice = ["4\" + 6\" + 8\" Tiered", "6\" + 8\" + 10\" Tiered"];
-    if (cakeType === "tiered" && needsNotice.includes(size)) {
-        const dateVal = document.getElementById("pickupDate").value;
-        if (dateVal) {
-            const selected = new Date(dateVal);
-            const today    = new Date();
-            const diffDays = (selected - today) / (1000*60*60*24);
-            if (diffDays < 14) {
-                showFormError("⚠️ 3‑tiered cakes require at least 2 weeks notice. Please choose a later date.");
+    if (cakeType === "tiered") {
+      const dateVal = document.getElementById("pickupDate").value;
+      if (dateVal) {
+        const selected = new Date(dateVal + "T00:00");
+        const today    = new Date();
+        const diffDays = (selected - today) / (1000*60*60*24);
+        if (diffDays < 14) {
+          showFormError("⚠️ Tiered cakes require at least 2 weeks notice. Please choose a later date.");
 
-                preservedSize = document.getElementById("size").value;
-                preservedFlavor = document.getElementById("flavor").value;
-                preservedFrosting = document.getElementById("frosting").value;
-                preservedFilling = document.getElementById("filling").value;
-                wasRedirectedAfterWarning = true;
-              
-                // Show Step 1 again
-                document.querySelectorAll(".form-step").forEach((step, idx) =>
-                  step.classList.toggle("active", idx === 0)
-                );
+          preservedSize     = document.getElementById("size").value;
+          preservedFlavor   = document.getElementById("flavor").value;
+          preservedFrosting = document.getElementById("frosting").value;
+          preservedFilling  = document.getElementById("filling").value;
+          wasRedirectedAfterWarning = true;
 
-              
-                // ✅ Reset currentStep so 'Next' works again
-                currentStep = 0;
-              
-                // ✅ Re-populate Step 2 values in advance so it's ready when they return
-                const cakeType = document.getElementById("cakeType").value;
-                if (cakeType) {
-                  populateSelect(document.getElementById("flavor"), flavorOptions, "Select a flavor");
-                  populateSelect(document.getElementById("frosting"), frostingOptions, "Select a frosting");
-                  populateSelect(document.getElementById("filling"), fillingOptions, "Select a filling (optional)", true);
-                  populateSelect(document.getElementById("size"), sizeOptions[cakeType] || [], "Select a size");
-              
-                  const selectedSize = document.getElementById("size").value;
-                  if (selectedSize && sizeDetails[selectedSize]) {
-                    renderSizeInfo(selectedSize);
-                  }                  
-                  
-                }
-              
-                return; // Cancel form submission
-              }              
+          document.querySelectorAll(".form-step").forEach((step, idx) =>
+            step.classList.toggle("active", idx === 0)
+          );
+          currentStep = 0;
+
+          const cakeTypeNow = document.getElementById("cakeType").value;
+          if (cakeTypeNow) {
+            populateSelect(document.getElementById("flavor"),  flavorOptions,  "Select a flavor");
+            populateSelect(document.getElementById("frosting"),frostingOptions,"Select a frosting");
+            populateSelect(document.getElementById("filling"), fillingOptions, "Select a filling (optional)", true);
+            populateSelect(document.getElementById("size"),    sizeOptions[cakeTypeNow] || [], "Select a size");
+
+            const selectedSize = document.getElementById("size").value;
+            if (selectedSize && sizeDetails[selectedSize]) {
+              renderSizeInfo(selectedSize);
+            }
+          }
+          return; // Cancel submit
         }
+      }
     }
 
     const form = e.target;
