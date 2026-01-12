@@ -635,7 +635,7 @@ pickupDateField.addEventListener("change", function(e) {
 
   // 2) Block these exact dates: June 11, 12, 14, 2025
   //    (format: "YYYY-MM-DD")
-  const invalidDates = [ "2026-01-09", "2026-01-10", "2026-01-11"
+  const invalidDates = [ ""
 
   ];
   if (invalidDates.includes(val)) {
