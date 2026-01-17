@@ -2994,3 +2994,17 @@ body.home-active .hero-top-right {
   color: #444;
   text-align: center;
 }
+
+.estimate-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.estimate-note {
+  font-size: 0.75em;
+  font-style: italic;
+  color: #666;
+}

@@ -635,9 +635,44 @@ pickupDateField.addEventListener("change", function(e) {
 
   // 2) Block these exact dates: June 11, 12, 14, 2025
   //    (format: "YYYY-MM-DD")
-  const invalidDates = [ ""
-
+  const invalidDates = [
+    "2026-02-17",
+    "2026-02-18",
+    "2026-02-19",
+    "2026-02-20",
+    "2026-02-21",
+    "2026-02-22",
+    "2026-02-23",
+    "2026-02-24",
+    "2026-02-25",
+    "2026-02-26",
+    "2026-02-27",
+    "2026-02-28",
+    "2026-03-01",
+    "2026-03-02",
+    "2026-03-03",
+    "2026-03-04",
+    "2026-03-05",
+    "2026-03-06",
+    "2026-03-07",
+    "2026-03-08",
+    "2026-03-09",
+    "2026-03-10",
+    "2026-03-11",
+    "2026-03-12",
+    "2026-03-13",
+    "2026-03-14",
+    "2026-03-15",
+    "2026-03-16",
+    "2026-03-17",
+    "2026-03-18",
+    "2026-03-19",
+    "2026-03-20",
+    "2026-03-21",
+    "2026-03-22",
+    "2026-03-23",
   ];
+  
   if (invalidDates.includes(val)) {
     showFormError("⚠️ That date is unavailable. Please choose another day.");
     e.target.value = "";
@@ -708,7 +743,7 @@ const flavorOptions = [
   ];
   
   const fillingOptions = [
-    "Cream Cheese","Vanilla Ganache", "Whipped Cream", "Strawberries", "Strawberries & Cream", "Chocolate Fudge",
+    "Cream Cheese","Vanilla Ganache", "Whipped Cream", "Raspberry Jam",  "Blueberry Jam", "Lemon Jam", "Strawberries", "Strawberries & Cream", "Chocolate Fudge",
     "Cookies & Cream", "Lotus Biscoff", "Reese's Peanut Butter"
   ];
   
@@ -750,7 +785,7 @@ const flavorOptions = [
     const { price, serves } = sizeDetails[sizeKey];     // price like "$100"
     const base = parseInt(price.replace(/[^0-9]/g, ""), 10);
     const max  = base + 30;
-    return `$${base}–$${max} – <em>${serves}</em>`;
+    return `~$${base}–$${max} – <em>${serves}</em>`;
   }
   
   
