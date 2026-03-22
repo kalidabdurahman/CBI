@@ -52,35 +52,115 @@ document.querySelectorAll('.nav-link').forEach(link => {
     });
 });
   
-
-
-// Function to initially reveal gallery items with a staggered animation
-function revealGalleryItems() {
-    const galleryItems = document.querySelectorAll('.gallery-item');
-    galleryItems.forEach((item, index) => {
-        // Reset each item's visibility to enable animation on each click
-        item.classList.remove('visible');
+// // Function to initially reveal gallery items with a staggered animation
+// function revealGalleryItems() {
+//     const galleryItems = document.querySelectorAll('.gallery-item');
+//     galleryItems.forEach((item, index) => {
+//         // Reset each item's visibility to enable animation on each click
+//         item.classList.remove('visible');
         
+//         setTimeout(() => {
+//             item.classList.add('visible');
+//         }, index * 200); // Adjust delay as needed
+//     });
+// }
+
+// // Function to handle fade-in on scroll
+// function revealOnScroll() {
+//     const galleryItems = document.querySelectorAll('.gallery-item');
+
+//     galleryItems.forEach(item => {
+//         const itemPosition = item.getBoundingClientRect().top;
+//         const windowHeight = window.innerHeight;
+
+//         // Check if the item is within the viewport
+//         if (itemPosition < windowHeight - 100) {
+//             item.classList.add('visible');
+//         }
+//     });
+// }
+
+function getVisibleGalleryItems() {
+    return Array.from(document.querySelectorAll('#galleryGrid .gallery-item'))
+        .filter(item => !item.classList.contains('filtered-out'));
+}
+
+function revealGalleryItems() {
+    const galleryItems = getVisibleGalleryItems();
+
+    galleryItems.forEach((item, index) => {
+        item.classList.remove('visible');
+
         setTimeout(() => {
             item.classList.add('visible');
-        }, index * 200); // Adjust delay as needed
+        }, index * 120);
     });
 }
 
 // Function to handle fade-in on scroll
 function revealOnScroll() {
-    const galleryItems = document.querySelectorAll('.gallery-item');
+    const galleryItems = getVisibleGalleryItems();
 
     galleryItems.forEach(item => {
         const itemPosition = item.getBoundingClientRect().top;
         const windowHeight = window.innerHeight;
 
-        // Check if the item is within the viewport
         if (itemPosition < windowHeight - 100) {
             item.classList.add('visible');
         }
     });
 }
+
+const featuredPreviewCards = document.querySelectorAll('.featured-preview-card');
+const galleryEmptyMessage = document.getElementById('galleryEmptyMessage');
+const galleryCurrentLabel = document.getElementById('galleryCurrentLabel');
+
+function formatGalleryLabel(category) {
+    if (category === 'all') return 'All Cakes';
+
+    return category
+        .split('-')
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ');
+}
+
+function applyGalleryFilter(category) {
+    const galleryItems = document.querySelectorAll('#galleryGrid .gallery-item');
+
+    galleryItems.forEach(item => {
+        const matches = category === 'all' || item.dataset.category === category;
+        item.classList.toggle('filtered-out', !matches);
+        item.classList.remove('visible');
+    });
+
+    featuredPreviewCards.forEach(card => {
+        card.classList.toggle('active', card.dataset.filterTarget === category);
+    });
+
+    if (galleryCurrentLabel) {
+        galleryCurrentLabel.textContent = formatGalleryLabel(category);
+    }
+
+    const visibleItems = getVisibleGalleryItems();
+    galleryEmptyMessage.classList.toggle('show', visibleItems.length === 0);
+
+    revealGalleryItems();
+    setTimeout(revealOnScroll, 50);
+}
+
+featuredPreviewCards.forEach(card => {
+    card.addEventListener('click', () => {
+        const category = card.dataset.filterTarget;
+        const isAlreadyActive = card.classList.contains('active');
+
+        applyGalleryFilter(isAlreadyActive ? 'all' : category);
+
+        const galleryGrid = document.getElementById('galleryGrid');
+        if (galleryGrid) {
+            galleryGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    });
+});
 
 // ▼ Back to Top button on Gallery ▼
 const backToTopBtn = document.getElementById("backToTop");
@@ -109,6 +189,8 @@ window.addEventListener('scroll', revealOnScroll);
 
 // Trigger the function on initial load
 revealOnScroll();
+
+applyGalleryFilter('all');
 
 
 
@@ -226,36 +308,50 @@ document.getElementById("agreeButton").addEventListener("click", () => {
   orderModal.classList.remove("show");
   setTimeout(() => (orderModal.style.display = "none"), 300);
 });
-
-
-
-
-
-async function getExpensesSum() {
-    let totalSum = 0;
   
-    try {
-      const response = await fetch("http://myCoolServer.com/expenses");
-  
-      if (response.ok) {
-        const data = await response.json();
-  
-        data.res.forEach(item => {
-          totalSum += item.amount;
-        });
-      } else {
-        console.log("Failed to fetch expenses.");
-      }
-    } catch (error) {
-      console.error("Error fetching expenses:", error);
-    }
-  
-    return totalSum;
-  }
-  
+
+// let wasRedirectedAfterWarning = false;
+// const galleryImages = document.querySelectorAll('.gallery-item');
+// const lightbox = document.getElementById('lightbox');
+// const lightboxImage = document.querySelector('.lightbox-image');
+// const closeBtn = document.querySelector('.close-lightbox');
+// const prevBtn = document.querySelector('.lightbox-prev');
+// const nextBtn = document.querySelector('.lightbox-next');
+
+// let currentIndex = 0;
+
+// galleryImages.forEach((img, index) => {
+//     img.addEventListener('click', () => {
+//         currentIndex = index;
+//         showLightbox();
+//     });
+// });
+
+// function showLightbox() {
+//     lightboxImage.src = galleryImages[currentIndex].src;
+//     lightbox.style.display = 'flex';
+// }
+
+// function hideLightbox() {
+//     lightbox.style.display = 'none';
+// }
+
+// function showNext() {
+//     currentIndex = (currentIndex + 1) % galleryImages.length;
+//     showLightbox();
+// }
+
+// function showPrev() {
+//     currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+//     showLightbox();
+// }
+
+// closeBtn.addEventListener('click', hideLightbox);
+// nextBtn.addEventListener('click', showNext);
+// prevBtn.addEventListener('click', showPrev);
 
 let wasRedirectedAfterWarning = false;
-const galleryImages = document.querySelectorAll('.gallery-item');
+const allGalleryImages = Array.from(document.querySelectorAll('#galleryGrid .gallery-item'));
 const lightbox = document.getElementById('lightbox');
 const lightboxImage = document.querySelector('.lightbox-image');
 const closeBtn = document.querySelector('.close-lightbox');
@@ -264,15 +360,27 @@ const nextBtn = document.querySelector('.lightbox-next');
 
 let currentIndex = 0;
 
-galleryImages.forEach((img, index) => {
+allGalleryImages.forEach((img) => {
     img.addEventListener('click', () => {
-        currentIndex = index;
-        showLightbox();
+        const visibleItems = getVisibleGalleryItems();
+        currentIndex = visibleItems.indexOf(img);
+
+        if (currentIndex !== -1) {
+            showLightbox();
+        }
     });
 });
 
 function showLightbox() {
-    lightboxImage.src = galleryImages[currentIndex].src;
+    const visibleItems = getVisibleGalleryItems();
+    if (!visibleItems.length) return;
+
+    if (currentIndex < 0 || currentIndex >= visibleItems.length) {
+        currentIndex = 0;
+    }
+
+    lightboxImage.src = visibleItems[currentIndex].src;
+    lightboxImage.alt = visibleItems[currentIndex].alt;
     lightbox.style.display = 'flex';
 }
 
@@ -281,18 +389,25 @@ function hideLightbox() {
 }
 
 function showNext() {
-    currentIndex = (currentIndex + 1) % galleryImages.length;
+    const visibleItems = getVisibleGalleryItems();
+    if (!visibleItems.length) return;
+
+    currentIndex = (currentIndex + 1) % visibleItems.length;
     showLightbox();
 }
 
 function showPrev() {
-    currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+    const visibleItems = getVisibleGalleryItems();
+    if (!visibleItems.length) return;
+
+    currentIndex = (currentIndex - 1 + visibleItems.length) % visibleItems.length;
     showLightbox();
 }
 
 closeBtn.addEventListener('click', hideLightbox);
 nextBtn.addEventListener('click', showNext);
 prevBtn.addEventListener('click', showPrev);
+
 
 // Optional: Close with ESC key
 document.addEventListener('keydown', (e) => {
@@ -424,41 +539,135 @@ function updatePreview() {
   
 
     // ▼ build the HTML for Step 3 review ▼
-  function generateReviewSummary() {
-    const summaryDiv = document.getElementById("orderReviewSummary");
-    const formData   = new FormData(document.getElementById("orderForm"));
-    // list each field in order:
-    const fields = [
-      { label: "First Name",         name: "firstName" },
-      { label: "Last Name",          name: "lastName" },
-      { label: "Contact Preference", name: "contactPreference" },
-      { label: "Contact Info",       name: "contactInfo" },
-      { label: "Delivery Option",    name: "deliveryOption" },
-      { label: "Pickup Date",        name: "pickupDate" },
-      { label: "Payment Type",       name: "paymentType" },
-      { label: "Occasion",           name: "occasion" },
-      { label: "Referral Source",    name: "referralSource" },
-      { label: "Cake Type",          name: "cakeType" },
-      { label: "Size",               name: "size" },
-      { label: "Flavor",             name: "flavor" },
-      { label: "Frosting",           name: "frosting" },
-      { label: "Filling",            name: "filling" },
-      { label: "Add-Ons",            name: "addons" },
-      { label: "Cake Details",       name: "cakeDetails" },
-      { label: "Extra Notes",        name: "notes" }
-    ];
+function generateReviewSummary() {
+  const summaryDiv = document.getElementById("orderReviewSummary");
+  const formData = new FormData(document.getElementById("orderForm"));
+  const orderCategory = formData.get("orderCategory");
 
-    let html = "<ul style='list-style:none;padding:0;'>";
-    fields.forEach(f => {
-      const vals = formData.getAll(f.name);
-      const disp = vals.length > 1
-        ? vals.join(", ")
-        : formData.get(f.name) || "—";
-      html += `<li><strong>${f.label}:</strong> ${disp}</li>`;
-    });
-    html += "</ul>";
-    summaryDiv.innerHTML = html;
+  const row = (label, value) => {
+    const safeValue = value && String(value).trim() ? value : "—";
+    return `<li><strong>${label}:</strong> ${safeValue}</li>`;
+  };
+
+  let orderDetailsHtml = "";
+
+  if (orderCategory === "custom_cake") {
+const addons = formData.getAll("addons");
+const addonsDisplay = addons.length ? addons.join(", ") : "None";
+const fillingDisplay = formData.get("filling") || "None";
+const selectedSize = formData.get("size");
+const customPriceEstimate =
+  selectedSize && sizeDetails[selectedSize]
+    ? sizePriceRangeHTML(selectedSize)
+    : "—";
+
+const clearBoxValue = formData.get("clearBoxOption") || "standard";
+let clearBoxDisplay = "Standard Cardboard Box (Included)";
+
+if (clearBoxValue === "clear") {
+  const clearBoxPrice = clearBoxPrices[selectedSize];
+  clearBoxDisplay = clearBoxPrice
+    ? `Clear Box Upgrade (+$${clearBoxPrice})`
+    : "Clear Box Upgrade";
+}
+
+orderDetailsHtml = `
+  <div class="review-summary-section">
+      <h4>Order Details</h4>
+      <ul>
+        ${row("Order Type", "Custom Cake")}
+        ${row("Cake Type", formData.get("cakeType"))}
+        ${row("Size", selectedSize)}
+        ${row("Price Estimate", customPriceEstimate)}
+        ${row("Flavor", formData.get("flavor"))}
+        ${row("Frosting", formData.get("frosting"))}
+        ${row("Filling", fillingDisplay)}
+        ${row("Add-Ons", addonsDisplay)}
+        ${row("Cake Box", clearBoxDisplay)}
+        ${row("Cake Details", formData.get("cakeDetails"))}
+        ${row("Extra Notes", formData.get("notes"))}
+      </ul>
+    </div>
+  `;
+  } else if (orderCategory === "tasting_box") {
+    const tastingBoxType = formData.get("tastingBoxType");
+
+    if (tastingBoxType === "regular") {
+      const sideFillings = formData.getAll("regularBoxSideFillings");
+      const sideFillingsDisplay = sideFillings.length ? sideFillings.join(", ") : "None";
+      const regularFlavors = "Vanilla, Chocolate, Marble, Cookies & Cream, Red Velvet, Confetti";
+
+      orderDetailsHtml = `
+        <div class="review-summary-section">
+          <h4>Order Details</h4>
+          <ul>
+            ${row("Order Type", "Cake Tasting Box")}
+            ${row("Tasting Box Type", "Regular")}
+            ${row("Price Estimate", "$40")}
+            ${row("Included Flavors", regularFlavors)}
+            ${row("Frosting", "Vanilla Buttercream on all 6 slices")}
+            ${row("Side Fillings", sideFillingsDisplay)}
+            ${row("Extra Notes", formData.get("tastingBoxNotes"))}
+          </ul>
+        </div>
+      `;
+    }
+
+    if (tastingBoxType === "deluxe") {
+      let slicesHtml = "";
+
+      for (let i = 1; i <= 6; i++) {
+        const flavor = formData.get(`slice${i}Flavor`) || "—";
+        const frosting = formData.get(`slice${i}Frosting`) || "—";
+        const filling = formData.get(`slice${i}Filling`) || "None";
+
+        slicesHtml += `
+          <div class="review-slice-card">
+            <strong>Slice ${i}</strong><br>
+            Flavor: ${flavor}<br>
+            Frosting: ${frosting}<br>
+            Filling: ${filling}
+          </div>
+        `;
+      }
+
+      orderDetailsHtml = `
+        <div class="review-summary-section">
+          <h4>Order Details</h4>
+          <ul>
+            ${row("Order Type", "Cake Tasting Box")}
+            ${row("Tasting Box Type", "Deluxe")}
+            ${row("Price Estimate", "$55")}
+            ${row("Extra Notes", formData.get("tastingBoxNotesDeluxe"))}
+          </ul>
+
+          <div class="review-slices-grid">
+            ${slicesHtml}
+          </div>
+        </div>
+      `;
+    }
   }
+
+  const contactDetailsHtml = `
+    <div class="review-summary-section">
+      <h4>Contact & Pickup Details</h4>
+      <ul>
+        ${row("First Name", formData.get("firstName"))}
+        ${row("Last Name", formData.get("lastName"))}
+        ${row("Contact Preference", formData.get("contactPreference"))}
+        ${row("Contact Info", formData.get("contactInfo"))}
+        ${row("Delivery Option", formData.get("deliveryOption"))}
+        ${row("Pickup Date", formData.get("pickupDate"))}
+        ${row("Payment Type", formData.get("paymentType"))}
+        ${row("Occasion", formData.get("occasion"))}
+        ${row("Referral Source", formData.get("referralSource"))}
+      </ul>
+    </div>
+  `;
+
+  summaryDiv.innerHTML = orderDetailsHtml + contactDetailsHtml;
+}
   // ▲ end summary helper ▲
 
 
@@ -513,6 +722,10 @@ function updatePreview() {
           }
         }
 
+        if (step === 1) {
+          renderContactStepEstimate();
+        }
+
         if (step === 2) {
           generateReviewSummary();
         }
@@ -522,17 +735,25 @@ function updatePreview() {
       nextBtns.forEach(btn => {
         btn.addEventListener('click', () => {
           if (currentStep === 1) {
-            const dateVal  = document.getElementById("pickupDate").value;
+            const dateVal = document.getElementById("pickupDate").value;
+            const orderCategory = document.getElementById("orderCategory").value;
             const cakeType = document.getElementById("cakeType").value;
             if (dateVal) {
               const chosen = new Date(dateVal + "T00:00");
-              const today  = new Date();
+              const today = new Date();
+              today.setHours(0, 0, 0, 0);
+
               const diffDays = (chosen - today) / (1000 * 60 * 60 * 24);
-              const requiredDays = (cakeType === "tiered") ? 14 : 6;
-          
+              const selectedSize = document.getElementById("size").value;
+
+              let requiredDays = 6;
+              if (orderCategory === "custom_cake" && cakeType === "tiered") {
+                requiredDays = getTieredLeadTimeDays(selectedSize);
+              }
+
               if (chosen.getDay() === 1 || diffDays < requiredDays) {
                 showFormError(
-                  `⚠️ Please choose a valid date: ${requiredDays === 14 ? "at least 2 weeks" : "at least one week"} notice and not a Monday.`
+                  `⚠️ Please choose a valid date: ${getTieredLeadTimeText(requiredDays)} notice and not a Monday.`
                 );
                 return;
               }
@@ -545,15 +766,8 @@ function updatePreview() {
           let allValid = true;
           let firstInvalidField = null;
       
-          // ▼ Special case for CAKE-DETAILS (step 0) to require at least one image ▼
-          if (currentStep === 0) {
-            const imageInputs = document.querySelectorAll("input[name='inspirationPic']");
-            const hasImage = Array.from(imageInputs).some(input => input.files.length > 0);
-      
-            if (!hasImage) {
-              showFormError("⚠️ Please upload at least one inspiration picture.");
-              return; // Stop here and do not proceed
-            }
+          if (currentStep === 0 && !validateStepOne()) {
+            return;
           }
       
           currentStepFields.forEach(field => {
@@ -636,12 +850,7 @@ pickupDateField.addEventListener("change", function(e) {
   // 2) Block these exact dates: June 11, 12, 14, 2025
   //    (format: "YYYY-MM-DD")
   const invalidDates = [
-    "2026-03-24",
-    "2026-03-25",
-    "2026-03-26",
-    "2026-03-27",
-    "2026-03-28",
-    "2026-03-29",
+    
   ];
   
   if (invalidDates.includes(val)) {
@@ -692,10 +901,25 @@ pickupDateField.addEventListener("change", function(e) {
         populateSelect(document.getElementById("size"), sizeOptions[selectedType] || [], "Select a size");
       });
     
-      document.getElementById("size").addEventListener("change", function () {
-        const selectedSize = this.value;
-        renderSizeInfo(selectedSize);
-      });      
+    document.getElementById("size").addEventListener("change", function () {
+      const selectedSize = this.value;
+      renderSizeInfo(selectedSize);
+      updateClearBoxOptions(selectedSize);
+      renderContactStepEstimate();
+    });
+
+    document.getElementById("clearBoxOption").addEventListener("change", function () {
+      renderContactStepEstimate();
+    });
+      
+    document.getElementById("orderCategory").addEventListener("change", toggleOrderTypePanels);
+    document.getElementById("tastingBoxType").addEventListener("change", () => {
+      toggleTastingTypePanels();
+      clearFormError();
+    });
+
+    toggleOrderTypePanels();
+
   
     // Handle first file input preview
     imageInputsContainer.querySelector("input[type='file']").addEventListener("change", updatePreview);
@@ -710,13 +934,19 @@ const flavorOptions = [
   ];
   
   const frostingOptions = [
-    "Vanilla Buttercream", "Chocolate Buttercream", "Chocolate Ganache"
+    "Vanilla Buttercream", "Chocolate Buttercream"
   ];
   
   const fillingOptions = [
-    "Cream Cheese","Vanilla Ganache", "Whipped Cream", "Raspberry Jam",  "Blueberry Jam", "Lemon Jam", "Strawberries", "Strawberries & Cream", "Chocolate Fudge",
+    "Cream Cheese", "Whipped Cream", "Raspberry Jam",  "Blueberry Jam", "Lemon Jam", "Strawberries", "Strawberries & Cream", "Chocolate Fudge",
     "Cookies & Cream", "Lotus Biscoff", "Reese's Peanut Butter"
   ];
+
+  const tastingFrostingOptions = [
+    "Vanilla Buttercream",
+    "Chocolate Buttercream"
+  ];
+
   
   const sizeOptions = {
     heart: ["4\" Heart", "6\" Heart", "8\" Heart"],
@@ -725,10 +955,10 @@ const flavorOptions = [
       "4\" + 6\" Tiered",
       "6\" + 8\" Tiered",
       "8\" + 10\" Tiered",
-      // "4\" + 6\" + 8\" Tiered",
-      // "6\" + 8\" + 10\" Tiered"
+      "4\" + 6\" + 8\" Tiered",
+      "6\" + 8\" + 10\" Tiered"
     ],
-    cupcake: ["1/2 Dozen (6)", "1 Dozen (12)", "2 Dozen (24)"]
+    dessert: ["1/2 Dozen (6) Cupcakes", "1 Dozen (12) Cupcakes", "1 Dozen (12) Cake Cups"]
   };
   
   const sizeDetails = {
@@ -744,14 +974,37 @@ const flavorOptions = [
     '4" + 6" Tiered': { price: "$145", serves: "Feeds 20–30" },
     '6" + 8" Tiered': { price: "$220", serves: "Feeds 50–60" },
     '8" + 10" Tiered': { price: "$280", serves: "Feeds 90–100" },
-    // '4" + 6" + 8" Tiered': { price: "$290", serves: "Feeds 70–80" },
-    // '6" + 8" + 10" Tiered': { price: "$380", serves: "Feeds 115–135" },
+    '4" + 6" + 8" Tiered': { price: "$290", serves: "Feeds 70–80" },
+    '6" + 8" + 10" Tiered': { price: "$380", serves: "Feeds 115–135" },
   
-    "1/2 Dozen (6)": { price: "$25", serves: "6 Cupcakes" },
-    "1 Dozen (12)": { price: "$35", serves: "12 Cupcakes" },
-    "2 Dozen (24)": { price: "$55", serves: "24 Cupcakes" }
+    "1/2 Dozen (6) Cupcakes": { price: "$25", serves: "6 Cupcakes" },
+    "1 Dozen (12) Cupcakes": { price: "$35", serves: "12 Cupcakes" },
+    "1 Dozen (12) Cake Cups": { price: "$25", serves: "12 Cake Cups" }
   };
-  
+
+  const clearBoxPrices = {
+    '4" Heart': 3,
+    '4" Round': 3,
+    '6" Heart': 5,
+    '6" Round': 5,
+    '8" Heart': 7,
+    '8" Round': 7,
+    '10" Round': 9
+  };
+
+  const threeTierTieredSizes = [
+  '4" + 6" + 8" Tiered',
+  '6" + 8" + 10" Tiered'
+];
+
+  function getTieredLeadTimeDays(sizeKey) {
+    return threeTierTieredSizes.includes(sizeKey) ? 30 : 14;
+  }
+
+  function getTieredLeadTimeText(days) {
+    return days === 30 ? "at least 1 month" : "at least 2 weeks";
+  }
+    
   function sizePriceRangeHTML(sizeKey) {
     const { price, serves } = sizeDetails[sizeKey];     // price like "$100"
     const base = parseInt(price.replace(/[^0-9]/g, ""), 10);
@@ -760,13 +1013,47 @@ const flavorOptions = [
   }
   
   
-  function renderSizeInfo(sizeKey) {
-  const bars = document.querySelectorAll('.size-info');
+function renderSizeInfo(sizeKey) {
+  const row = document.getElementById("customEstimateRow");
+  const bar = document.getElementById("customPriceInfo");
+
+  if (!row || !bar) return;
+
   if (sizeDetails[sizeKey]) {
-    const html = sizePriceRangeHTML(sizeKey); // already returns "$min–$max – <em>serves</em>"
-    bars.forEach(el => el.innerHTML = html);
+    bar.innerHTML = sizePriceRangeHTML(sizeKey);
+    row.style.display = "block";
   } else {
-    bars.forEach(el => el.innerHTML = '');
+    bar.innerHTML = "";
+    row.style.display = "none";
+  }
+}
+
+function updateClearBoxOptions(sizeKey) {
+  const clearBoxSelect = document.getElementById("clearBoxOption");
+  const clearOption = clearBoxSelect?.querySelector('option[value="clear"]');
+  const note = document.getElementById("clearBoxAvailabilityNote");
+
+  if (!clearBoxSelect || !clearOption || !note) return;
+
+  const clearBoxPrice = clearBoxPrices[sizeKey];
+
+  if (clearBoxPrice) {
+    clearOption.disabled = false;
+    clearOption.textContent = `Clear Box Upgrade (+$${clearBoxPrice})`;
+    note.style.display = "none";
+  } else {
+    clearOption.disabled = true;
+    clearOption.textContent = "Clear Box Upgrade";
+
+    if (clearBoxSelect.value === "clear") {
+      clearBoxSelect.value = "standard";
+    }
+
+    if (sizeKey) {
+      note.style.display = "block";
+    } else {
+      note.style.display = "none";
+    }
   }
 }
 
@@ -807,6 +1094,274 @@ const flavorOptions = [
         selectElement.value = ""; // Force it to land on placeholder
     }
   }
+
+    function setSectionEnabled(sectionEl, enabled) {
+    if (!sectionEl) return;
+
+    sectionEl.style.display = enabled ? "block" : "none";
+
+    sectionEl.querySelectorAll("input, select, textarea, button").forEach(el => {
+      el.disabled = !enabled;
+    });
+  }
+
+  function renderRegularFillingOptions() {
+    const container = document.getElementById("regularFillingsContainer");
+    if (!container || container.children.length > 0) return;
+
+    container.innerHTML = fillingOptions.map(filling => `
+      <label>
+        <input type="checkbox" name="regularBoxSideFillings" value="${filling}">
+        ${filling}
+      </label>
+    `).join("");
+
+    container.querySelectorAll("input[name='regularBoxSideFillings']").forEach(box => {
+      box.addEventListener("change", function () {
+        const checked = document.querySelectorAll("input[name='regularBoxSideFillings']:checked");
+        if (checked.length > 2) {
+          this.checked = false;
+          showFormError("⚠️ Regular tasting boxes can have up to 2 side fillings.");
+          return;
+        }
+        clearFormError();
+      });
+    });
+  }
+
+  function renderDeluxeSliceCards() {
+    const container = document.getElementById("deluxeSlicesContainer");
+    if (!container) return;
+
+    if (!container.children.length) {
+      let html = "";
+
+      for (let i = 1; i <= 6; i++) {
+        html += `
+          <div class="slice-card">
+            <h4>Slice ${i}</h4>
+
+            <div class="form-group">
+              <label for="slice${i}Flavor">Flavor <span class="required-asterisk">*</span></label>
+              <select id="slice${i}Flavor" name="slice${i}Flavor" required></select>
+            </div>
+
+            <div class="form-group">
+              <label for="slice${i}Frosting">Frosting <span class="required-asterisk">*</span></label>
+              <select id="slice${i}Frosting" name="slice${i}Frosting" required></select>
+            </div>
+
+            <div class="form-group">
+              <label for="slice${i}Filling">Filling (optional)</label>
+              <select id="slice${i}Filling" name="slice${i}Filling"></select>
+            </div>
+          </div>
+        `;
+      }
+
+      container.innerHTML = html;
+    }
+
+    for (let i = 1; i <= 6; i++) {
+      populateSelect(
+        document.getElementById(`slice${i}Flavor`),
+        flavorOptions,
+        "Select a flavor"
+      );
+
+      populateSelect(
+        document.getElementById(`slice${i}Frosting`),
+        tastingFrostingOptions,
+        "Select a frosting"
+      );
+
+      populateSelect(
+        document.getElementById(`slice${i}Filling`),
+        fillingOptions,
+        "Select a filling (optional)",
+        true
+      );
+    }
+
+    container.querySelectorAll("select").forEach(select => {
+      select.addEventListener("change", clearFormError);
+    });
+  }
+
+function renderTastingBoxPriceInfo() {
+  const tastingBoxType = document.getElementById("tastingBoxType").value;
+  const row = document.getElementById("tastingEstimateRow");
+  const priceInfo = document.getElementById("tastingBoxPriceInfo");
+
+  if (!row || !priceInfo) return;
+
+  if (tastingBoxType === "regular") {
+    priceInfo.innerHTML = `$40 – <em>Regular Tasting Box</em>`;
+    row.style.display = "block";
+  } else if (tastingBoxType === "deluxe") {
+    priceInfo.innerHTML = `$55 – <em>Deluxe Tasting Box</em>`;
+    row.style.display = "block";
+  } else {
+    priceInfo.innerHTML = "";
+    row.style.display = "none";
+  }
+}
+
+function renderContactStepEstimate() {
+  const row = document.getElementById("contactEstimateRow");
+  const info = document.getElementById("contactEstimateInfo");
+  const note = document.getElementById("contactEstimateNote");
+
+  if (!row || !info || !note) return;
+
+  const orderCategory = document.getElementById("orderCategory").value;
+
+  if (orderCategory === "custom_cake") {
+    const selectedSize = document.getElementById("size").value;
+    const clearBoxValue = document.getElementById("clearBoxOption").value;
+
+    if (selectedSize && sizeDetails[selectedSize]) {
+      let display = sizePriceRangeHTML(selectedSize);
+
+      info.innerHTML = display;
+      note.textContent = "(Note: This is only an estimated cost & serving size. Total cost will be provided in invoice!)";
+      row.style.display = "block";
+    } else {
+      info.innerHTML = "";
+      note.textContent = "";
+      row.style.display = "none";
+    }
+
+    return;
+  }
+
+  if (orderCategory === "tasting_box") {
+    const tastingBoxType = document.getElementById("tastingBoxType").value;
+
+    if (tastingBoxType === "regular") {
+      info.innerHTML = `$40 – <em>Regular Tasting Box</em>`;
+      note.textContent = "(Note: This is only an estimated cost. Total cost will be provided in invoice!)";
+      row.style.display = "block";
+      return;
+    }
+
+    if (tastingBoxType === "deluxe") {
+      info.innerHTML = `$55 – <em>Deluxe Tasting Box</em>`;
+      note.textContent = "(Note: This is only an estimated cost. Total cost will be provided in invoice!)";
+      row.style.display = "block";
+      return;
+    }
+  }
+
+  info.innerHTML = "";
+  note.textContent = "";
+  row.style.display = "none";
+}
+
+
+  function toggleTastingTypePanels() {
+    const tastingBoxType = document.getElementById("tastingBoxType").value;
+    const regularPanel = document.getElementById("regularTastingFields");
+    const deluxePanel = document.getElementById("deluxeTastingFields");
+
+    if (tastingBoxType === "regular") {
+      renderRegularFillingOptions();
+    }
+
+    if (tastingBoxType === "deluxe") {
+      renderDeluxeSliceCards();
+    }
+
+    setSectionEnabled(regularPanel, tastingBoxType === "regular");
+    setSectionEnabled(deluxePanel, tastingBoxType === "deluxe");
+
+    renderTastingBoxPriceInfo();
+
+    renderContactStepEstimate();
+
+  }
+
+function toggleOrderTypePanels() {
+  const orderCategory = document.getElementById("orderCategory").value;
+  const customPanel = document.getElementById("customCakeFields");
+  const tastingPanel = document.getElementById("tastingBoxFields");
+
+  setSectionEnabled(customPanel, orderCategory === "custom_cake");
+  setSectionEnabled(tastingPanel, orderCategory === "tasting_box");
+
+  const customEstimateRow = document.getElementById("customEstimateRow");
+  const customPriceInfo = document.getElementById("customPriceInfo");
+  const tastingEstimateRow = document.getElementById("tastingEstimateRow");
+  const tastingBoxPriceInfo = document.getElementById("tastingBoxPriceInfo");
+
+  if (orderCategory === "custom_cake") {
+    tastingBoxPriceInfo.innerHTML = "";
+    tastingEstimateRow.style.display = "none";
+
+    renderSizeInfo(document.getElementById("size").value);
+  } else {
+    customPriceInfo.innerHTML = "";
+    customEstimateRow.style.display = "none";
+  }
+
+  if (orderCategory !== "tasting_box") {
+    document.getElementById("tastingBoxType").value = "";
+    setSectionEnabled(document.getElementById("regularTastingFields"), false);
+    setSectionEnabled(document.getElementById("deluxeTastingFields"), false);
+    tastingBoxPriceInfo.innerHTML = "";
+    tastingEstimateRow.style.display = "none";
+  }
+
+  if (orderCategory !== "custom_cake") {
+    customPriceInfo.innerHTML = "";
+    customEstimateRow.style.display = "none";
+    document.getElementById("clearBoxOption").value = "standard";
+    document.getElementById("clearBoxAvailabilityNote").style.display = "none";
+  }
+
+  renderContactStepEstimate();
+
+  clearFormError();
+}
+
+  function validateStepOne() {
+    const orderCategory = document.getElementById("orderCategory").value;
+
+    if (!orderCategory) {
+      showFormError("⚠️ Please choose what you'd like to order.");
+      return false;
+    }
+
+    if (orderCategory === "custom_cake") {
+      const imageInputs = document.querySelectorAll("input[name='inspirationPic']");
+      const hasImage = Array.from(imageInputs).some(input => input.files.length > 0);
+
+      if (!hasImage) {
+        showFormError("⚠️ Please upload at least one inspiration picture.");
+        return false;
+      }
+    }
+
+    if (orderCategory === "tasting_box") {
+      const tastingBoxType = document.getElementById("tastingBoxType").value;
+
+      if (!tastingBoxType) {
+        showFormError("⚠️ Please choose which tasting box you'd like.");
+        return false;
+      }
+
+      if (tastingBoxType === "regular") {
+        const checked = document.querySelectorAll("input[name='regularBoxSideFillings']:checked");
+        if (checked.length > 2) {
+          showFormError("⚠️ Regular tasting boxes can have up to 2 side fillings.");
+          return false;
+        }
+      }
+    }
+
+    return true;
+  }
+
   
 
   window.addEventListener("DOMContentLoaded", () => {
@@ -839,6 +1394,43 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+  function buildDeluxeSlicesData() {
+    const slices = [];
+
+    for (let i = 1; i <= 6; i++) {
+      slices.push({
+        slice: i,
+        flavor: document.getElementById(`slice${i}Flavor`).value || "",
+        frosting: document.getElementById(`slice${i}Frosting`).value || "",
+        filling: document.getElementById(`slice${i}Filling`).value || ""
+      });
+    }
+
+    return slices;
+  }
+
+function resetOrderPanelsAfterSubmit() {
+  document.getElementById("orderCategory").value = "";
+  document.getElementById("tastingBoxType").value = "";
+
+  toggleOrderTypePanels();
+  setSectionEnabled(document.getElementById("regularTastingFields"), false);
+  setSectionEnabled(document.getElementById("deluxeTastingFields"), false);
+
+  document.getElementById("customPriceInfo").innerHTML = "";
+  document.getElementById("tastingBoxPriceInfo").innerHTML = "";
+  document.getElementById("customEstimateRow").style.display = "none";
+  document.getElementById("tastingEstimateRow").style.display = "none";
+
+  document.getElementById("clearBoxOption").value = "standard";
+  document.getElementById("clearBoxAvailabilityNote").style.display = "none";
+
+  document.getElementById("contactEstimateInfo").innerHTML = "";
+  document.getElementById("contactEstimateNote").textContent = "";
+  document.getElementById("contactEstimateRow").style.display = "none";
+
+  clearFormError();
+}
 
 
 
@@ -851,30 +1443,37 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("orderForm").addEventListener("submit", async function (e) {
     e.preventDefault();
 
-      // ▼ Require the “I agree to Order Rules” checkbox ▼
-  const agreeCheckbox = document.getElementById("agreeRules");
-  if (!agreeCheckbox.checked) {
-    showFormError("⚠️ You must agree to the Order Rules before submitting.");
-    agreeCheckbox.focus();
-    return;  // stop submission
-  }
-  // ▲ end checkbox guard ▲
+    const agreeCheckbox = document.getElementById("agreeRules");
+    if (!agreeCheckbox.checked) {
+      showFormError("⚠️ You must agree to the Order Rules before submitting.");
+      agreeCheckbox.focus();
+      return;
+    }
 
-
+    const form = e.target;
+    const formData = new FormData(form);
+    const orderCategory = document.getElementById("orderCategory").value;
     const cakeType = document.getElementById("cakeType").value;
-    if (cakeType === "tiered") {
-      const dateVal = document.getElementById("pickupDate").value;
-      if (dateVal) {
-        const selected = new Date(dateVal + "T00:00");
-        const today    = new Date();
-        const diffDays = (selected - today) / (1000*60*60*24);
-        if (diffDays < 14) {
-          showFormError("⚠️ Tiered cakes require at least 2 weeks notice. Please choose a later date.");
 
-          preservedSize     = document.getElementById("size").value;
-          preservedFlavor   = document.getElementById("flavor").value;
+  if (orderCategory === "custom_cake" && cakeType === "tiered") {
+    const dateVal = document.getElementById("pickupDate").value;
+    const selectedSize = document.getElementById("size").value;
+
+    if (dateVal) {
+      const selected = new Date(dateVal + "T00:00");
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+
+      const diffDays = (selected - today) / (1000 * 60 * 60 * 24);
+      const requiredDays = getTieredLeadTimeDays(selectedSize);
+
+      if (diffDays < requiredDays) {
+        showFormError(`⚠️ Tiered cakes require ${getTieredLeadTimeText(requiredDays)} notice. Please choose a later date.`);
+
+          preservedSize = document.getElementById("size").value;
+          preservedFlavor = document.getElementById("flavor").value;
           preservedFrosting = document.getElementById("frosting").value;
-          preservedFilling  = document.getElementById("filling").value;
+          preservedFilling = document.getElementById("filling").value;
           wasRedirectedAfterWarning = true;
 
           document.querySelectorAll(".form-step").forEach((step, idx) =>
@@ -884,65 +1483,87 @@ document.addEventListener("DOMContentLoaded", () => {
 
           const cakeTypeNow = document.getElementById("cakeType").value;
           if (cakeTypeNow) {
-            populateSelect(document.getElementById("flavor"),  flavorOptions,  "Select a flavor");
-            populateSelect(document.getElementById("frosting"),frostingOptions,"Select a frosting");
+            populateSelect(document.getElementById("flavor"), flavorOptions, "Select a flavor");
+            populateSelect(document.getElementById("frosting"), frostingOptions, "Select a frosting");
             populateSelect(document.getElementById("filling"), fillingOptions, "Select a filling (optional)", true);
-            populateSelect(document.getElementById("size"),    sizeOptions[cakeTypeNow] || [], "Select a size");
+            populateSelect(document.getElementById("size"), sizeOptions[cakeTypeNow] || [], "Select a size");
 
             const selectedSize = document.getElementById("size").value;
             if (selectedSize && sizeDetails[selectedSize]) {
               renderSizeInfo(selectedSize);
+              updateClearBoxOptions(selectedSize);
             }
           }
-          return; // Cancel submit
+
+          return;
         }
       }
     }
 
-    const form = e.target;
-    const formData = new FormData(form);
+    if (orderCategory === "custom_cake") {
+      const imageInputs = document.querySelectorAll("input[name='inspirationPic']");
+      const atLeastOneImage = Array.from(imageInputs).some(input => input.files.length > 0);
 
-    const imageInputs = document.querySelectorAll("input[name='inspirationPic']");
-
-    const atLeastOneImage = Array.from(imageInputs).some(input => input.files.length > 0);
-
-    if (!atLeastOneImage) {
+      if (!atLeastOneImage) {
         showFormError("⚠️ Please upload at least one inspiration picture.");
-    return;
+        return;
+      }
+
+      for (let i = 0; i < Math.min(3, imageInputs.length); i++) {
+        const file = imageInputs[i].files[0];
+        if (!file) continue;
+
+        const base64 = await new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () => resolve(reader.result.split(",")[1]);
+          reader.onerror = reject;
+          reader.readAsDataURL(file);
+        });
+
+        formData.append(`image${i + 1}`, base64);
+        formData.append(`imageName${i + 1}`, file.name);
+        formData.append(`imageType${i + 1}`, file.type || "image/jpeg");
+      }
     }
 
-    for (let i = 0; i < Math.min(3, imageInputs.length); i++) {
-    const file = imageInputs[i].files[0];
-    if (!file) continue;
+    if (orderCategory === "tasting_box") {
+      const tastingBoxType = document.getElementById("tastingBoxType").value;
 
-    const base64 = await new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = () => resolve(reader.result.split(",")[1]);
-        reader.onerror = reject;
-        reader.readAsDataURL(file);
-    });
+      if (tastingBoxType === "regular") {
+        const selectedFillings = Array.from(
+          document.querySelectorAll("input[name='regularBoxSideFillings']:checked")
+        ).map(input => input.value);
 
-    formData.append(`image${i + 1}`, base64);
-    formData.append(`imageName${i + 1}`, file.name);
+      }
+
+      if (tastingBoxType === "deluxe") {
+        const deluxeSlices = buildDeluxeSlicesData();
+
+        const deluxeSliceSummary = deluxeSlices
+          .map(slice => `Slice ${slice.slice}: ${slice.flavor} / ${slice.frosting} / ${slice.filling || "None"}`)
+          .join("\n");
+
+
+        formData.append("deluxeSliceSummary", deluxeSliceSummary);
+      }
     }
 
-
-  
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbx6eh_ZJWWV-F9pwlcIXUUzIJwFr-mMEp7bG_lxsWBx06xC5zRMHgVTSuBWMG2w5Y1-/exec';
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbzwC_5xb_4pIwvDHeEKQE5PFlS9-IyJaln3JpwQvpWBYksA8LY9Ysv-epITjSXwp1f4mw/exec';
 
     const submitBtn = form.querySelector("button[type='submit']");
     submitBtn.disabled = true;
     submitBtn.textContent = "Submitting...";
     submitBtn.classList.add("submitting");
     clearFormError();
-  
+
     try {
       await fetch(scriptURL, {
         method: 'POST',
         body: formData,
+        mode: 'no-cors',
       });
-  
-      // Show confirmation message
+
+
       document.getElementById("orderForm").style.display = "none";
       document.getElementById("orderHeader").style.display = "none";
       document.getElementById("confirmationMessage").style.display = "block";
@@ -950,8 +1571,7 @@ document.addEventListener("DOMContentLoaded", () => {
       submitBtn.disabled = false;
       submitBtn.textContent = "Submit";
       submitBtn.classList.remove("submitting");
-  
-      // Reset form to step 1
+
       form.reset();
 
       preservedSize = "";
@@ -959,34 +1579,43 @@ document.addEventListener("DOMContentLoaded", () => {
       preservedFrosting = "";
       preservedFilling = "";
 
-      // Clear Step 2 dynamic content
       document.getElementById("tieredNotice").style.display = "none";
       document.getElementById("flavor").innerHTML = "";
       document.getElementById("frosting").innerHTML = "";
       document.getElementById("filling").innerHTML = "";
       document.getElementById("size").innerHTML = "";
-      
-      document.querySelectorAll('.size-info').forEach(el => el.innerHTML = '');
 
+      document.getElementById("customPriceInfo").innerHTML = "";
+      document.getElementById("tastingBoxPriceInfo").innerHTML = "";
+      document.getElementById("customEstimateRow").style.display = "none";
+      document.getElementById("tastingEstimateRow").style.display = "none";
 
-      // Remove uploaded image inputs and preview
+      document.getElementById("contactEstimateInfo").innerHTML = "";
+      document.getElementById("contactEstimateNote").textContent = "";
+      document.getElementById("contactEstimateRow").style.display = "none";
+
       const imageInputsContainer = document.getElementById("imageInputsContainer");
       imageInputsContainer.innerHTML = `<input type="file" name="inspirationPic" accept="image/*" class="inspo-file" required>`;
       document.getElementById("previewContainer").innerHTML = "";
 
-      // Reattach the image preview listener to the new input
       imageInputsContainer.querySelector("input").addEventListener("change", updatePreview);
 
       currentStep = 0;
       document.querySelectorAll('.form-step').forEach((step, index) => {
         step.classList.toggle('active', index === 0);
       });
-  
+
+      resetOrderPanelsAfterSubmit();
+
     } catch (error) {
       console.error("Submission error:", error);
       alert("⚠️ Submission failed. Try again or contact on Instagram.");
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Submit";
+      submitBtn.classList.remove("submitting");
     }
   });
+
 
 // mobile nav links
 document.querySelectorAll('.mobile-nav-links a').forEach(link => {
