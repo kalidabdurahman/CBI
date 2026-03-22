@@ -850,7 +850,7 @@ pickupDateField.addEventListener("change", function(e) {
   // 2) Block these exact dates: June 11, 12, 14, 2025
   //    (format: "YYYY-MM-DD")
   const invalidDates = [
-    
+
   ];
   
   if (invalidDates.includes(val)) {
@@ -1110,9 +1110,9 @@ function updateClearBoxOptions(sizeKey) {
     if (!container || container.children.length > 0) return;
 
     container.innerHTML = fillingOptions.map(filling => `
-      <label>
+      <label class="filling-option">
         <input type="checkbox" name="regularBoxSideFillings" value="${filling}">
-        ${filling}
+        <span>${filling}</span>
       </label>
     `).join("");
 
