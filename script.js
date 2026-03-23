@@ -746,14 +746,14 @@ orderDetailsHtml = `
               const diffDays = (chosen - today) / (1000 * 60 * 60 * 24);
               const selectedSize = document.getElementById("size").value;
 
-              let requiredDays = 6;
+              let requiredDays = 7;
               if (orderCategory === "custom_cake" && cakeType === "tiered") {
                 requiredDays = getTieredLeadTimeDays(selectedSize);
               }
 
               if (chosen.getDay() === 1 || diffDays < requiredDays) {
                 showFormError(
-                  `⚠️ Please choose a valid date: ${getTieredLeadTimeText(requiredDays)} notice and not a Monday.`
+                  `⚠️ Please choose a valid date: ${getLeadTimeText(requiredDays)} notice and not a Monday.`
                 );
                 return;
               }
@@ -828,7 +828,7 @@ orderDetailsHtml = `
     const pickupDateField = document.getElementById("pickupDate");
     const today = new Date();
     const minDate = new Date(today);
-    minDate.setDate(minDate.getDate() + 6);
+    minDate.setDate(minDate.getDate() + 7);
     pickupDateField.min = minDate.toISOString().split("T")[0];
 
 // ▽ block out Mondays AND specific dates ▽
@@ -850,7 +850,13 @@ pickupDateField.addEventListener("change", function(e) {
   // 2) Block these exact dates: June 11, 12, 14, 2025
   //    (format: "YYYY-MM-DD")
   const invalidDates = [
-
+    "2026-07-20",
+    "2026-07-21",
+    "2026-07-22",
+    "2026-07-23",
+    "2026-07-24",
+    "2026-07-25",
+    "2026-07-26"
   ];
   
   if (invalidDates.includes(val)) {
@@ -1001,8 +1007,11 @@ const flavorOptions = [
     return threeTierTieredSizes.includes(sizeKey) ? 30 : 14;
   }
 
-  function getTieredLeadTimeText(days) {
-    return days === 30 ? "at least 1 month" : "at least 2 weeks";
+  function getLeadTimeText(days) {
+    if (days === 30) return "at least 1 month";
+    if (days === 14) return "at least 2 weeks";
+    if (days === 7) return "at least 1 week";
+    return `at least ${days} days`;
   }
     
   function sizePriceRangeHTML(sizeKey) {
@@ -1468,7 +1477,7 @@ function resetOrderPanelsAfterSubmit() {
       const requiredDays = getTieredLeadTimeDays(selectedSize);
 
       if (diffDays < requiredDays) {
-        showFormError(`⚠️ Tiered cakes require ${getTieredLeadTimeText(requiredDays)} notice. Please choose a later date.`);
+        showFormError(`⚠️ Tiered cakes require ${getLeadTimeText(requiredDays)} notice. Please choose a later date.`);
 
           preservedSize = document.getElementById("size").value;
           preservedFlavor = document.getElementById("flavor").value;
