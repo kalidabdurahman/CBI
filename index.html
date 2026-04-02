@@ -328,6 +328,7 @@
                     <li>6” Round (Feeds 12–17)<span>$90</span></li>
                     <li>8” Round (Feeds 25–35)<span>$130</span></li>
                     <li>10” Round (Feeds 40–50)<span>$165</span></li>
+                    <li>12” Round (Feeds 60–70)<span>$210</span></li>
                 </ul>
             </div>            
         
@@ -568,6 +569,9 @@
 
                     <div class="form-group">
                         <label>Upload Inspiration Picture(s)<span class="required-asterisk">*</span> <span style="font-size: 0.8em;">(up to 3)</span></label>
+                            <p class="small-note" style="margin-top: 6px;">
+                                No profanity, no horoscopes, and no AI-generated inspiration pictures.
+                            </p>
                         <div id="imageInputsContainer">
                             <input type="file" name="inspirationPic" accept="image/*" class="inspo-file" required>
                         </div>
@@ -700,16 +704,12 @@
         
                 <!-- Preferred Form of Contact -->
                 <div class="form-group">
-                    <label for="contactPreference">Preferred Form of Contact<span class="required-asterisk">*</span> </label>
-                    <select id="contactPreference" name="contactPreference" required>
-                        <option value="" disabled selected>Select a Contact Method<span class="required-asterisk">*</span> </option>
-                        <option value="text">Text Message</option>
-                        <option value="email">Email</option>
-                    </select>
+                    <label for="phoneNumber">Phone Number<span class="required-asterisk">*</span> </label>
+                    <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="Your Phone Number" required>
                 </div>
                 <div class="form-group">
-                    <label for="contactInfo">Info for Contact (Phone Number or Email) <span class="required-asterisk">*</span> </label>
-                    <input type="text" id="contactInfo" name="contactInfo" placeholder="Your Contact Info" required>
+                    <label for="email">Email Address<span class="required-asterisk">*</span> </label>
+                    <input type="email" id="email" name="email" placeholder="Your Email Address" required>
                 </div>
         
                 <!-- Pickup or Delivery -->
@@ -869,8 +869,10 @@
                   <ul>
                       <li>Orders are not confirmed until payment is received.</li>
                       <li>A 50% <strong>non-refundable</strong> deposit is required to secure most orders.</li>
-                      <li>Wedding cakes under $400 must be paid in full at booking.</li>
-                      <li>Invoices <strong>must</strong> be paid within 48 hours of being sent or the date may be released and open to others.</li>
+                      <li>Wedding cakes $400 and under must be paid in full at booking.</li>
+                      <li>Invoices <strong>must</strong> be paid within 48 hours of being sent or the date may be released and opened to others. I will reach out to you via your chosen contact method if I have any questions or need verification. Once all changes have been made and confirmed, your invoice will be sent.</li>
+                      <li>Two reminders will also be sent: the day before it is due and the day it is due. If payment is not made by the due date, the order will be <strong>canceled</strong>. No payment can be made after.</li>
+                      <li>For orders placed with less than 1 week notice, 50% is due by the end of that same day.</li>
                   </ul>
               </li>
 
@@ -886,7 +888,8 @@
               <li>
                   Final Payment
                   <ul>
-                      <li>Remaining balances must be paid by date listed on the invoice.</li>
+                      <li>Remaining balances must be paid by the date listed on the invoice.</li>
+                      <li>For orders $400 and over, the remaining balance is due 2 weeks prior to the event, with a 48-hour payment deadline and reminders.</li>
                       <li>Full payment is <strong>required</strong> before pickup or delivery.</li>
                       <li>No cake will be released without full payment. <strong>No exceptions.</strong></li>
                   </ul>
@@ -904,8 +907,8 @@
                   Cancellations
                   <ul>
                       <li>Deposits are non-refundable once an order is confirmed.</li>
-                      <li>Orders canceled within 2 weeks of the event date are not eligible for refund.</li>
-                      <li>Any orders cancelled before 2 weeks of event are eligible for refund.</li>
+                      <li>Orders canceled within 2 weeks of the event date are <strong>not</strong> eligible for refund.</li>
+                      <li>Any orders canceled before 2 weeks of the event <strong>may</strong> be eligible for refund.</li>
                   </ul>
               </li>
 
@@ -913,8 +916,8 @@
                   Pickup &amp; Delivery
                   <ul>
                       <li>Pickup address will be sent the day before your scheduled pickup.</li>
-                      <li>Please arrive at the agreed pickup time – if you are running late or need to reschedule, you have 3 days to communicate or the order will not be held.</li>
-                      <li>Any cake 6” + 8” + 10” tier or larger must be delivered.</li>
+                      <li>Please arrive at the agreed pickup time. If you are running late or need to reschedule, you have 3 days to communicate or the order will not be held.</li>
+                      <li>Any cake 6” + 8” + 10” tier or larger <strong>must</strong> be delivered.</li>
                   </ul>
               </li>
 
@@ -926,6 +929,10 @@
                   </ul>
               </li>
           </ol>
+
+          <p style="text-align: center; margin-top: 24px;">
+              CakesByIftu is not liable for any damages once the product is picked up or delivered.
+          </p>
 
           <p style="text-align: center; margin-top: 24px;">
               CakesByIftu LLC is a registered business in the State of Minnesota and operates as a Minnesota Registered Cottage Food Producer following state food safety regulations.

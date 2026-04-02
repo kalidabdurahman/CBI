@@ -655,8 +655,8 @@ orderDetailsHtml = `
       <ul>
         ${row("First Name", formData.get("firstName"))}
         ${row("Last Name", formData.get("lastName"))}
-        ${row("Contact Preference", formData.get("contactPreference"))}
-        ${row("Contact Info", formData.get("contactInfo"))}
+        ${row("Phone Number", formData.get("phoneNumber"))}
+        ${row("Email", formData.get("email"))}
         ${row("Delivery Option", formData.get("deliveryOption"))}
         ${row("Pickup Date", formData.get("pickupDate"))}
         ${row("Payment Type", formData.get("paymentType"))}
@@ -956,7 +956,7 @@ const flavorOptions = [
   
   const sizeOptions = {
     heart: ["4\" Heart", "6\" Heart", "8\" Heart"],
-    round: ["4\" Round", "6\" Round", "8\" Round", "10\" Round"],
+    round: ["4\" Round", "6\" Round", "8\" Round", "10\" Round", "12\" Round"],
     tiered: [
       "4\" + 6\" Tiered",
       "6\" + 8\" Tiered",
@@ -976,6 +976,7 @@ const flavorOptions = [
     '6" Round': { price: "$90", serves: "Feeds 12–17" },
     '8" Round': { price: "$130", serves: "Feeds 25–35" },
     '10" Round': { price: "$165", serves: "Feeds 40–50" },
+    '12" Round': { price: "$210", serves: "Feeds 60–70" },
   
     '4" + 6" Tiered': { price: "$145", serves: "Feeds 20–30" },
     '6" + 8" Tiered': { price: "$220", serves: "Feeds 50–60" },
@@ -1557,7 +1558,7 @@ function resetOrderPanelsAfterSubmit() {
       }
     }
 
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbzwC_5xb_4pIwvDHeEKQE5PFlS9-IyJaln3JpwQvpWBYksA8LY9Ysv-epITjSXwp1f4mw/exec';
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxKe7iX4u6PWXxd34XF_OP6VrAgaZo6Zt7VTzhrMSet2UxLzd26cAMsnNSZFFlQZeFnfQ/exec';
 
     const submitBtn = form.querySelector("button[type='submit']");
     submitBtn.disabled = true;
