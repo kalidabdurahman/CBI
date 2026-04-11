@@ -751,9 +751,9 @@ orderDetailsHtml = `
                 requiredDays = getTieredLeadTimeDays(selectedSize);
               }
 
-              if (chosen.getDay() === 1 || diffDays < requiredDays) {
+              if (chosen.getDay() === 1 || chosen.getDay() === 2 || diffDays < requiredDays) {
                 showFormError(
-                  `⚠️ Please choose a valid date: ${getLeadTimeText(requiredDays)} notice and not a Monday.`
+                  `⚠️ Please choose a valid date: ${getLeadTimeText(requiredDays)} notice and not a Monday or Tuesday.`
                 );
                 return;
               }
@@ -840,9 +840,9 @@ pickupDateField.addEventListener("change", function(e) {
   const chosen = new Date(val + "T00:00");
   const dayOfWeek = chosen.getDay(); // 0=Sunday, 1=Monday, …, 6=Saturday
 
-  // 1) Block all Mondays
-  if (dayOfWeek === 1) {
-    showFormError("⚠️ Mondays are unavailable. Please pick another day.");
+  // 1) Block all Mondays and Tuesdays
+  if (dayOfWeek === 1 || dayOfWeek === 2) {
+    showFormError("⚠️ Mondays and Tuesdays are unavailable. Please pick another day.");
     e.target.value = "";
     return;
   }
@@ -871,6 +871,13 @@ pickupDateField.addEventListener("change", function(e) {
     "2026-04-28",
     "2026-04-29",
     "2026-04-30",
+    "2026-07-12",
+    "2026-07-13",
+    "2026-07-14",
+    "2026-07-15",
+    "2026-07-16",
+    "2026-07-17",
+    "2026-07-18",
     "2026-07-20",
     "2026-07-21",
     "2026-07-22",
