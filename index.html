@@ -239,9 +239,11 @@
                         <li>Double Chocolate</li>
                         <li>Marble</li>
                         <li>Confetti</li>
+                        <li>Lemon</li>
                         <li>Strawberry</li>
                         <li>Red Velvet</li>
                         <li>Cookies & Cream</li>
+                        <li>Biscoff Swirl</li>
                     </ul>
                 </div>
                 <div class="flavor-column">
@@ -355,12 +357,43 @@
         
             <div class="pricing-info" id="dessert">
                 <h3>Desserts</h3>
+
+                <p>Cupcakes</p>
                 <ul>
-                    <li>1/2 Dozen (6) Cupcakes<span>$25</span></li>
-                    <li>1 Dozen (12) Cupcakes<span>$35</span></li>
-                    <li>1 Dozen (12) Cake Cups<span>$25</span></li>
-                    <li>Extra Decor (Depending on Size) - <span>$5-$15</span></li>
+                    <li>1/2 Dozen (6)<span>$25</span></li>
+                    <li>1 Dozen (12)<span>$35/dozen</span></li>
+                    <li>2–4 Dozen<span>$32/dozen</span></li>
+                    <li>5–7 Dozen<span>$30/dozen</span></li>
+                    <li>8–10 Dozen<span>$28/dozen</span></li>
                 </ul>
+
+                <p>Cake Cups</p>
+                <ul>
+                    <li>1 Dozen (12)<span>$30/dozen</span></li>
+                    <li>2–4 Dozen<span>$28/dozen</span></li>
+                    <li>5–7 Dozen<span>$27/dozen</span></li>
+                    <li>8–10 Dozen<span>$26/dozen</span></li>
+                </ul>
+
+                <p>Cake Pops</p>
+                <ul>
+                    <li>1 Dozen (12)<span>$30/dozen</span></li>
+                    <li>2–4 Dozen<span>$28/dozen</span></li>
+                    <li>5–7 Dozen<span>$27/dozen</span></li>
+                    <li>8–10 Dozen<span>$26/dozen</span></li>
+                </ul>
+
+                <p>Pretzel Rods</p>
+                <ul>
+                    <li>1 Dozen (12)<span>$25/dozen</span></li>
+                    <li>2–4 Dozen<span>$24/dozen</span></li>
+                    <li>5–7 Dozen<span>$23/dozen</span></li>
+                    <li>8–10 Dozen<span>$22/dozen</span></li>
+                </ul>
+
+                <p class="small-note">
+                    Dessert pricing is fixed by quantity. Cupcake fillings are optional at no additional cost.
+                </p>
             </div>
 
               <div class="pricing-info" id="cake-tasting-box">
@@ -509,6 +542,7 @@
                         <option value="" disabled selected>Select an option</option>
                         <option value="custom_cake">Custom Cake</option>
                         <option value="tasting_box">Cake Tasting Box</option>
+                        <option value="dessert">Desserts</option>
                     </select>
                 </div>
 
@@ -521,8 +555,7 @@
                             <option value="heart">Heart Cake</option>
                             <option value="round">Round Cake</option>
                             <option value="tiered">Tiered Cake</option>
-                            <option value="dessert">Dessert</option>
-                                              </select>
+                        </select>
                       <div id="tieredNotice" style="display: none; color: #b30000; font-weight: bold; margin-top: 8px;">
                           ⚠️ ⚠️ ⚠️<br>
                           2-tier cakes must be ordered at least 2 weeks in advance.<br>
@@ -679,6 +712,85 @@
                             <label for="tastingBoxNotesDeluxe">Any notes for your tasting box?</label>
                             <textarea id="tastingBoxNotesDeluxe" name="tastingBoxNotesDeluxe" rows="4" placeholder="Anything you'd like us to know?"></textarea>
                         </div>
+                    </div>
+                </div>
+
+                <!-- DESSERT PANEL -->
+                <div id="dessertFields" class="order-type-panel">
+                    <div class="form-group">
+                        <label for="dessertType">What dessert would you like? <span class="required-asterisk">*</span></label>
+                        <select id="dessertType" name="dessertType" required>
+                            <option value="" disabled selected>Select a dessert</option>
+                            <option value="cupcakes">Cupcakes</option>
+                            <option value="cake_cups">Cake Cups</option>
+                            <option value="pretzel_rods">Pretzel Rods</option>
+                            <option value="cake_pops">Cake Pops</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dessertPackage">How many dozen would you like? <span class="required-asterisk">*</span></label>
+                        <select id="dessertPackage" name="dessertPackage" required>
+                            <option value="" disabled selected>Select a package</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group" id="dessertFlavorGroup">
+                        <label for="dessertFlavor">Flavor <span class="required-asterisk">*</span></label>
+                        <select id="dessertFlavor" name="dessertFlavor"></select>
+                    </div>
+
+                    <div class="form-group" id="dessertFrostingGroup">
+                        <label for="dessertFrosting">Frosting <span class="required-asterisk">*</span></label>
+                        <select id="dessertFrosting" name="dessertFrosting"></select>
+                    </div>
+
+                    <div class="form-group" id="dessertFillingGroup">
+                        <label for="dessertFilling">Filling</label>
+                        <select id="dessertFilling" name="dessertFilling"></select>
+                        <p class="small-note" style="margin-top: 6px;">
+                            Optional for cupcakes only — no additional cost.
+                        </p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dessertDetails">
+                            Describe any specific details you'd like
+                            <span class="required-asterisk">*</span>
+                        </label>
+                        <textarea
+                            id="dessertDetails"
+                            name="dessertDetails"
+                            rows="4"
+                            placeholder="Colors, theme, design, toppings, drizzle colors, etc."
+                            required
+                        ></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Upload Inspiration Picture(s) <span style="font-size: 0.8em;">(optional, up to 3)</span></label>
+                        <p class="small-note" style="margin-top: 6px;">
+                            No profanity, no horoscopes, and no AI-generated inspiration pictures.
+                        </p>
+
+                        <div id="dessertImageInputsContainer">
+                            <input type="file" name="dessertInspirationPic" accept="image/*" class="inspo-file">
+                        </div>
+
+                        <button type="button" id="addDessertImageBtn" class="order-button" style="margin-top: 10px;">+ Add Another Image</button>
+                        <div id="dessertPreviewContainer" class="preview-container" style="margin-top: 10px;"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dessertNotes">Any extra notes or requests?</label>
+                        <textarea id="dessertNotes" name="dessertNotes" rows="4" placeholder="Anything else you'd like to include?"></textarea>
+                    </div>
+
+                    <div id="dessertEstimateRow" class="estimate-row" style="margin-top: 8px; display: none;">
+                        <div id="dessertPriceInfo" class="size-info"></div>
+                        <span class="estimate-note">
+                            (Note: This is only an estimated cost. Total cost will be provided in invoice!)
+                        </span>
                     </div>
                 </div>
 

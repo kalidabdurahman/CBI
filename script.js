@@ -520,6 +520,61 @@ function updatePreview() {
     });
   }
 
+  function updateDessertPreview() {
+  const dessertPreviewContainer = document.getElementById("dessertPreviewContainer");
+  const dessertImageInputsContainer = document.getElementById("dessertImageInputsContainer");
+
+  if (!dessertPreviewContainer || !dessertImageInputsContainer) return;
+
+  dessertPreviewContainer.innerHTML = "";
+
+  const inputs = dessertImageInputsContainer.querySelectorAll("input[type='file']");
+  inputs.forEach((input) => {
+    if (input.files && input.files[0]) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const wrapper = document.createElement("div");
+        wrapper.className = "preview-wrapper";
+        wrapper.style.position = "relative";
+        wrapper.style.display = "inline-block";
+        wrapper.style.marginRight = "10px";
+
+        const img = document.createElement("img");
+        img.src = e.target.result;
+        img.style.maxWidth = "100px";
+        img.style.borderRadius = "8px";
+
+        const removeBtn = document.createElement("span");
+        removeBtn.innerHTML = "×";
+        removeBtn.style.position = "absolute";
+        removeBtn.style.top = "0";
+        removeBtn.style.right = "5px";
+        removeBtn.style.cursor = "pointer";
+        removeBtn.style.fontSize = "20px";
+        removeBtn.style.color = "#fff";
+        removeBtn.style.background = "#d33";
+        removeBtn.style.borderRadius = "50%";
+        removeBtn.style.width = "20px";
+        removeBtn.style.height = "20px";
+        removeBtn.style.textAlign = "center";
+        removeBtn.style.lineHeight = "20px";
+        removeBtn.title = "Remove";
+
+        removeBtn.addEventListener("click", () => {
+          input.remove();
+          updateDessertPreview();
+        });
+
+        wrapper.appendChild(img);
+        wrapper.appendChild(removeBtn);
+        dessertPreviewContainer.appendChild(wrapper);
+      };
+
+      reader.readAsDataURL(input.files[0]);
+    }
+  });
+}
+
   document.querySelectorAll('.review-image').forEach(img => {
     img.addEventListener('click', function() {
       let index = parseInt(img.getAttribute('data-index'));
@@ -648,6 +703,46 @@ orderDetailsHtml = `
       `;
     }
   }
+
+else if (orderCategory === "dessert") {
+  const dessertType = formData.get("dessertType");
+  const dessertPackage = formData.get("dessertPackage");
+  const dessertDetails = getDessertPackageDetails(dessertType, dessertPackage);
+  const dessertName = dessertTypeLabels[dessertType] || "Dessert";
+
+  const flavorDisplay = formData.get("dessertFlavor") || "N/A";
+  const frostingDisplay = formData.get("dessertFrosting") || "N/A";
+  const fillingDisplay =
+    dessertType === "cupcakes"
+      ? (formData.get("dessertFilling") || "None")
+      : "N/A";
+
+  const priceDisplay = dessertDetails
+    ? `${dessertDetails.price} – ${dessertName}, ${dessertPackage}`
+    : "—";
+
+  const totalPiecesDisplay = dessertDetails
+    ? dessertDetails.totalPieces
+    : "—";
+
+  orderDetailsHtml = `
+    <div class="review-summary-section">
+      <h4>Order Details</h4>
+      <ul>
+        ${row("Order Type", "Desserts")}
+        ${row("Dessert Type", dessertName)}
+        ${row("Quantity", dessertPackage)}
+        ${row("Total Pieces", totalPiecesDisplay)}
+        ${row("Price Estimate", priceDisplay)}
+        ${row("Flavor", flavorDisplay)}
+        ${row("Frosting", frostingDisplay)}
+        ${row("Filling", fillingDisplay)}
+        ${row("Dessert Details", formData.get("dessertDetails"))}
+        ${row("Extra Notes", formData.get("dessertNotes"))}
+      </ul>
+    </div>
+  `;
+}
 
   const contactDetailsHtml = `
     <div class="review-summary-section">
@@ -926,6 +1021,30 @@ pickupDateField.addEventListener("change", function(e) {
       }
     });
 
+    const addDessertImageBtn = document.getElementById("addDessertImageBtn");
+    const dessertImageInputsContainer = document.getElementById("dessertImageInputsContainer");
+
+    if (addDessertImageBtn && dessertImageInputsContainer) {
+      addDessertImageBtn.addEventListener("click", () => {
+        const currentInputs = dessertImageInputsContainer.querySelectorAll("input[type='file']");
+        if (currentInputs.length < 3) {
+          const newInput = document.createElement("input");
+          newInput.type = "file";
+          newInput.name = "dessertInspirationPic";
+          newInput.accept = "image/*";
+          newInput.classList.add("inspo-file");
+
+          newInput.addEventListener("change", updateDessertPreview);
+          dessertImageInputsContainer.appendChild(newInput);
+        }
+      });
+
+      const firstDessertImageInput = dessertImageInputsContainer.querySelector("input[type='file']");
+      if (firstDessertImageInput) {
+        firstDessertImageInput.addEventListener("change", updateDessertPreview);
+      }
+    }
+
     document.getElementById("cakeType").addEventListener("change", function () {
         const selectedType = this.value;
     
@@ -959,6 +1078,23 @@ pickupDateField.addEventListener("change", function(e) {
       clearFormError();
     });
 
+    document.getElementById("dessertType").addEventListener("change", () => {
+      populateDessertPackages();
+      renderDessertFieldVisibility();
+      renderDessertPriceInfo();
+      clearFormError();
+    });
+
+    document.getElementById("dessertPackage").addEventListener("change", () => {
+      renderDessertPriceInfo();
+      clearFormError();
+    });
+
+    document.getElementById("dessertFlavor").addEventListener("change", clearFormError);
+    document.getElementById("dessertFrosting").addEventListener("change", clearFormError);
+    document.getElementById("dessertFilling").addEventListener("change", clearFormError);
+    document.getElementById("dessertDetails").addEventListener("input", clearFormError);
+
     toggleOrderTypePanels();
 
   
@@ -969,9 +1105,16 @@ pickupDateField.addEventListener("change", function(e) {
   
 
 
-const flavorOptions = [
-    "French Vanilla", "Double Chocolate", "Marble", "Confetti",
-    "Strawberry", "Red Velvet", "Cookies & Cream"
+  const flavorOptions = [
+    "French Vanilla",
+    "Double Chocolate",
+    "Marble",
+    "Confetti",
+    "Lemon",
+    "Strawberry",
+    "Red Velvet",
+    "Cookies & Cream",
+    "Biscoff Swirl"
   ];
   
   const frostingOptions = [
@@ -1023,6 +1166,108 @@ const flavorOptions = [
     "1 Dozen (12) Cupcakes": { price: "$35", serves: "12 Cupcakes" },
     "1 Dozen (12) Cake Cups": { price: "$25", serves: "12 Cake Cups" }
   };
+
+    const dessertPricing = {
+    cupcakes: {
+      halfDozenPrice: 25,
+      tiers: [
+        { min: 1, max: 1, perDozen: 35 },
+        { min: 2, max: 4, perDozen: 32 },
+        { min: 5, max: 7, perDozen: 30 },
+        { min: 8, max: 10, perDozen: 28 }
+      ]
+    },
+    cake_cups: {
+      tiers: [
+        { min: 1, max: 1, perDozen: 30 },
+        { min: 2, max: 4, perDozen: 28 },
+        { min: 5, max: 7, perDozen: 27 },
+        { min: 8, max: 10, perDozen: 26 }
+      ]
+    },
+    pretzel_rods: {
+      tiers: [
+        { min: 1, max: 1, perDozen: 25 },
+        { min: 2, max: 4, perDozen: 24 },
+        { min: 5, max: 7, perDozen: 23 },
+        { min: 8, max: 10, perDozen: 22 }
+      ]
+    },
+    cake_pops: {
+      tiers: [
+        { min: 1, max: 1, perDozen: 30 },
+        { min: 2, max: 4, perDozen: 28 },
+        { min: 5, max: 7, perDozen: 27 },
+        { min: 8, max: 10, perDozen: 26 }
+      ]
+    }
+  };
+
+  const dessertTypeLabels = {
+    cupcakes: "Cupcakes",
+    cake_cups: "Cake Cups",
+    pretzel_rods: "Pretzel Rods",
+    cake_pops: "Cake Pops"
+  };
+
+  function getDessertPerDozenPrice(dessertType, dozenCount) {
+    const pricing = dessertPricing[dessertType];
+    if (!pricing) return null;
+
+    const tier = pricing.tiers.find(item => dozenCount >= item.min && dozenCount <= item.max);
+    return tier ? tier.perDozen : null;
+  }
+
+  function getDessertQuantityOptions(dessertType) {
+    const options = [];
+
+    if (dessertType === "cupcakes") {
+      options.push({
+        label: "1/2 Dozen (6)",
+        dozenCount: 0.5,
+        totalPieces: 6,
+        priceValue: dessertPricing.cupcakes.halfDozenPrice,
+        price: `$${dessertPricing.cupcakes.halfDozenPrice}`
+      });
+    }
+
+    for (let dozenCount = 1; dozenCount <= 10; dozenCount++) {
+      const perDozen = getDessertPerDozenPrice(dessertType, dozenCount);
+      if (!perDozen) continue;
+
+      const totalPieces = dozenCount * 12;
+      const totalPrice = perDozen * dozenCount;
+      const dozenLabel = dozenCount === 1 ? "1 Dozen" : `${dozenCount} Dozen`;
+
+      options.push({
+        label: `${dozenLabel} (${totalPieces})`,
+        dozenCount,
+        totalPieces,
+        perDozen,
+        priceValue: totalPrice,
+        price: `$${totalPrice}`
+      });
+    }
+
+    return options;
+  }
+
+  function getDessertPackageDetails(dessertType, packageLabel) {
+    const packages = getDessertQuantityOptions(dessertType);
+    return packages.find(item => item.label === packageLabel);
+  }
+
+  function dessertNeedsFlavor(dessertType) {
+    return dessertType === "cupcakes" || dessertType === "cake_cups" || dessertType === "cake_pops";
+  }
+
+  function dessertNeedsFrosting(dessertType) {
+    return dessertType === "cupcakes" || dessertType === "cake_cups";
+  }
+
+  function dessertAllowsFilling(dessertType) {
+    return dessertType === "cupcakes";
+  }
 
   const clearBoxPrices = {
     '4" Heart': 3,
@@ -1252,6 +1497,125 @@ function renderTastingBoxPriceInfo() {
   }
 }
 
+function populateDessertPackages() {
+  const dessertType = document.getElementById("dessertType").value;
+  const packageSelect = document.getElementById("dessertPackage");
+  const options = getDessertQuantityOptions(dessertType);
+
+  packageSelect.innerHTML = "";
+
+  const placeholder = document.createElement("option");
+  placeholder.value = "";
+  placeholder.disabled = true;
+  placeholder.selected = true;
+  placeholder.hidden = true;
+  placeholder.textContent = "Select quantity";
+  packageSelect.appendChild(placeholder);
+
+  options.forEach(item => {
+    const option = document.createElement("option");
+    option.value = item.label;
+
+    if (item.dozenCount === 0.5) {
+      option.textContent = `${item.label} — ${item.price}`;
+    } else {
+      option.textContent = `${item.label} — ${item.price}`;
+    }
+
+    packageSelect.appendChild(option);
+  });
+}
+
+function renderDessertFieldVisibility() {
+  const dessertType = document.getElementById("dessertType").value;
+
+  const flavorGroup = document.getElementById("dessertFlavorGroup");
+  const frostingGroup = document.getElementById("dessertFrostingGroup");
+  const fillingGroup = document.getElementById("dessertFillingGroup");
+
+  const flavorSelect = document.getElementById("dessertFlavor");
+  const frostingSelect = document.getElementById("dessertFrosting");
+  const fillingSelect = document.getElementById("dessertFilling");
+
+  const showFlavor = dessertNeedsFlavor(dessertType);
+  const showFrosting = dessertNeedsFrosting(dessertType);
+  const showFilling = dessertAllowsFilling(dessertType);
+
+  flavorGroup.style.display = showFlavor ? "block" : "none";
+  frostingGroup.style.display = showFrosting ? "block" : "none";
+  fillingGroup.style.display = showFilling ? "block" : "none";
+
+  flavorSelect.required = showFlavor;
+  frostingSelect.required = showFrosting;
+  fillingSelect.required = false;
+
+  flavorSelect.disabled = !showFlavor;
+  frostingSelect.disabled = !showFrosting;
+  fillingSelect.disabled = !showFilling;
+
+  if (showFlavor) {
+    populateSelect(flavorSelect, flavorOptions, "Select a flavor");
+  } else {
+    flavorSelect.innerHTML = "";
+    flavorSelect.value = "";
+  }
+
+  if (showFrosting) {
+    populateSelect(frostingSelect, frostingOptions, "Select a frosting");
+  } else {
+    frostingSelect.innerHTML = "";
+    frostingSelect.value = "";
+  }
+
+  if (showFilling) {
+    populateSelect(fillingSelect, fillingOptions, "Select a filling (optional)", true);
+  } else {
+    fillingSelect.innerHTML = "";
+    fillingSelect.value = "";
+  }
+}
+
+function renderDessertPriceInfo() {
+  const dessertType = document.getElementById("dessertType").value;
+  const packageLabel = document.getElementById("dessertPackage").value;
+
+  const row = document.getElementById("dessertEstimateRow");
+  const info = document.getElementById("dessertPriceInfo");
+
+  if (!row || !info) return;
+
+  const details = getDessertPackageDetails(dessertType, packageLabel);
+
+  if (details) {
+    const dessertName = dessertTypeLabels[dessertType] || "Dessert";
+    info.innerHTML = `${details.price} – <em>${dessertName}, ${details.label}</em>`;
+    row.style.display = "block";
+  } else {
+    info.innerHTML = "";
+    row.style.display = "none";
+  }
+
+  renderContactStepEstimate();
+}
+
+function resetDessertFields() {
+  document.getElementById("dessertType").value = "";
+  document.getElementById("dessertPackage").innerHTML = `<option value="" disabled selected>Select quantity</option>`;
+  document.getElementById("dessertFlavor").innerHTML = "";
+  document.getElementById("dessertFrosting").innerHTML = "";
+  document.getElementById("dessertFilling").innerHTML = "";
+  document.getElementById("dessertFillingGroup").style.display = "none";
+  document.getElementById("dessertPriceInfo").innerHTML = "";
+  document.getElementById("dessertEstimateRow").style.display = "none";
+  document.getElementById("dessertPreviewContainer").innerHTML = "";
+  document.getElementById("dessertImageInputsContainer").innerHTML = `<input type="file" name="dessertInspirationPic" accept="image/*" class="inspo-file">`;
+
+  const firstDessertInput = document.querySelector("input[name='dessertInspirationPic']");
+  if (firstDessertInput) {
+    firstDessertInput.addEventListener("change", updateDessertPreview);
+  }
+}
+
 function renderContactStepEstimate() {
   const row = document.getElementById("contactEstimateRow");
   const info = document.getElementById("contactEstimateInfo");
@@ -1298,6 +1662,20 @@ function renderContactStepEstimate() {
     }
   }
 
+  if (orderCategory === "dessert") {
+    const dessertType = document.getElementById("dessertType").value;
+    const packageLabel = document.getElementById("dessertPackage").value;
+    const details = getDessertPackageDetails(dessertType, packageLabel);
+
+    if (details) {
+      const dessertName = dessertTypeLabels[dessertType] || "Dessert";
+      info.innerHTML = `${details.price} – <em>${dessertName}, ${details.label}</em>`;
+      note.textContent = "(Note: Dessert pricing is fixed by quantity. Total cost will be confirmed in invoice!)";
+      row.style.display = "block";
+      return;
+    }
+  }
+
   info.innerHTML = "";
   note.textContent = "";
   row.style.display = "none";
@@ -1330,18 +1708,25 @@ function toggleOrderTypePanels() {
   const orderCategory = document.getElementById("orderCategory").value;
   const customPanel = document.getElementById("customCakeFields");
   const tastingPanel = document.getElementById("tastingBoxFields");
+  const dessertPanel = document.getElementById("dessertFields");
 
   setSectionEnabled(customPanel, orderCategory === "custom_cake");
   setSectionEnabled(tastingPanel, orderCategory === "tasting_box");
+  setSectionEnabled(dessertPanel, orderCategory === "dessert");
 
   const customEstimateRow = document.getElementById("customEstimateRow");
   const customPriceInfo = document.getElementById("customPriceInfo");
   const tastingEstimateRow = document.getElementById("tastingEstimateRow");
   const tastingBoxPriceInfo = document.getElementById("tastingBoxPriceInfo");
+  const dessertEstimateRow = document.getElementById("dessertEstimateRow");
+  const dessertPriceInfo = document.getElementById("dessertPriceInfo");
 
   if (orderCategory === "custom_cake") {
     tastingBoxPriceInfo.innerHTML = "";
     tastingEstimateRow.style.display = "none";
+
+    if (dessertPriceInfo) dessertPriceInfo.innerHTML = "";
+    if (dessertEstimateRow) dessertEstimateRow.style.display = "none";
 
     renderSizeInfo(document.getElementById("size").value);
   } else {
@@ -1364,8 +1749,12 @@ function toggleOrderTypePanels() {
     document.getElementById("clearBoxAvailabilityNote").style.display = "none";
   }
 
-  renderContactStepEstimate();
+  if (orderCategory !== "dessert") {
+    if (dessertPriceInfo) dessertPriceInfo.innerHTML = "";
+    if (dessertEstimateRow) dessertEstimateRow.style.display = "none";
+  }
 
+  renderContactStepEstimate();
   clearFormError();
 }
 
@@ -1401,6 +1790,37 @@ function toggleOrderTypePanels() {
           showFormError("⚠️ Regular tasting boxes can have up to 2 side fillings.");
           return false;
         }
+      }
+    }
+
+    if (orderCategory === "dessert") {
+      const dessertType = document.getElementById("dessertType").value;
+      const dessertPackage = document.getElementById("dessertPackage").value;
+      const dessertDetails = document.getElementById("dessertDetails").value.trim();
+
+      if (!dessertType) {
+        showFormError("⚠️ Please choose what dessert you'd like.");
+        return false;
+      }
+
+      if (!dessertPackage) {
+        showFormError("⚠️ Please choose a dessert package.");
+        return false;
+      }
+
+      if (dessertNeedsFlavor(dessertType) && !document.getElementById("dessertFlavor").value) {
+        showFormError("⚠️ Please choose a dessert flavor.");
+        return false;
+      }
+
+      if (dessertNeedsFrosting(dessertType) && !document.getElementById("dessertFrosting").value) {
+        showFormError("⚠️ Please choose a dessert frosting.");
+        return false;
+      }
+
+      if (!dessertDetails) {
+        showFormError("⚠️ Please describe the details you'd like for your dessert order.");
+        return false;
       }
     }
 
@@ -1484,6 +1904,23 @@ function resetOrderPanelsAfterSubmit() {
   let preservedFrosting = "";
   let preservedFilling = "";
   
+  async function appendImagesToFormData(formData, imageInputs) {
+  for (let i = 0; i < Math.min(3, imageInputs.length); i++) {
+    const file = imageInputs[i].files[0];
+    if (!file) continue;
+
+    const base64 = await new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result.split(",")[1]);
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+
+    formData.append(`image${i + 1}`, base64);
+    formData.append(`imageName${i + 1}`, file.name);
+    formData.append(`imageType${i + 1}`, file.type || "image/jpeg");
+  }
+}
 
   document.getElementById("orderForm").addEventListener("submit", async function (e) {
     e.preventDefault();
@@ -1554,21 +1991,21 @@ function resetOrderPanelsAfterSubmit() {
         return;
       }
 
-      for (let i = 0; i < Math.min(3, imageInputs.length); i++) {
-        const file = imageInputs[i].files[0];
-        if (!file) continue;
+      await appendImagesToFormData(formData, imageInputs);
+    }
 
-        const base64 = await new Promise((resolve, reject) => {
-          const reader = new FileReader();
-          reader.onload = () => resolve(reader.result.split(",")[1]);
-          reader.onerror = reject;
-          reader.readAsDataURL(file);
-        });
+    if (orderCategory === "dessert") {
+      const dessertType = document.getElementById("dessertType").value;
+      const dessertPackage = document.getElementById("dessertPackage").value;
+      const dessertDetails = getDessertPackageDetails(dessertType, dessertPackage);
 
-        formData.append(`image${i + 1}`, base64);
-        formData.append(`imageName${i + 1}`, file.name);
-        formData.append(`imageType${i + 1}`, file.type || "image/jpeg");
+      if (dessertDetails) {
+        formData.append("dessertPriceEstimate", dessertDetails.price);
+        formData.append("dessertTotalPieces", String(dessertDetails.totalPieces));
       }
+
+      const dessertImageInputs = document.querySelectorAll("input[name='dessertInspirationPic']");
+      await appendImagesToFormData(formData, dessertImageInputs);
     }
 
     if (orderCategory === "tasting_box") {
@@ -1593,7 +2030,7 @@ function resetOrderPanelsAfterSubmit() {
       }
     }
 
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbxKe7iX4u6PWXxd34XF_OP6VrAgaZo6Zt7VTzhrMSet2UxLzd26cAMsnNSZFFlQZeFnfQ/exec';
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbwgl3HYsnGD7H6KekQboCXrlQy89-K6T3g6AENlTtWhz3dT-5reffdAPC40-zoSFBTkag/exec';
 
     const submitBtn = form.querySelector("button[type='submit']");
     submitBtn.disabled = true;
