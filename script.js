@@ -1127,21 +1127,21 @@ pickupDateField.addEventListener("change", function(e) {
   };
   
   const sizeDetails = {
-    '4" Heart': { price: "$50", serves: "Feeds 3–5" },
-    '6" Heart': { price: "$100", serves: "Feeds 13–19" },
-    '8" Heart': { price: "$150", serves: "Feeds 25–30" },
+    '4" Heart': { price: "$50", serves: "Feeds 2–4" },
+    '6" Heart': { price: "$110", serves: "Feeds 13–19" },
+    '8" Heart': { price: "$160", serves: "Feeds 25–30" },
   
-    '4" Round': { price: "$45", serves: "Feeds 4–8" },
-    '6" Round': { price: "$90", serves: "Feeds 12–17" },
-    '8" Round': { price: "$130", serves: "Feeds 25–35" },
-    '10" Round': { price: "$165", serves: "Feeds 40–50" },
-    '12" Round': { price: "$210", serves: "Feeds 60–70" },
+    '4" Round': { price: "$50", serves: "Feeds 4–6" },
+    '6" Round': { price: "$100", serves: "Feeds 12–17" },
+    '8" Round': { price: "$150", serves: "Feeds 25–35" },
+    '10" Round': { price: "$185", serves: "Feeds 40–50" },
+    '12" Round': { price: "$230", serves: "Feeds 60–70" },
   
-    '4" + 6" Tiered': { price: "$145", serves: "Feeds 20–30" },
-    '6" + 8" Tiered': { price: "$220", serves: "Feeds 50–60" },
-    '8" + 10" Tiered': { price: "$280", serves: "Feeds 90–100" },
-    '4" + 6" + 8" Tiered': { price: "$290", serves: "Feeds 70–80" },
-    '6" + 8" + 10" Tiered': { price: "$380", serves: "Feeds 115–135" },
+    '4" + 6" Tiered': { price: "$160", serves: "Feeds 20–30" },
+    '6" + 8" Tiered': { price: "$240", serves: "Feeds 50–60" },
+    '8" + 10" Tiered': { price: "$300", serves: "Feeds 90–100" },
+    '4" + 6" + 8" Tiered': { price: "$310", serves: "Feeds 70–80" },
+    '6" + 8" + 10" Tiered': { price: "$410", serves: "Feeds 115–135" },
   
     "1/2 Dozen (6) Cupcakes": { price: "$25", serves: "6 Cupcakes" },
     "1 Dozen (12) Cupcakes": { price: "$35", serves: "12 Cupcakes" },
