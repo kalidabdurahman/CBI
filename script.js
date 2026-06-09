@@ -468,27 +468,64 @@ cornerIDs.forEach((id, i) => {
   });
 });
 
+function getSelectedNewImageCount(container) {
+  if (!container) return 0;
 
+  return Array.from(container.querySelectorAll("input[type='file']"))
+    .filter(input => input.files && input.files[0])
+    .length;
+}
+
+function getSavedImageCountForCurrentEdit() {
+  return editingCartItemId ? editingExistingImages.length : 0;
+}
+
+function getTotalImageCountForContainer(container) {
+  return getSavedImageCountForCurrentEdit() + getSelectedNewImageCount(container);
+}
 
 
 function updatePreview() {
     previewContainer.innerHTML = "";
 
+    if (editingCartItemId && editingExistingImages.length) {
+      renderSavedCartImagePreviews(editingExistingImages, "previewContainer");
+    }
+
     const inputs = imageInputsContainer.querySelectorAll("input[type='file']");
-    inputs.forEach((input, index) => {
+
+    const selectedInputs = Array.from(inputs).filter(input => input.files && input.files[0]);
+    const savedCount = getSavedImageCountForCurrentEdit();
+
+    if (savedCount + selectedInputs.length > 3) {
+      selectedInputs[selectedInputs.length - 1].value = "";
+      showFormError("⚠️ You can upload up to 3 inspiration pictures total.");
+      updatePreview();
+      return;
+    }
+
+    selectedInputs.forEach((input) => {
       if (input.files && input.files[0]) {
         const reader = new FileReader();
+
         reader.onload = function (e) {
           const wrapper = document.createElement("div");
           wrapper.className = "preview-wrapper";
           wrapper.style.position = "relative";
           wrapper.style.display = "inline-block";
           wrapper.style.marginRight = "10px";
+          wrapper.style.marginBottom = "10px";
 
           const img = document.createElement("img");
           img.src = e.target.result;
           img.style.maxWidth = "100px";
           img.style.borderRadius = "8px";
+
+          const label = document.createElement("div");
+          label.textContent = "New";
+          label.style.fontSize = "0.75rem";
+          label.style.textAlign = "center";
+          label.style.marginTop = "4px";
 
           const removeBtn = document.createElement("span");
           removeBtn.innerHTML = "×";
@@ -508,19 +545,21 @@ function updatePreview() {
 
           removeBtn.addEventListener("click", () => {
             input.remove();
-            updatePreview(); // re-render previews
+            updatePreview();
           });
 
           wrapper.appendChild(img);
           wrapper.appendChild(removeBtn);
+          wrapper.appendChild(label);
           previewContainer.appendChild(wrapper);
         };
+
         reader.readAsDataURL(input.files[0]);
       }
     });
   }
 
-  function updateDessertPreview() {
+function updateDessertPreview() {
   const dessertPreviewContainer = document.getElementById("dessertPreviewContainer");
   const dessertImageInputsContainer = document.getElementById("dessertImageInputsContainer");
 
@@ -528,21 +567,44 @@ function updatePreview() {
 
   dessertPreviewContainer.innerHTML = "";
 
+  if (editingCartItemId && editingExistingImages.length) {
+    renderSavedCartImagePreviews(editingExistingImages, "dessertPreviewContainer");
+  }
+
   const inputs = dessertImageInputsContainer.querySelectorAll("input[type='file']");
-  inputs.forEach((input) => {
+
+  const selectedInputs = Array.from(inputs).filter(input => input.files && input.files[0]);
+  const savedCount = getSavedImageCountForCurrentEdit();
+
+  if (savedCount + selectedInputs.length > 3) {
+    selectedInputs[selectedInputs.length - 1].value = "";
+    showFormError("⚠️ You can upload up to 3 inspiration pictures total.");
+    updateDessertPreview();
+    return;
+  }
+
+  selectedInputs.forEach((input) => {
     if (input.files && input.files[0]) {
       const reader = new FileReader();
+
       reader.onload = function (e) {
         const wrapper = document.createElement("div");
         wrapper.className = "preview-wrapper";
         wrapper.style.position = "relative";
         wrapper.style.display = "inline-block";
         wrapper.style.marginRight = "10px";
+        wrapper.style.marginBottom = "10px";
 
         const img = document.createElement("img");
         img.src = e.target.result;
         img.style.maxWidth = "100px";
         img.style.borderRadius = "8px";
+
+        const label = document.createElement("div");
+        label.textContent = "New";
+        label.style.fontSize = "0.75rem";
+        label.style.textAlign = "center";
+        label.style.marginTop = "4px";
 
         const removeBtn = document.createElement("span");
         removeBtn.innerHTML = "×";
@@ -567,6 +629,7 @@ function updatePreview() {
 
         wrapper.appendChild(img);
         wrapper.appendChild(removeBtn);
+        wrapper.appendChild(label);
         dessertPreviewContainer.appendChild(wrapper);
       };
 
@@ -603,6 +666,53 @@ function generateReviewSummary() {
     const safeValue = value && String(value).trim() ? value : "—";
     return `<li><strong>${label}:</strong> ${safeValue}</li>`;
   };
+
+  if (cartItems.length) {
+    const formData = new FormData(document.getElementById("orderForm"));
+
+    const cartHtml = `
+      <div class="review-summary-section">
+        <h4>Cart Items</h4>
+        ${cartItems.map((item, index) => `
+          <div class="cart-review-item">
+            <h4>Item ${index + 1}: ${item.title}</h4>
+            <ul>
+              ${row("Order Type", item.displayCategory)}
+              ${row("Price Estimate", item.priceEstimateText || item.priceEstimate)}
+              ${Object.entries(item.details || {}).map(([key, value]) => {
+                if (key.endsWith("Value")) return "";
+                if (Array.isArray(value)) {
+                  return row(key, value.length ? value.join(", ") : "None");
+                }
+                return row(key, value);
+              }).join("")}
+              ${row("Images", item.images && item.images.length ? `${item.images.length} uploaded` : "None")}
+            </ul>
+          </div>
+        `).join("")}
+      </div>
+    `;
+
+    const contactDetailsHtml = `
+      <div class="review-summary-section">
+        <h4>Contact & Pickup Details</h4>
+        <ul>
+          ${row("First Name", formData.get("firstName"))}
+          ${row("Last Name", formData.get("lastName"))}
+          ${row("Phone Number", formData.get("phoneNumber"))}
+          ${row("Email", formData.get("email"))}
+          ${row("Delivery Option", formData.get("deliveryOption"))}
+          ${row("Pickup Date", formData.get("pickupDate"))}
+          ${row("Payment Type", formData.get("paymentType"))}
+          ${row("Occasion", formData.get("occasion"))}
+          ${row("Referral Source", formData.get("referralSource"))}
+        </ul>
+      </div>
+    `;
+
+    summaryDiv.innerHTML = cartHtml + contactDetailsHtml;
+    return;
+  }
 
   let orderDetailsHtml = "";
 
@@ -841,8 +951,9 @@ else if (orderCategory === "dessert") {
               const diffDays = (chosen - today) / (1000 * 60 * 60 * 24);
               const selectedSize = document.getElementById("size").value;
 
-              let requiredDays = 7;
-              if (orderCategory === "custom_cake" && cakeType === "tiered") {
+              let requiredDays = cartItems.length ? getCartRequiredLeadTimeDays() : 7;
+
+              if (!cartItems.length && orderCategory === "custom_cake" && cakeType === "tiered") {
                 requiredDays = getTieredLeadTimeDays(selectedSize);
               }
 
@@ -989,16 +1100,29 @@ pickupDateField.addEventListener("change", function(e) {
     const previewContainer = document.getElementById("previewContainer");
   
     addImageBtn.addEventListener("click", () => {
+      const savedCount = getSavedImageCountForCurrentEdit();
+      const selectedNewCount = getSelectedNewImageCount(imageInputsContainer);
+      const totalImageCount = savedCount + selectedNewCount;
+
+      if (totalImageCount >= 3) {
+        showFormError("⚠️ You can upload up to 3 inspiration pictures total.");
+        return;
+      }
+
+      const maxNewInputsAllowed = 3 - savedCount;
       const currentInputs = imageInputsContainer.querySelectorAll("input[type='file']");
-      if (currentInputs.length < 3) {
+
+      if (currentInputs.length < maxNewInputsAllowed) {
         const newInput = document.createElement("input");
         newInput.type = "file";
         newInput.name = "inspirationPic";
         newInput.accept = "image/*";
         newInput.classList.add("inspo-file");
-  
+
         newInput.addEventListener("change", updatePreview);
         imageInputsContainer.appendChild(newInput);
+      } else {
+        showFormError("⚠️ You can upload up to 3 inspiration pictures total.");
       }
     });
 
@@ -1007,8 +1131,19 @@ pickupDateField.addEventListener("change", function(e) {
 
     if (addDessertImageBtn && dessertImageInputsContainer) {
       addDessertImageBtn.addEventListener("click", () => {
+        const savedCount = getSavedImageCountForCurrentEdit();
+        const selectedNewCount = getSelectedNewImageCount(dessertImageInputsContainer);
+        const totalImageCount = savedCount + selectedNewCount;
+
+        if (totalImageCount >= 3) {
+          showFormError("⚠️ You can upload up to 3 inspiration pictures total.");
+          return;
+        }
+
+        const maxNewInputsAllowed = 3 - savedCount;
         const currentInputs = dessertImageInputsContainer.querySelectorAll("input[type='file']");
-        if (currentInputs.length < 3) {
+
+        if (currentInputs.length < maxNewInputsAllowed) {
           const newInput = document.createElement("input");
           newInput.type = "file";
           newInput.name = "dessertInspirationPic";
@@ -1017,6 +1152,8 @@ pickupDateField.addEventListener("change", function(e) {
 
           newInput.addEventListener("change", updateDessertPreview);
           dessertImageInputsContainer.appendChild(newInput);
+        } else {
+          showFormError("⚠️ You can upload up to 3 inspiration pictures total.");
         }
       });
 
@@ -1749,9 +1886,10 @@ function toggleOrderTypePanels() {
 
     if (orderCategory === "custom_cake") {
       const imageInputs = document.querySelectorAll("input[name='inspirationPic']");
-      const hasImage = Array.from(imageInputs).some(input => input.files.length > 0);
+      const hasNewImage = Array.from(imageInputs).some(input => input.files.length > 0);
+      const hasExistingImage = editingCartItemId && editingExistingImages.length > 0;
 
-      if (!hasImage) {
+      if (!hasNewImage && !hasExistingImage) {
         showFormError("⚠️ Please upload at least one inspiration picture.");
         return false;
       }
@@ -1806,6 +1944,556 @@ function toggleOrderTypePanels() {
     }
 
     return true;
+  }
+
+  let cartItems = [];
+  let editingCartItemId = null;
+  let editingExistingImages = [];
+
+  const CART_STORAGE_KEY = "cbiCartItemsV2";
+
+  function makeCartItemId() {
+    return `cart_${Date.now()}_${Math.random().toString(16).slice(2)}`;
+  }
+
+  function htmlToText(html) {
+    const div = document.createElement("div");
+    div.innerHTML = html || "";
+    return div.textContent || div.innerText || "";
+  }
+
+function getCartItemsForStorage() {
+    return cartItems.map(item => ({
+      ...item,
+      images: []
+    }));
+  }
+
+  function saveCartToStorage() {
+    try {
+      localStorage.removeItem(CART_STORAGE_KEY);
+      localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(getCartItemsForStorage()));
+    } catch (error) {
+      console.warn("Cart could not be saved to localStorage.", error);
+    }
+  }
+
+  function loadCartFromStorage() {
+    try {
+      const saved = localStorage.getItem(CART_STORAGE_KEY);
+      cartItems = saved ? JSON.parse(saved) : [];
+
+      cartItems = cartItems.map(item => ({
+        ...item,
+        images: item.images || []
+      }));
+    } catch {
+      cartItems = [];
+    }
+
+    renderCart();
+  }
+
+  function getCakeTypeLabel(value) {
+    const labels = {
+      heart: "Heart Cake",
+      round: "Round Cake",
+      tiered: "Tiered Cake"
+    };
+
+    return labels[value] || value || "Custom Cake";
+  }
+
+  function getTastingBoxLabel(value) {
+    if (value === "regular") return "Regular Tasting Box";
+    if (value === "deluxe") return "Deluxe Tasting Box";
+    return "Cake Tasting Box";
+  }
+
+  function readFileAsBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        resolve({
+          data: reader.result.split(",")[1],
+          name: file.name,
+          type: file.type || "image/jpeg"
+        });
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
+
+  async function collectImagesFromInputs(selector) {
+    const inputs = Array.from(document.querySelectorAll(selector));
+    const images = [];
+
+    for (const input of inputs.slice(0, 3)) {
+      const file = input.files && input.files[0];
+      if (!file) continue;
+      images.push(await readFileAsBase64(file));
+    }
+
+    return images;
+  }
+
+  function getCartItemLeadTimeDays(item) {
+    if (item.orderCategory === "custom_cake" && item.details.cakeType === "tiered") {
+      return getTieredLeadTimeDays(item.details.size);
+    }
+
+    return 7;
+  }
+
+  function getCartRequiredLeadTimeDays() {
+    if (!cartItems.length) return 7;
+    return Math.max(...cartItems.map(getCartItemLeadTimeDays));
+  }
+
+  function buildCartPlainTextSummary() {
+    if (!cartItems.length) return "";
+
+    return cartItems.map((item, index) => {
+      const lines = [
+        `Item ${index + 1}: ${item.title}`,
+        `Order Type: ${item.displayCategory}`,
+        `Price Estimate: ${item.priceEstimateText || item.priceEstimate || "—"}`
+      ];
+
+      Object.entries(item.details || {}).forEach(([key, value]) => {
+        if (Array.isArray(value)) {
+          lines.push(`${key}: ${value.length ? value.join(", ") : "None"}`);
+        } else {
+          lines.push(`${key}: ${value || "—"}`);
+        }
+      });
+
+      if (item.images && item.images.length) {
+        lines.push(`Images: ${item.images.map(img => img.name).join(", ")}`);
+      }
+
+      return lines.join("\n");
+    }).join("\n\n----------------------------------------\n\n");
+  }
+
+  function cartItemJsonForSubmit() {
+    return cartItems.map(item => ({
+      ...item,
+      images: (item.images || []).map(img => ({
+        name: img.name,
+        type: img.type
+      }))
+    }));
+  }
+
+  async function buildCartItemFromCurrentForm() {
+    if (!validateStepOne()) {
+      return null;
+    }
+
+    const form = document.getElementById("orderForm");
+    const formData = new FormData(form);
+    const orderCategory = formData.get("orderCategory");
+
+    if (orderCategory === "custom_cake") {
+      const cakeType = formData.get("cakeType");
+      const selectedSize = formData.get("size");
+      const priceEstimateHtml =
+        selectedSize && sizeDetails[selectedSize]
+          ? sizePriceRangeHTML(selectedSize)
+          : "—";
+
+    const newImages = await collectImagesFromInputs("input[name='inspirationPic']");
+    let images = editingCartItemId
+      ? [...editingExistingImages, ...newImages].slice(0, 3)
+      : newImages;
+
+      const addons = formData.getAll("addons");
+
+      return {
+        id: editingCartItemId || makeCartItemId(),
+        orderCategory: "custom_cake",
+        displayCategory: "Custom Cake",
+        title: `${selectedSize || ""} ${getCakeTypeLabel(cakeType)}`.trim(),
+        priceEstimate: priceEstimateHtml,
+        priceEstimateText: htmlToText(priceEstimateHtml),
+        requiredLeadDays: cakeType === "tiered" ? getTieredLeadTimeDays(selectedSize) : 7,
+        images,
+        details: {
+          cakeType: getCakeTypeLabel(cakeType),
+          cakeTypeValue: cakeType,
+          size: selectedSize,
+          flavor: formData.get("flavor"),
+          frosting: formData.get("frosting"),
+          filling: formData.get("filling") || "None",
+          addons,
+          clearBoxOption: formData.get("clearBoxOption") || "standard",
+          cakeDetails: formData.get("cakeDetails"),
+          notes: formData.get("notes")
+        }
+      };
+    }
+
+    if (orderCategory === "tasting_box") {
+      const tastingBoxType = formData.get("tastingBoxType");
+
+      if (tastingBoxType === "regular") {
+        const sideFillings = formData.getAll("regularBoxSideFillings");
+
+        return {
+          id: editingCartItemId || makeCartItemId(),
+          orderCategory: "tasting_box",
+          displayCategory: "Cake Tasting Box",
+          title: "Regular Tasting Box",
+          priceEstimate: "$40",
+          priceEstimateText: "$40",
+          requiredLeadDays: 7,
+          images: [],
+          details: {
+            tastingBoxType: "Regular",
+            includedFlavors: "Vanilla, Chocolate, Marble, Cookies & Cream, Red Velvet, Confetti",
+            frosting: "Vanilla Buttercream on all 6 slices",
+            sideFillings,
+            notes: formData.get("tastingBoxNotes")
+          }
+        };
+      }
+
+      if (tastingBoxType === "deluxe") {
+        const deluxeSlices = buildDeluxeSlicesData();
+        const deluxeSliceSummary = deluxeSlices
+          .map(slice => `Slice ${slice.slice}: ${slice.flavor} / ${slice.frosting} / ${slice.filling || "None"}`)
+          .join("\n");
+
+        return {
+          id: editingCartItemId || makeCartItemId(),
+          orderCategory: "tasting_box",
+          displayCategory: "Cake Tasting Box",
+          title: "Deluxe Tasting Box",
+          priceEstimate: "$55",
+          priceEstimateText: "$55",
+          requiredLeadDays: 7,
+          images: [],
+          details: {
+            tastingBoxType: "Deluxe",
+            deluxeSlices,
+            deluxeSliceSummary,
+            notes: formData.get("tastingBoxNotesDeluxe")
+          }
+        };
+      }
+    }
+
+    if (orderCategory === "dessert") {
+      const dessertType = formData.get("dessertType");
+      const dessertPackage = formData.get("dessertPackage");
+      const dessertDetails = getDessertPackageDetails(dessertType, dessertPackage);
+      const dessertName = dessertTypeLabels[dessertType] || "Dessert";
+
+      const newImages = await collectImagesFromInputs("input[name='dessertInspirationPic']");
+      let images = editingCartItemId
+        ? [...editingExistingImages, ...newImages].slice(0, 3)
+        : newImages;
+
+      return {
+        id: editingCartItemId || makeCartItemId(),
+        orderCategory: "dessert",
+        displayCategory: "Desserts",
+        title: `${dessertName} — ${dessertPackage}`,
+        priceEstimate: dessertDetails ? dessertDetails.price : "—",
+        priceEstimateText: dessertDetails ? dessertDetails.price : "—",
+        requiredLeadDays: 7,
+        images,
+        details: {
+          dessertType: dessertName,
+          dessertTypeValue: dessertType,
+          dessertPackage,
+          totalPieces: dessertDetails ? dessertDetails.totalPieces : "",
+          flavor: formData.get("dessertFlavor") || "N/A",
+          frosting: formData.get("dessertFrosting") || "N/A",
+          filling: dessertType === "cupcakes" ? (formData.get("dessertFilling") || "None") : "N/A",
+          dessertDetails: formData.get("dessertDetails"),
+          notes: formData.get("dessertNotes"),
+          priceEstimate: dessertDetails ? dessertDetails.price : "—"
+        }
+      };
+    }
+
+    return null;
+  }
+
+  function renderCart() {
+    const list = document.getElementById("cartItemsList");
+    const emptyMessage = document.getElementById("cartEmptyMessage");
+    const checkoutBtn = document.getElementById("checkoutCartBtn");
+
+    if (!list || !emptyMessage || !checkoutBtn) return;
+
+    emptyMessage.style.display = cartItems.length ? "none" : "block";
+    checkoutBtn.disabled = cartItems.length === 0;
+
+    list.innerHTML = cartItems.map((item, index) => `
+      <div class="cart-item-card" data-cart-id="${item.id}">
+        <div class="cart-item-header">
+          <div>
+            <div class="cart-item-title">${index + 1}. ${item.title}</div>
+            <div class="cart-item-meta">
+              ${item.displayCategory}<br>
+              Price Estimate: ${item.priceEstimateText || item.priceEstimate || "—"}<br>
+              Images: ${item.images && item.images.length ? item.images.length : 0}
+            </div>
+          </div>
+
+          <div class="cart-item-buttons">
+            <button type="button" class="cart-small-btn edit-cart-item" data-cart-id="${item.id}">Edit</button>
+            <button type="button" class="cart-small-btn remove-cart-item" data-cart-id="${item.id}">Remove</button>
+          </div>
+        </div>
+      </div>
+    `).join("");
+  }
+
+  function resetItemBuilderForm() {
+    const stepOne = formSteps[0];
+
+    stepOne.querySelectorAll("input, select, textarea").forEach(field => {
+      if (field.type === "checkbox" || field.type === "radio") {
+        field.checked = false;
+      } else if (field.type === "file") {
+        field.value = "";
+      } else {
+        field.value = "";
+      }
+    });
+
+    document.getElementById("previewContainer").innerHTML = "";
+    document.getElementById("dessertPreviewContainer").innerHTML = "";
+
+    document.getElementById("imageInputsContainer").innerHTML = `
+      <input type="file" name="inspirationPic" accept="image/*" class="inspo-file" required>
+    `;
+
+    document.getElementById("dessertImageInputsContainer").innerHTML = `
+      <input type="file" name="dessertInspirationPic" accept="image/*" class="inspo-file">
+    `;
+
+    const firstCustomImage = document.querySelector("input[name='inspirationPic']");
+    if (firstCustomImage) firstCustomImage.addEventListener("change", updatePreview);
+
+    const firstDessertImage = document.querySelector("input[name='dessertInspirationPic']");
+    if (firstDessertImage) firstDessertImage.addEventListener("change", updateDessertPreview);
+
+    editingCartItemId = null;
+    editingExistingImages = [];
+
+    const addBtn = document.getElementById("addToCartBtn");
+    if (addBtn) addBtn.textContent = "Add to Cart";
+
+    toggleOrderTypePanels();
+    clearFormError();
+  }
+
+  function addOrUpdateCartItem(item) {
+    if (editingCartItemId) {
+      cartItems = cartItems.map(existing => existing.id === editingCartItemId ? item : existing);
+    } else {
+      cartItems.push(item);
+    }
+
+    saveCartToStorage();
+    renderCart();
+    resetItemBuilderForm();
+  }
+
+  function removeCartItem(id) {
+    const wasEditingRemovedItem = editingCartItemId === id;
+
+    cartItems = cartItems.filter(item => item.id !== id);
+    saveCartToStorage();
+    renderCart();
+
+    if (wasEditingRemovedItem) {
+      resetItemBuilderForm();
+    }
+  }
+
+  function loadCartItemForEdit(id) {
+    const item = cartItems.find(entry => entry.id === id);
+    if (!item) return;
+
+    editingCartItemId = id;
+    editingExistingImages = item.images || [];
+
+    document.getElementById("orderCategory").value = item.orderCategory;
+    toggleOrderTypePanels();
+
+    if (item.orderCategory === "custom_cake") {
+      const d = item.details;
+
+      document.getElementById("cakeType").value = d.cakeTypeValue;
+      document.getElementById("cakeType").dispatchEvent(new Event("change"));
+
+      document.getElementById("size").value = d.size;
+      document.getElementById("flavor").value = d.flavor;
+      document.getElementById("frosting").value = d.frosting;
+      document.getElementById("filling").value = d.filling === "None" ? "" : d.filling;
+      document.getElementById("clearBoxOption").value = d.clearBoxOption || "standard";
+      document.getElementById("cakeDetails").value = d.cakeDetails || "";
+      document.getElementById("notes").value = d.notes || "";
+
+      document.querySelectorAll("input[name='addons']").forEach(input => {
+        input.checked = Array.isArray(d.addons) && d.addons.includes(input.value);
+      });
+
+      renderSizeInfo(d.size);
+      updateClearBoxOptions(d.size);
+      renderSavedCartImagePreviews(editingExistingImages, "previewContainer");
+    }
+
+    if (item.orderCategory === "tasting_box") {
+      const d = item.details;
+      const tastingValue = d.tastingBoxType === "Regular" ? "regular" : "deluxe";
+
+      document.getElementById("tastingBoxType").value = tastingValue;
+      toggleTastingTypePanels();
+
+      if (tastingValue === "regular") {
+        document.querySelectorAll("input[name='regularBoxSideFillings']").forEach(input => {
+          input.checked = Array.isArray(d.sideFillings) && d.sideFillings.includes(input.value);
+        });
+
+        document.getElementById("tastingBoxNotes").value = d.notes || "";
+      }
+
+      if (tastingValue === "deluxe") {
+        (d.deluxeSlices || []).forEach(slice => {
+          document.getElementById(`slice${slice.slice}Flavor`).value = slice.flavor || "";
+          document.getElementById(`slice${slice.slice}Frosting`).value = slice.frosting || "";
+          document.getElementById(`slice${slice.slice}Filling`).value = slice.filling || "";
+        });
+
+        document.getElementById("tastingBoxNotesDeluxe").value = d.notes || "";
+      }
+    }
+
+    if (item.orderCategory === "dessert") {
+      const d = item.details;
+
+      document.getElementById("dessertType").value = d.dessertTypeValue;
+      populateDessertPackages();
+      renderDessertFieldVisibility();
+
+      document.getElementById("dessertPackage").value = d.dessertPackage || "";
+      document.getElementById("dessertFlavor").value = d.flavor === "N/A" ? "" : d.flavor;
+      document.getElementById("dessertFrosting").value = d.frosting === "N/A" ? "" : d.frosting;
+      document.getElementById("dessertFilling").value = d.filling === "N/A" || d.filling === "None" ? "" : d.filling;
+      document.getElementById("dessertDetails").value = d.dessertDetails || "";
+      document.getElementById("dessertNotes").value = d.notes || "";
+
+      renderDessertPriceInfo();
+      renderSavedCartImagePreviews(editingExistingImages, "dessertPreviewContainer");
+    }
+
+    const addBtn = document.getElementById("addToCartBtn");
+    if (addBtn) addBtn.textContent = "Update Cart Item";
+
+    clearFormError();
+  }
+
+  document.getElementById("addToCartBtn").addEventListener("click", async () => {
+    const item = await buildCartItemFromCurrentForm();
+
+    if (!item) return;
+
+    addOrUpdateCartItem(item);
+  });
+
+  document.getElementById("checkoutCartBtn").addEventListener("click", () => {
+    if (!cartItems.length) {
+      showFormError("⚠️ Please add at least one item to your cart before checking out.");
+      return;
+    }
+
+    clearFormError();
+    currentStep = 1;
+    showStep(currentStep);
+  });
+
+  document.getElementById("cartItemsList").addEventListener("click", (event) => {
+    const editBtn = event.target.closest(".edit-cart-item");
+    const removeBtn = event.target.closest(".remove-cart-item");
+
+    if (editBtn) {
+      loadCartItemForEdit(editBtn.dataset.cartId);
+    }
+
+    if (removeBtn) {
+      removeCartItem(removeBtn.dataset.cartId);
+    }
+  });
+
+  loadCartFromStorage();
+
+  function renderSavedCartImagePreviews(images, previewContainerId) {
+    const container = document.getElementById(previewContainerId);
+    if (!container) return;
+
+    container.innerHTML = "";
+
+    if (!images || !images.length) return;
+
+    images.forEach((image, index) => {
+      const wrapper = document.createElement("div");
+      wrapper.className = "preview-wrapper saved-cart-preview";
+      wrapper.style.position = "relative";
+      wrapper.style.display = "inline-block";
+      wrapper.style.marginRight = "10px";
+      wrapper.style.marginBottom = "10px";
+
+      const img = document.createElement("img");
+      img.src = `data:${image.type || "image/jpeg"};base64,${image.data}`;
+      img.alt = image.name || `Saved image ${index + 1}`;
+      img.style.maxWidth = "100px";
+      img.style.borderRadius = "8px";
+
+      const label = document.createElement("div");
+      label.textContent = "Saved";
+      label.style.fontSize = "0.75rem";
+      label.style.textAlign = "center";
+      label.style.marginTop = "4px";
+
+      const removeBtn = document.createElement("span");
+      removeBtn.innerHTML = "×";
+      removeBtn.style.position = "absolute";
+      removeBtn.style.top = "0";
+      removeBtn.style.right = "5px";
+      removeBtn.style.cursor = "pointer";
+      removeBtn.style.fontSize = "20px";
+      removeBtn.style.color = "#fff";
+      removeBtn.style.background = "#d33";
+      removeBtn.style.borderRadius = "50%";
+      removeBtn.style.width = "20px";
+      removeBtn.style.height = "20px";
+      removeBtn.style.textAlign = "center";
+      removeBtn.style.lineHeight = "20px";
+      removeBtn.title = "Remove saved image";
+
+      removeBtn.addEventListener("click", () => {
+        editingExistingImages.splice(index, 1);
+
+        if (previewContainerId === "dessertPreviewContainer") {
+          updateDessertPreview();
+        } else {
+          updatePreview();
+        }
+      });
+
+      wrapper.appendChild(img);
+      wrapper.appendChild(removeBtn);
+      wrapper.appendChild(label);
+      container.appendChild(wrapper);
+    });
   }
 
   
@@ -1915,8 +2603,27 @@ function resetOrderPanelsAfterSubmit() {
 
     const form = e.target;
     const formData = new FormData(form);
-    const orderCategory = document.getElementById("orderCategory").value;
+    let orderCategory = cartItems.length ? "batch_order" : document.getElementById("orderCategory").value;
+    formData.set("orderCategory", orderCategory);
+
     const cakeType = document.getElementById("cakeType").value;
+
+    if (orderCategory === "batch_order") {
+      formData.append("cartItemsJson", JSON.stringify(cartItemJsonForSubmit()));
+      formData.append("cartSummary", buildCartPlainTextSummary());
+      formData.append("cartItemCount", String(cartItems.length));
+
+      cartItems.forEach((item, itemIndex) => {
+        (item.images || []).forEach((image, imageIndex) => {
+          const itemNumber = itemIndex + 1;
+          const imageNumber = imageIndex + 1;
+
+          formData.append(`item${itemNumber}Image${imageNumber}`, image.data);
+          formData.append(`item${itemNumber}ImageName${imageNumber}`, image.name);
+          formData.append(`item${itemNumber}ImageType${imageNumber}`, image.type || "image/jpeg");
+        });
+      });
+    }
 
   if (orderCategory === "custom_cake" && cakeType === "tiered") {
     const dateVal = document.getElementById("pickupDate").value;
@@ -2011,7 +2718,7 @@ function resetOrderPanelsAfterSubmit() {
       }
     }
 
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbwgl3HYsnGD7H6KekQboCXrlQy89-K6T3g6AENlTtWhz3dT-5reffdAPC40-zoSFBTkag/exec';
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbyaMidrMaJuA8VTty6vAIs6jnDBJb_PA-ifsw1cFJcyf7TF52Vf7iU4wWDcypcYhAWUfQ/exec';
 
     const submitBtn = form.querySelector("button[type='submit']");
     submitBtn.disabled = true;
@@ -2026,7 +2733,6 @@ function resetOrderPanelsAfterSubmit() {
         mode: 'no-cors',
       });
 
-
       document.getElementById("orderForm").style.display = "none";
       document.getElementById("orderHeader").style.display = "none";
       document.getElementById("confirmationMessage").style.display = "block";
@@ -2034,6 +2740,24 @@ function resetOrderPanelsAfterSubmit() {
       submitBtn.disabled = false;
       submitBtn.textContent = "Submit";
       submitBtn.classList.remove("submitting");
+
+      // ✅ Clear cart only after successful submission
+      cartItems = [];
+      editingCartItemId = null;
+      editingExistingImages = [];
+
+      try {
+        localStorage.removeItem(CART_STORAGE_KEY);
+      } catch (error) {
+        console.warn("Could not clear saved cart after submit.", error);
+      }
+
+      renderCart();
+
+      const addToCartBtn = document.getElementById("addToCartBtn");
+      if (addToCartBtn) {
+        addToCartBtn.textContent = "Add to Cart";
+      }
 
       form.reset();
 

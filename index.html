@@ -529,7 +529,7 @@
   
             </div> 
             <div id="formError" style="display: none;" class="form-error"></div>
-            <form id="orderForm">
+            <form id="orderForm" novalidate>
 
              <!-- CAKE DETAILS: now the first, active step, with formErrorStep1 -->
                           <!-- STEP 1: ORDER DETAILS -->
@@ -800,8 +800,21 @@
                       (Note: This is only an estimated cost. Total cost will be provided in invoice!)
                   </span>
                 </div>
-                <button type="button" class="order-button next-step">Next - Contact Info</button>
+            <div class="item-builder-actions">
+                <button type="button" id="addToCartBtn" class="order-button">Add to Cart</button>
             </div>
+
+            <div id="cartPanel" class="cart-panel">
+                <h3>Your Cart</h3>
+                <p id="cartEmptyMessage" class="small-note">Your cart is empty. Add an item to continue.</p>
+                <div id="cartItemsList"></div>
+
+                <div class="cart-actions">
+                    <button type="button" id="checkoutCartBtn" class="order-button" disabled>Checkout</button>
+                </div>
+            </div>
+            
+            </div> 
             
 
             <!-- PERSONAL INFO: second step, no active, with formErrorStep2 -->
