@@ -25,6 +25,24 @@ function showFormError(message) {
     }
   }
   
+  function showSubmitStatus(message, type = "info") {
+    const statusBox = document.getElementById("submitStatusMessage");
+    if (!statusBox) return;
+
+    statusBox.textContent = message;
+    statusBox.classList.toggle("submit-status-error", type === "error");
+    statusBox.style.display = "block";
+    statusBox.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+
+  function clearSubmitStatus() {
+    const statusBox = document.getElementById("submitStatusMessage");
+    if (!statusBox) return;
+
+    statusBox.textContent = "";
+    statusBox.classList.remove("submit-status-error");
+    statusBox.style.display = "none";
+  }
   
 
   document.querySelectorAll("input[required], select[required], textarea[required]").forEach(field => {
@@ -2725,9 +2743,12 @@ function resetOrderPanelsAfterSubmit() {
 
     const submitBtn = form.querySelector("button[type='submit']");
     submitBtn.disabled = true;
-    submitBtn.textContent = "Submitting...";
+    submitBtn.textContent = "Submitting... please wait";
     submitBtn.classList.add("submitting");
+
     clearFormError();
+    clearSubmitStatus();
+    showSubmitStatus("Please don’t close or refresh this page. Orders with multiple images may take up to 1 minute.");
 
     try {
       await fetch(scriptURL, {
@@ -2735,6 +2756,8 @@ function resetOrderPanelsAfterSubmit() {
         body: formData,
         mode: 'no-cors',
       });
+
+      clearSubmitStatus();
 
       document.getElementById("orderForm").style.display = "none";
       document.getElementById("orderHeader").style.display = "none";
@@ -2799,7 +2822,10 @@ function resetOrderPanelsAfterSubmit() {
 
     } catch (error) {
       console.error("Submission error:", error);
-      alert("⚠️ Submission failed. Try again or contact on Instagram.");
+
+      clearSubmitStatus();
+      showSubmitStatus("⚠️ Submission failed. Try again with fewer/smaller images or contact me on Instagram.", "error");
+
       submitBtn.disabled = false;
       submitBtn.textContent = "Submit";
       submitBtn.classList.remove("submitting");

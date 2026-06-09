@@ -1828,6 +1828,26 @@ button.order-button:hover {
     }
 }
 
+.submit-status-message {
+  margin: 14px 0 18px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.55);
+  color: #5c4b66;
+  font-size: 0.92rem;
+  font-style: italic;
+  line-height: 1.45;
+  text-align: center;
+  border: 1px solid rgba(92, 75, 102, 0.12);
+}
+
+.submit-status-message.submit-status-error {
+  background: #fff4f4;
+  color: #9b1c1c;
+  border-color: rgba(155, 28, 28, 0.18);
+  font-style: normal;
+}
+
 
 /* Modal */
 .modal {
