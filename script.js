@@ -699,9 +699,19 @@ function generateReviewSummary() {
               ${row("Price Estimate", item.priceEstimateText || item.priceEstimate)}
               ${Object.entries(item.details || {}).map(([key, value]) => {
                 if (key.endsWith("Value")) return "";
+
+                // deluxeSlices is an array of objects, so don't display it directly
+                if (key === "deluxeSlices") return "";
+
+                // Show the readable slice summary instead
+                if (key === "deluxeSliceSummary") {
+                  return row("Slices", String(value || "None").replace(/\n/g, "<br>"));
+                }
+
                 if (Array.isArray(value)) {
                   return row(key, value.length ? value.join(", ") : "None");
                 }
+
                 return row(key, value);
               }).join("")}
               ${row("Images", item.images && item.images.length ? `${item.images.length} uploaded` : "None")}
@@ -2083,6 +2093,13 @@ function getCartItemsForStorage() {
       ];
 
       Object.entries(item.details || {}).forEach(([key, value]) => {
+        if (key === "deluxeSlices") return;
+
+        if (key === "deluxeSliceSummary") {
+          lines.push(`Slices:\n${value || "None"}`);
+          return;
+        }
+
         if (Array.isArray(value)) {
           lines.push(`${key}: ${value.length ? value.join(", ") : "None"}`);
         } else {
