@@ -1,0 +1,181 @@
+:root {
+    --iftu-lilac: #e1d5f5;
+  }
+
+  
+@keyframes fadeSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px); /* Start with a slight downward offset */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0); /* Move into place */
+    }
+}
+
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%; /* Ensure the layout spans the full viewport height */
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* General Styles */
+
+body {
+    background-color: #e1d5f5;
+}
+
+/* Fullscreen background image at the top */
+
+.home-hero-bg {
+  position: relative;
+  width: 100%;
+  height: auto; /* not forced to 100vh anymore unless you want */
+  padding-top: 20px; /* if you want breathing space */
+  padding-bottom: 20px;
+  /* background-color: #e1d5f5; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+.pricing-info li,
+.pricing-info li span,
+.addons-grid li,
+.addons-grid li span {
+    font-family: 'Viaoda Libre', serif;
+}
+
+
+.pricing-info h3 {
+    font-family: 'Viaoda Libre', serif !important;
+}
+
+
+
+
+header, footer {
+    font-family: 'Viaoda Libre', serif;
+}
+
+/* Header */
+header {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  z-index: 10;
+  background: transparent;
+  box-shadow: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 20px;
+}
+
+  
+  
+
+
+.logo img {
+    width: 60px;
+    max-width: 100%;
+    margin-right: 10px;
+}
+
+
+nav {
+    width: 100%;
+    display: flex;
+    justify-content: left;
+  }
+  
+
+nav ul {
+    top: 0px;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+    position: relative;
+  }
+  
+
+nav a {
+    font-size: 15px;
+    text-decoration: none;
+    color: #000;
+    font-weight: bold;
+    font-family: 'Viaoda Libre', serif;
+    position: relative;
+    padding-bottom: 0px; /* Adds spacing for the underline */
+    transition: color 0.3s ease; /* Smooth color transition */
+}
+
+/* Hover effect for navigation links */
+nav a:hover {
+    color: #000000; /* Change text color on hover */
+}
+
+/* Underline animation */
+nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px; /* Thickness of the underline */
+    background-color: #000000; /* Color of the underline */
+    transition: width 0.3s ease; /* Animation for expanding the underline */
+}
+
+/* Expand underline on hover */
+nav a:hover::after {
+    width: 100%; /* Expand underline to full width */
+}
+
+
+/* Main Layout */
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure container spans full viewport height */
+}
+
+main {
+    flex: 1; /* Take up remaining space between header and footer */
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+    justify-content: space-between; /* Push sections down */
+}
+
+/* Footer */
+footer {
+    flex-shrink: 0; /* Prevent the footer from shrinking */
+    background-color: transparent;
+    color: black;
+    text-align: center;
+    padding: 10px 0;
+    width: 100%;
+    margin: 0; /* Remove default margin */
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+footer {
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+

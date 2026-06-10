@@ -1,0 +1,302 @@
+/* Home Section */
+
+
+  
+  .home-hero {
+    width: 100%;
+    height: 100%;
+    padding: 40px;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+  
+
+  .hero-logo {
+    width: 45px;
+    height: 45px;
+    border-radius: 6px;
+  }
+  
+  .hero-title {
+    font-size: 2vw;
+    font-weight: bold;
+  }
+  
+  .hero-ig {
+    display: none;
+  }
+  
+  .mobile-menu-overlay.open .hero-ig {
+    display: block;
+    width: 30px;
+    margin-top: 40px;
+  }
+  
+  
+  .hero-buttons {
+    position: absolute;
+    top: 120px; /* Moves buttons lower */
+    right: 20px;
+    display: flex;
+    gap: 6px;
+    z-index: 2;
+  }
+  
+  .hero-btn:hover {
+    background-color: #f4ebfc;
+  }
+
+  .hero-top-right {
+    position: absolute;
+    top: 15px;
+    right: 40px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    z-index: 2;
+  }
+  
+  .hero-btn {
+    background-color: #e1d5f5;
+    color: #000000;
+    padding: 12px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.85vw;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-family: 'Viaoda Libre', serif;
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    line-height: 1;
+}
+
+.hero-btn:hover {
+    background-color: #d6c3f0; /* darker lilac */
+    transform: scale(1.03);
+}
+
+
+  
+  .hero-ig {
+    width: 25px;
+    height: 25px;
+  }
+  
+
+  .logo-left {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 250px; /* ✅ wider box */
+    text-align: left;
+    z-index: 10;
+  }
+  
+  .top-logo {
+    width: 125px;
+    height: 125px;
+  }
+  
+  .logo-text {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #e1d5f5;
+    font-family: 'Viaoda Libre', serif;
+  }
+  
+  .logo-tagline-wrapper {
+    display: none; 
+    text-align: center;
+    max-width: 220px; 
+    top: 0px;
+    left:10px;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #000000;
+    font-family: 'Viaoda Libre', serif;
+  }
+
+  #home.page.active .logo-tagline-wrapper {
+    display: block !important;
+}
+
+body.home-active .logo-tagline-wrapper {
+    display: block;
+  }
+  
+
+  
+  #home.page.active .logo-tagline-wrapper {
+    display: block;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #e1d5f5;
+    font-family: 'Viaoda Libre', serif;
+  }
+
+  @media (max-width: 768px) {
+    #home {
+      background-size: cover;
+      background-repeat: no-repeat;
+      height: auto;
+      min-height: 100vh;
+    }
+  }
+  
+  
+
+  .page:not(#home) {
+    padding-top: 100px; /* normal buffer for most pages */
+  }
+
+  #gallery.page,
+#pricing.page,
+#order.page {
+  padding-top: 50px; /* extra space for these specific ones */
+}
+
+#order #orderHeader p {
+    margin-bottom: 25px; /* adjust as needed */
+  }
+
+  
+
+#home.page {
+    display: none; /* hidden by default */
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+#home.page.active {
+    display: flex; /* show it only when active */
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
+    opacity: 1;
+    transform: translateY(0);
+    animation: fadeSlideIn 0.5s ease forwards;
+}
+
+/* ─────────────────────────────────────────────────────────
+   on the #home section, kill the nav (leaving only logo+buttons)
+───────────────────────────────────────────────────────── */
+/* #home.page nav {
+  display: none !important;
+} */
+
+
+
+.order-button {
+    font-family: 'Viaoda Libre', serif;
+    display: inline-block;
+    padding: 12px 25px;
+    background-color: #e1d5f5;
+    color: white;
+    font-size: 1.1em;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, transform 0.2s;
+}
+
+.order-button:hover {
+    background-color: #e1d5f5;
+    transform: scale(1.05);
+}
+
+/* About Section */
+
+.home-3-column {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px 20px;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.home-logo-column,
+.home-about-column,
+.home-photo-column {
+    flex: 1;
+    text-align: center;
+}
+
+.home-logo-main {
+    max-width: 500px;
+    width: 100%;
+    margin: 0 auto;
+    border-radius: 10px;
+}
+
+.home-about-column h3 {
+    font-size: 2.5em;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.home-about-column p {
+    font-size: 1.6em;
+    color: #666;
+    line-height: 1.6;
+    max-width: 400px;
+    margin: 0 auto 20px auto;
+}
+
+.iftu-photo {
+    width: 400px;
+    height: auto;
+    border-radius: 10px;
+    object-fit: cover;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+
+/* Section Headers */
+h2, h3 {
+    font-family: 'Viaoda Libre', serif;
+    font-weight: 700;
+    color: #333;
+}
+
+.section-heading {
+    font-family: 'Viaoda Libre', serif;
+    font-size: 3.25em;
+    text-transform: uppercase;
+    text-align: center;
+    margin-top: 10px;
+    color: #333;
+  }
+
+  .section-subtext {
+    font-family: 'Viaoda Libre', serif;
+    font-size: 1.1em;
+    color: #000;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+@media (max-width: 768px) {
+  .section-heading {
+    font-size: 2.0em; /* smaller on mobile */
+    padding: 0 10px; /* optional: adds a little breathing room on sides */
+  }
+}
+
+@media (max-width: 768px) {
+  .section-subtext {
+    font-size: 1.0em; /* smaller on mobile */
+    padding: 0 10px; /* optional: adds a little breathing room on sides */
+  }
+}
+
+
+
+  
+
+

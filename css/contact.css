@@ -1,0 +1,86 @@
+/* Contact Section */
+#contact {
+  position: relative;
+  /* background: url('../images/iftu/heart-desktop.png') no-repeat center bottom; */
+  background-size: cover;
+  background-attachment: scroll;
+  background-color: #eadaf8;
+  min-height: 100vh;
+  text-align: center;
+  overflow: hidden;
+}
+
+/* Haze overlay */
+#contact::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(255, 255, 255, 0.6); /* Adjust opacity if needed */
+  z-index: 1;
+}
+
+/* Keep text above the haze */
+#contact > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Mobile: still cover the whole screen */
+@media (max-width: 768px) {
+  #contact {
+    /* background: url('../images/iftu/heart.png') no-repeat center center; */
+    background-size: cover; /* 🔥 switch back to full screen for mobile */
+    background-attachment: scroll;
+    background-position: center center;
+    min-height: 100vh;
+    text-align: center;
+  }
+  .contact-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+    margin-top: 30px;
+}
+}
+
+.contact-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 1.4em;
+    color: #333;
+}
+
+.contact-item a {
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.2s ease;
+}
+
+.contact-item a:hover {
+    color: #b89ae2;
+}
+
+.contact-icon {
+    width: 30px;
+    height: 30px;
+}
+
+.contact-item,
+.contact-item a,
+.contact-item span {
+    font-family: 'Viaoda Libre', serif;
+}
+
+
+

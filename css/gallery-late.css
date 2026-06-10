@@ -1,0 +1,26 @@
+@media (max-width: 480px) {
+  .gallery-preview-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .featured-preview-card img {
+    height: 76px;
+  }
+
+  .featured-preview-label {
+    font-size: 0.62em;
+    padding: 4px 5px;
+  }
+
+  .gallery {
+    grid-template-columns: 1fr;
+  }
+}
+/* @media (max-width: 480px) {
+  .gallery {
+    grid-template-columns: 1fr;
+  }
+} */
+
+

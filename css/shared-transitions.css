@@ -1,0 +1,71 @@
+/* Page Transition */
+.page {
+    display: none;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.page.active {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+    animation: fadeSlideIn 0.5s ease forwards;
+}
+
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .about-instagram-container {
+        flex-direction: column;
+        text-align: center;
+    }
+    .about-image {
+        width: 120px;
+    }
+    .instagram-section {
+        margin-top: 20px;
+    }
+
+    .flavors-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .gallery {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .flavors-container {
+        grid-template-columns: 1fr;
+    }
+
+    .gallery {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Background Transition on Scroll */
+@keyframes backgroundScroll {
+    0% {
+        background-color: #f8f8f8;
+    }
+    50% {
+        background-color: #e8e8e8;
+    }
+    100% {
+        background-color: #f8f8f8;
+    }
+}
+
+
+/* @media (max-width: 768px) {
+  .hero-top-right {
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+  }
+} */
+
+

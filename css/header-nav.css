@@ -1,0 +1,522 @@
+/* Hamburger styles */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  z-index: 11;
+}
+
+.hamburger span {
+  height: 3px;
+  width: 25px;
+  background: #000;
+  margin: 4px 0;
+  border-radius: 2px;
+}
+
+/* Show hamburger on small screens */
+@media (max-width: 768px) {
+  nav ul {
+    display: none;
+    flex-direction: column;
+    background: #e1d5f5;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    text-align: center;
+  }
+
+  nav ul.show {
+    display: flex;
+  }
+
+  .hamburger {
+    display: flex;
+    margin-left: auto;
+  }
+}
+
+
+/* @media (max-width: 768px) {
+  .hero-top-right {
+    flex-direction: column;
+    align-items: flex-end;
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    gap: 10px;
+  }
+
+  .hero-btn {
+    font-size: 4vw;
+    padding: 10px 15px;
+  }
+} */
+
+
+.hero-ig {
+  display: inline-block;
+}
+
+@media (max-width: 768px) {
+  .hero-ig {
+    display: none;
+  }
+
+  .mobile-menu .hero-ig {
+    display: inline-block;
+    margin-top: 20px;
+  }
+}
+
+/* header { position: relative; } */
+.hero-top-right {
+  position: absolute;
+  top: 20px;
+  right: 50px;
+  display: flex;
+  gap: 5px;
+  z-index: 900;
+  pointer-events: none;
+}
+
+.hero-top-right .hero-btn,
+.hero-top-right a,
+.hero-top-right .hero-ig {
+  pointer-events: auto;
+}
+
+@media (max-width: 768px) {
+  .hero-top-right {
+    position: absolute;
+    top: 58px;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    width: calc(100% - 110px);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px 12px;
+    z-index: 1000;
+  }
+
+  .hero-btn {
+    font-size: 1.15rem;
+    padding: 10px 14px;
+    border-radius: 6px;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .hero-ig {
+    display: none;
+  }
+}
+
+
+/* Mobile adjustments */
+/* @media (max-width: 768px) {
+
+  .hero-top-right {
+    position: absolute !important;  
+    top: 20px           !important;
+    right: 50px         !important;
+    display: flex       !important;
+    flex-direction: row !important; 
+    align-items: center !important;
+    gap: 5px            !important;
+    z-index: 10000      !important;
+  }
+  .hero-top-right .hero-btn {
+    pointer-events: auto !important; 
+  }
+
+  .hero-btn {
+    font-size: 3.0vw; 
+    padding: 6px 12px; 
+    border-radius: 5px; 
+    max-width: 80%;
+    text-align: center; 
+  }
+
+  .hero-ig {
+    width: 22px;
+    height: 30px;
+    margin-top: 10px;
+  }
+} */
+
+
+.hero-btn:hover {
+  background-color: #d6c3f0;
+  transform: scale(1.05);
+}
+
+
+
+.mobile-menu-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #e1d5f5;
+  z-index: 999;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobile-menu-overlay.active {
+  display: flex;
+}
+
+.mobile-nav-links {
+  list-style: none;
+  text-align: center;
+  padding: 0;
+}
+
+.mobile-nav-links li {
+  margin: 20px 0;
+}
+
+.mobile-nav-links a {
+  font-family: 'Viaoda Libre', serif;
+  font-size: 1.8em;
+  color: black;
+  text-decoration: none;
+}
+
+.close-menu {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  /* make it a bit smaller */
+  font-size: 1.8em;
+  /* force the “×” to be pure black */
+  color: #000;
+  /* if your font supports it, use a lighter weight for a thinner look */
+  font-weight: 300;
+  /* tighten the line-height so it doesn’t feel too tall */
+  line-height: 1;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.addons-checkboxes { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; }
+.addons-checkboxes label { display: flex; align-items: center; font-weight: normal; }
+.addons-checkboxes input { margin-right: 6px; }
+
+
+.mobile-socials {
+  margin-top: 40px;
+}
+
+
+.logo-tagline-wrapper p {
+  font-size: 1.3em;
+  max-width: 80%;
+  margin-left: 10px;
+}
+
+@media (max-width: 768px) {
+  .logo-tagline-wrapper p {
+    font-size: 1em;
+    max-width: 90%;
+    margin: 0 auto;
+    text-align: center;
+  }
+}
+
+
+.mobile-menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #e9d9fb; /* Light purple */
+  z-index: 999;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.mobile-menu-overlay.open {
+  display: flex;
+}
+
+
+
+.hamburger {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  z-index: 1000;
+}
+
+.hamburger {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+
+.hamburger span {
+  height: 3px;
+  width: 25px;
+  background: #000;
+  margin: 1px 0; /* smaller gap */
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.mobile-menu-overlay {
+  display: none;
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  background-color: #e1d5f5;
+}
+
+.mobile-menu-overlay.open {
+  display: flex;
+  opacity: 1;
+  transform: scale(1);
+}
+
+
+
+.hamburger.open span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.open span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+.hamburger:active {
+  transform: scale(0.9);
+  transition: transform 0.1s ease;
+}
+
+
+
+/* When hamburger is open */
+.hamburger.open span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+  transform: translateX(20px); /* move out of view a little */
+}
+
+.hamburger.open span:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+
+@keyframes hamburgerFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.hamburger {
+  opacity: 0; /* Start hidden */
+  transform: translateY(-10px) scale(0.9); /* Start slightly smaller and higher */
+  transition: all 0.4s ease;
+  z-index: 1000;
+}
+
+/* When the page loads, trigger fade-in */
+.hamburger.show {
+  animation: hamburgerFadeIn 0.5s ease forwards;
+}
+
+
+@keyframes hamburgerFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-15px) scale(0.9);
+  }
+  70% {
+    opacity: 1;
+    transform: translateY(2px) scale(1.02); /* Slight overshoot */
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+
+
+.mobile-menu-overlay {
+  display: none;
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  background-color: #e1d5f5;
+}
+
+.mobile-menu-overlay.open {
+  display: flex;
+  opacity: 1;
+  transform: scale(1);
+}
+
+
+.mobile-menu-overlay {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.mobile-menu-overlay.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+.mobile-menu-overlay {
+  display: none;
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  background-color: #e1d5f5;
+}
+
+
+
+.mobile-menu-overlay.open {
+  display: flex;
+  opacity: 1;
+  transform: scale(1);
+}
+
+
+.mobile-menu-overlay {
+  display: flex; /* Always flex */
+  opacity: 0;
+  pointer-events: none; /* So it's unclickable when hidden */
+  transform: translateY(-20px) scale(0.95);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  background-color: #e1d5f5;
+  z-index: 999;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+
+.mobile-menu-overlay.open {
+  opacity: 1;
+  pointer-events: auto; /* Clickable now */
+  transform: translateY(0) scale(1);
+}
+
+
+
+.mobile-menu-overlay.closing {
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+
+.mobile-menu-overlay {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-20px) scale(0.95);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  background-color: #e1d5f5;
+  z-index: 999;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  text-align: center;
+}
+
+.mobile-menu-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+}
+
+
+
+.page {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.page.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+
+
+.hamburger {
+  display: none; /* Hide by default */
+}
+
+/* Show hamburger on screens smaller than 1024px */
+@media (max-width: 1024px) {
+  .hamburger {
+    display: flex;
+  }
+
+  nav ul {
+    display: none; /* Hide normal nav links when hamburger is visible */
+  }
+}
+
+/* Mobile Menu Fade-Out Animation */
+.mobile-menu-overlay.closing {
+  animation: fadeSlideUp 0.4s forwards;
+}
+
+@keyframes fadeSlideUp {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+

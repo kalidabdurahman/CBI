@@ -1,0 +1,21 @@
+/* inline “agree” checkbox styling */
+.form-group.terms {
+  margin: 1rem 0;
+  font-size: 0.9em;
+}
+.form-group.terms label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.form-group.terms input[type="checkbox"] {
+  width: 1.2em;
+  height: 1.2em;
+  flex-shrink: 0;
+}
+.form-group.terms a#showRulesLink {
+  color: #0066cc;
+  text-decoration: underline;
+  cursor: pointer;
+}
+

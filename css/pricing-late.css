@@ -1,0 +1,12 @@
+@media (max-width: 600px) {
+  .cake-type-buttons {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .cake-type-button {
+    width: 45%; /* smaller on mobile */
+  }
+}
+
+
