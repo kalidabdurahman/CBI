@@ -1143,6 +1143,31 @@ function toggleOrderTypePanels() {
           return false;
         }
       }
+
+      if (tastingBoxType === "deluxe") {
+        for (let i = 1; i <= 6; i++) {
+          const flavorField = document.getElementById(`slice${i}Flavor`);
+          const frostingField = document.getElementById(`slice${i}Frosting`);
+
+          if (!flavorField || flavorField.disabled || !flavorField.value) {
+            showFormError(`⚠️ Please choose a cake flavor for slice ${i}.`);
+            if (flavorField) {
+              flavorField.focus();
+              flavorField.reportValidity();
+            }
+            return false;
+          }
+
+          if (!frostingField || frostingField.disabled || !frostingField.value) {
+            showFormError(`⚠️ Please choose a frosting for slice ${i}.`);
+            if (frostingField) {
+              frostingField.focus();
+              frostingField.reportValidity();
+            }
+            return false;
+          }
+        }
+      }
     }
 
     if (orderCategory === "dessert") {
