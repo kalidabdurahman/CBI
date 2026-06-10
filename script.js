@@ -1505,6 +1505,26 @@ function toggleOrderTypePanels() {
     }
 
     if (orderCategory === "custom_cake") {
+      const requiredFields = [
+        { id: "cakeType", label: "cake type" },
+        { id: "size", label: "cake size" },
+        { id: "flavor", label: "cake flavor" },
+        { id: "frosting", label: "cake frosting" },
+        { id: "cakeDetails", label: "cake details" }
+      ];
+
+      for (const { id, label } of requiredFields) {
+        const field = document.getElementById(id);
+        const value = field ? field.value.trim() : "";
+
+        if (field && !field.disabled && !value) {
+          showFormError(`⚠️ Please fill out: ${label}.`);
+          field.focus();
+          field.reportValidity();
+          return false;
+        }
+      }
+
       const imageInputs = document.querySelectorAll("input[name='inspirationPic']");
       const hasNewImage = Array.from(imageInputs).some(input => input.files.length > 0);
       const hasExistingImage = editingCartItemId && editingExistingImages.length > 0;
