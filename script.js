@@ -1,42 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-function showFormError(message) {
-    const errorBox = document.getElementById(`formErrorStep${currentStep + 1}`);
-    if (errorBox) {
-      errorBox.textContent = message;
-      errorBox.style.display = "block";
-      errorBox.scrollIntoView({ behavior: "smooth", block: "center" });
-    }
-  }
-  
-  function clearFormError() {
-    const errorBox = document.getElementById(`formErrorStep${currentStep + 1}`);
-    if (errorBox) {
-      errorBox.textContent = "";
-      errorBox.style.display = "none";
-    }
-  }
-  
-  function showSubmitStatus(message, type = "info") {
-    const statusBox = document.getElementById("submitStatusMessage");
-    if (!statusBox) return;
-
-    statusBox.textContent = message;
-    statusBox.classList.toggle("submit-status-error", type === "error");
-    statusBox.style.display = "block";
-    statusBox.scrollIntoView({ behavior: "smooth", block: "center" });
-  }
-
-  function clearSubmitStatus() {
-    const statusBox = document.getElementById("submitStatusMessage");
-    if (!statusBox) return;
-
-    statusBox.textContent = "";
-    statusBox.classList.remove("submit-status-error");
-    statusBox.style.display = "none";
-  }
-  
-
   document.querySelectorAll("input[required], select[required], textarea[required]").forEach(field => {
     field.addEventListener("input", () => {
       if (field.checkValidity()) {
@@ -495,6 +458,7 @@ else if (orderCategory === "dessert") {
 
 
     let currentStep = 0;
+    window.getOrderCurrentStep = () => currentStep;
     const formSteps = document.querySelectorAll('.form-step');
     const nextBtns = document.querySelectorAll('.next-step');
     const backBtns = document.querySelectorAll('.prev-step');
