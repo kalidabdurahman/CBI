@@ -24,4 +24,16 @@ document.addEventListener("DOMContentLoaded", () => {
       mobileMenu.removeEventListener("animationend", handler);
     });
   });
+
+  document.querySelectorAll(".mobile-nav-links a").forEach(link => {
+    link.addEventListener("click", e => {
+      e.preventDefault();
+      const targetPage = link.getAttribute("href").substring(1);
+
+      hamburger.classList.remove("open");
+      mobileMenu.classList.remove("open", "closing");
+
+      navigateToPage(targetPage);
+    });
+  });
 });

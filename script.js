@@ -701,28 +701,6 @@ pickupDateField.addEventListener("change", function(e) {
 });
 
 
-document.addEventListener("DOMContentLoaded", () => {
-  const hamburger = document.getElementById("hamburger");
-  const mobileMenu = document.getElementById("mobileMenu");
-  const closeBtn = document.querySelector(".close-menu");
-
-  if (!hamburger || !mobileMenu || !closeBtn) {
-    console.error("Missing hamburger or menu element");
-    return;
-  }
-
-  hamburger.addEventListener("click", () => {
-    hamburger.classList.toggle("open");
-    mobileMenu.classList.toggle("open");
-  });
-
-  closeBtn.addEventListener("click", () => {
-    hamburger.classList.remove("open");
-    mobileMenu.classList.remove("open");
-  });
-});
-
-
   function buildDeluxeSlicesData() {
     const slices = [];
 
@@ -934,21 +912,5 @@ document.addEventListener("DOMContentLoaded", () => {
       submitBtn.classList.remove("submitting");
     }
   });
-
-
-// mobile nav links
-document.querySelectorAll('.mobile-nav-links a').forEach(link => {
-  link.addEventListener('click', e => {
-    e.preventDefault();
-    const targetPage = link.getAttribute('href').substring(1);
-
-    // close menu:
-    hamburger.classList.remove('open');
-    mobileMenu.classList.remove('open');
-
-    // go to page:
-    navigateToPage(targetPage);
-  });
-});
 
 });
