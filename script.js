@@ -61,6 +61,7 @@ function generateReviewSummary() {
   const summaryDiv = document.getElementById("orderReviewSummary");
   const formData = new FormData(document.getElementById("orderForm"));
   const orderCategory = formData.get("orderCategory");
+  const cartItems = window.getOrderCartItems();
 
   const row = (label, value) => {
     const safeValue = value && String(value).trim() ? value : "—";
@@ -646,7 +647,7 @@ function resetDessertFields() {
 
       const imageInputs = document.querySelectorAll("input[name='inspirationPic']");
       const hasNewImage = Array.from(imageInputs).some(input => input.files.length > 0);
-      const hasExistingImage = editingCartItemId && editingExistingImages.length > 0;
+      const hasExistingImage = window.isEditingOrderCartItem() && window.getEditingExistingImageCount() > 0;
 
       if (!hasNewImage && !hasExistingImage) {
         showFormError("⚠️ Please upload at least one inspiration picture.");
@@ -730,57 +731,10 @@ function resetDessertFields() {
     return true;
   }
 
-  let cartItems = [];
-  let editingCartItemId = null;
-  let editingExistingImages = [];
-
-  window.isEditingOrderCartItem = () => Boolean(editingCartItemId);
-  window.getEditingExistingImages = () => editingExistingImages.slice();
-  window.getEditingExistingImageCount = () => editingCartItemId ? editingExistingImages.length : 0;
-  window.removeEditingExistingImageAt = (index) => { editingExistingImages.splice(index, 1); };
-
-  const CART_STORAGE_KEY = "cbiCartItemsV2";
-
-  function makeCartItemId() {
-    return `cart_${Date.now()}_${Math.random().toString(16).slice(2)}`;
-  }
-
   function htmlToText(html) {
     const div = document.createElement("div");
     div.innerHTML = html || "";
     return div.textContent || div.innerText || "";
-  }
-
-function getCartItemsForStorage() {
-    return cartItems.map(item => ({
-      ...item,
-      images: []
-    }));
-  }
-
-  function saveCartToStorage() {
-    try {
-      localStorage.removeItem(CART_STORAGE_KEY);
-      localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(getCartItemsForStorage()));
-    } catch (error) {
-      console.warn("Cart could not be saved to localStorage.", error);
-    }
-  }
-
-  function loadCartFromStorage() {
-    try {
-      const saved = localStorage.getItem(CART_STORAGE_KEY);
-      cartItems = saved ? JSON.parse(saved) : [];
-
-      cartItems = cartItems.map(item => ({
-        ...item,
-        images: item.images || []
-      }));
-    } catch {
-      cartItems = [];
-    }
-
-    renderCart();
   }
 
   function getCakeTypeLabel(value) {
@@ -827,33 +781,9 @@ function getCartItemsForStorage() {
     return images;
   }
 
-  function getCartItemLeadTimeDays(item) {
-    const details = item.details || {};
-    const storedLeadDays = Number(item.requiredLeadDays) || 7;
-    const isTieredCake =
-      item.orderCategory === "custom_cake" &&
-      (
-        details.cakeTypeValue === "tiered" ||
-        details.cakeType === "tiered" ||
-        details.cakeType === "Tiered Cake" ||
-        (typeof details.size === "string" && details.size.includes("Tiered"))
-      );
-
-    if (isTieredCake) {
-      return Math.max(storedLeadDays, getTieredLeadTimeDays(details.size));
-    }
-
-    return storedLeadDays;
-  }
-
-  function getCartRequiredLeadTimeDays() {
-    if (!cartItems.length) return 7;
-    return Math.max(...cartItems.map(getCartItemLeadTimeDays));
-  }
-
   function getCurrentOrderRequiredLeadTimeDays() {
-    if (cartItems.length) {
-      return getCartRequiredLeadTimeDays();
+    if (window.hasOrderCartItems()) {
+      return window.getCartRequiredLeadTimeDays();
     }
 
     const orderCategory = document.getElementById("orderCategory").value;
@@ -865,49 +795,6 @@ function getCartItemsForStorage() {
     }
 
     return 7;
-  }
-
-  function buildCartPlainTextSummary() {
-    if (!cartItems.length) return "";
-
-    return cartItems.map((item, index) => {
-      const lines = [
-        `Item ${index + 1}: ${item.title}`,
-        `Order Type: ${item.displayCategory}`,
-        `Price Estimate: ${item.priceEstimateText || item.priceEstimate || "—"}`
-      ];
-
-      Object.entries(item.details || {}).forEach(([key, value]) => {
-        if (key === "deluxeSlices") return;
-
-        if (key === "deluxeSliceSummary") {
-          lines.push(`Slices:\n${value || "None"}`);
-          return;
-        }
-
-        if (Array.isArray(value)) {
-          lines.push(`${key}: ${value.length ? value.join(", ") : "None"}`);
-        } else {
-          lines.push(`${key}: ${value || "—"}`);
-        }
-      });
-
-      if (item.images && item.images.length) {
-        lines.push(`Images: ${item.images.map(img => img.name).join(", ")}`);
-      }
-
-      return lines.join("\n");
-    }).join("\n\n----------------------------------------\n\n");
-  }
-
-  function cartItemJsonForSubmit() {
-    return cartItems.map(item => ({
-      ...item,
-      images: (item.images || []).map(img => ({
-        name: img.name,
-        type: img.type
-      }))
-    }));
   }
 
   async function buildCartItemFromCurrentForm() {
@@ -927,15 +814,16 @@ function getCartItemsForStorage() {
           ? sizePriceRangeHTML(selectedSize)
           : "—";
 
-    const newImages = await collectImagesFromInputs("input[name='inspirationPic']");
-    let images = editingCartItemId
-      ? [...editingExistingImages, ...newImages].slice(0, 3)
-      : newImages;
+      const editingCartItemId = window.getEditingCartItemId();
+      const newImages = await collectImagesFromInputs("input[name='inspirationPic']");
+      let images = editingCartItemId
+        ? [...window.getEditingExistingImages(), ...newImages].slice(0, 3)
+        : newImages;
 
       const addons = formData.getAll("addons");
 
       return {
-        id: editingCartItemId || makeCartItemId(),
+        id: editingCartItemId || window.createOrderCartItemId(),
         orderCategory: "custom_cake",
         displayCategory: "Custom Cake",
         title: `${selectedSize || ""} ${getCakeTypeLabel(cakeType)}`.trim(),
@@ -965,7 +853,7 @@ function getCartItemsForStorage() {
         const sideFillings = formData.getAll("regularBoxSideFillings");
 
         return {
-          id: editingCartItemId || makeCartItemId(),
+          id: window.getEditingCartItemId() || window.createOrderCartItemId(),
           orderCategory: "tasting_box",
           displayCategory: "Cake Tasting Box",
           title: "Regular Tasting Box",
@@ -990,7 +878,7 @@ function getCartItemsForStorage() {
           .join("\n");
 
         return {
-          id: editingCartItemId || makeCartItemId(),
+          id: window.getEditingCartItemId() || window.createOrderCartItemId(),
           orderCategory: "tasting_box",
           displayCategory: "Cake Tasting Box",
           title: "Deluxe Tasting Box",
@@ -1014,13 +902,14 @@ function getCartItemsForStorage() {
       const dessertDetails = getDessertPackageDetails(dessertType, dessertPackage);
       const dessertName = dessertTypeLabels[dessertType] || "Dessert";
 
+      const editingCartItemId = window.getEditingCartItemId();
       const newImages = await collectImagesFromInputs("input[name='dessertInspirationPic']");
       let images = editingCartItemId
-        ? [...editingExistingImages, ...newImages].slice(0, 3)
+        ? [...window.getEditingExistingImages(), ...newImages].slice(0, 3)
         : newImages;
 
       return {
-        id: editingCartItemId || makeCartItemId(),
+        id: editingCartItemId || window.createOrderCartItemId(),
         orderCategory: "dessert",
         displayCategory: "Desserts",
         title: `${dessertName} — ${dessertPackage}`,
@@ -1044,37 +933,6 @@ function getCartItemsForStorage() {
     }
 
     return null;
-  }
-
-  function renderCart() {
-    const list = document.getElementById("cartItemsList");
-    const emptyMessage = document.getElementById("cartEmptyMessage");
-    const checkoutBtn = document.getElementById("checkoutCartBtn");
-
-    if (!list || !emptyMessage || !checkoutBtn) return;
-
-    emptyMessage.style.display = cartItems.length ? "none" : "block";
-    checkoutBtn.disabled = cartItems.length === 0;
-
-    list.innerHTML = cartItems.map((item, index) => `
-      <div class="cart-item-card" data-cart-id="${item.id}">
-        <div class="cart-item-header">
-          <div>
-            <div class="cart-item-title">${index + 1}. ${item.title}</div>
-            <div class="cart-item-meta">
-              ${item.displayCategory}<br>
-              Price Estimate: ${item.priceEstimateText || item.priceEstimate || "—"}<br>
-              Images: ${item.images && item.images.length ? item.images.length : 0}
-            </div>
-          </div>
-
-          <div class="cart-item-buttons">
-            <button type="button" class="cart-small-btn edit-cart-item" data-cart-id="${item.id}">Edit</button>
-            <button type="button" class="cart-small-btn remove-cart-item" data-cart-id="${item.id}">Remove</button>
-          </div>
-        </div>
-      </div>
-    `).join("");
   }
 
   function resetItemBuilderForm() {
@@ -1107,8 +965,7 @@ function getCartItemsForStorage() {
     const firstDessertImage = document.querySelector("input[name='dessertInspirationPic']");
     if (firstDessertImage) firstDessertImage.addEventListener("change", updateDessertPreview);
 
-    editingCartItemId = null;
-    editingExistingImages = [];
+    window.clearOrderCartEditState();
 
     const addBtn = document.getElementById("addToCartBtn");
     if (addBtn) addBtn.textContent = "Add to Cart";
@@ -1117,123 +974,18 @@ function getCartItemsForStorage() {
     clearFormError();
   }
 
-  function addOrUpdateCartItem(item) {
-    if (editingCartItemId) {
-      cartItems = cartItems.map(existing => existing.id === editingCartItemId ? item : existing);
-    } else {
-      cartItems.push(item);
-    }
-
-    saveCartToStorage();
-    renderCart();
-    resetItemBuilderForm();
-  }
-
-  function removeCartItem(id) {
-    const wasEditingRemovedItem = editingCartItemId === id;
-
-    cartItems = cartItems.filter(item => item.id !== id);
-    saveCartToStorage();
-    renderCart();
-
-    if (wasEditingRemovedItem) {
-      resetItemBuilderForm();
-    }
-  }
-
-  function loadCartItemForEdit(id) {
-    const item = cartItems.find(entry => entry.id === id);
-    if (!item) return;
-
-    editingCartItemId = id;
-    editingExistingImages = item.images || [];
-
-    document.getElementById("orderCategory").value = item.orderCategory;
-    toggleOrderTypePanels();
-
-    if (item.orderCategory === "custom_cake") {
-      const d = item.details;
-
-      document.getElementById("cakeType").value = d.cakeTypeValue;
-      document.getElementById("cakeType").dispatchEvent(new Event("change"));
-
-      document.getElementById("size").value = d.size;
-      document.getElementById("flavor").value = d.flavor;
-      document.getElementById("frosting").value = d.frosting;
-      document.getElementById("filling").value = d.filling === "None" ? "" : d.filling;
-      document.getElementById("clearBoxOption").value = d.clearBoxOption || "standard";
-      document.getElementById("cakeDetails").value = d.cakeDetails || "";
-      document.getElementById("notes").value = d.notes || "";
-
-      document.querySelectorAll("input[name='addons']").forEach(input => {
-        input.checked = Array.isArray(d.addons) && d.addons.includes(input.value);
-      });
-
-      renderSizeInfo(d.size);
-      updateClearBoxOptions(d.size);
-      renderSavedCartImagePreviews(editingExistingImages, "previewContainer");
-    }
-
-    if (item.orderCategory === "tasting_box") {
-      const d = item.details;
-      const tastingValue = d.tastingBoxType === "Regular" ? "regular" : "deluxe";
-
-      document.getElementById("tastingBoxType").value = tastingValue;
-      toggleTastingTypePanels();
-
-      if (tastingValue === "regular") {
-        document.querySelectorAll("input[name='regularBoxSideFillings']").forEach(input => {
-          input.checked = Array.isArray(d.sideFillings) && d.sideFillings.includes(input.value);
-        });
-
-        document.getElementById("tastingBoxNotes").value = d.notes || "";
-      }
-
-      if (tastingValue === "deluxe") {
-        (d.deluxeSlices || []).forEach(slice => {
-          document.getElementById(`slice${slice.slice}Flavor`).value = slice.flavor || "";
-          document.getElementById(`slice${slice.slice}Frosting`).value = slice.frosting || "";
-          document.getElementById(`slice${slice.slice}Filling`).value = slice.filling || "";
-        });
-
-        document.getElementById("tastingBoxNotesDeluxe").value = d.notes || "";
-      }
-    }
-
-    if (item.orderCategory === "dessert") {
-      const d = item.details;
-
-      document.getElementById("dessertType").value = d.dessertTypeValue;
-      populateDessertPackages();
-      renderDessertFieldVisibility();
-
-      document.getElementById("dessertPackage").value = d.dessertPackage || "";
-      document.getElementById("dessertFlavor").value = d.flavor === "N/A" ? "" : d.flavor;
-      document.getElementById("dessertFrosting").value = d.frosting === "N/A" ? "" : d.frosting;
-      document.getElementById("dessertFilling").value = d.filling === "N/A" || d.filling === "None" ? "" : d.filling;
-      document.getElementById("dessertDetails").value = d.dessertDetails || "";
-      document.getElementById("dessertNotes").value = d.notes || "";
-
-      renderDessertPriceInfo();
-      renderSavedCartImagePreviews(editingExistingImages, "dessertPreviewContainer");
-    }
-
-    const addBtn = document.getElementById("addToCartBtn");
-    if (addBtn) addBtn.textContent = "Update Cart Item";
-
-    clearFormError();
-  }
+  window.resetItemBuilderForm = resetItemBuilderForm;
 
   document.getElementById("addToCartBtn").addEventListener("click", async () => {
     const item = await buildCartItemFromCurrentForm();
 
     if (!item) return;
 
-    addOrUpdateCartItem(item);
+    window.addOrUpdateCartItem(item);
   });
 
   document.getElementById("checkoutCartBtn").addEventListener("click", () => {
-    if (!cartItems.length) {
+    if (!window.hasOrderCartItems()) {
       showFormError("⚠️ Please add at least one item to your cart before checking out.");
       return;
     }
@@ -1248,15 +1000,15 @@ function getCartItemsForStorage() {
     const removeBtn = event.target.closest(".remove-cart-item");
 
     if (editBtn) {
-      loadCartItemForEdit(editBtn.dataset.cartId);
+      window.loadCartItemForEdit(editBtn.dataset.cartId);
     }
 
     if (removeBtn) {
-      removeCartItem(removeBtn.dataset.cartId);
+      window.removeCartItem(removeBtn.dataset.cartId);
     }
   });
 
-  loadCartFromStorage();
+  window.loadCartFromStorage();
 
   window.addEventListener("DOMContentLoaded", () => {
     const isHome = document.getElementById("home").classList.contains("active");
@@ -1338,14 +1090,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const form = e.target;
     const formData = new FormData(form);
+    const cartItems = window.getOrderCartItems();
     let orderCategory = cartItems.length ? "batch_order" : document.getElementById("orderCategory").value;
     formData.set("orderCategory", orderCategory);
 
     const cakeType = document.getElementById("cakeType").value;
 
     if (orderCategory === "batch_order") {
-      formData.append("cartItemsJson", JSON.stringify(cartItemJsonForSubmit()));
-      formData.append("cartSummary", buildCartPlainTextSummary());
+      formData.append("cartItemsJson", JSON.stringify(window.cartItemJsonForSubmit()));
+      formData.append("cartSummary", window.buildCartPlainTextSummary());
       formData.append("cartItemCount", String(cartItems.length));
 
       cartItems.forEach((item, itemIndex) => {
@@ -1375,7 +1128,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (diffDays < requiredLeadDays) {
         showFormError(`⚠️ Tiered cakes require ${getLeadTimeText(requiredLeadDays)} notice. Please choose a later date.`);
 
-        if (!cartItems.length && orderCategory === "custom_cake" && cakeType === "tiered") {
+        if (!window.hasOrderCartItems() && orderCategory === "custom_cake" && cakeType === "tiered") {
           preservedSize = document.getElementById("size").value;
           preservedFlavor = document.getElementById("flavor").value;
           preservedFrosting = document.getElementById("frosting").value;
@@ -1484,17 +1237,7 @@ document.addEventListener("DOMContentLoaded", () => {
       submitBtn.classList.remove("submitting");
 
       // ✅ Clear cart only after successful submission
-      cartItems = [];
-      editingCartItemId = null;
-      editingExistingImages = [];
-
-      try {
-        localStorage.removeItem(CART_STORAGE_KEY);
-      } catch (error) {
-        console.warn("Could not clear saved cart after submit.", error);
-      }
-
-      renderCart();
+      window.clearOrderCart();
 
       const addToCartBtn = document.getElementById("addToCartBtn");
       if (addToCartBtn) {
