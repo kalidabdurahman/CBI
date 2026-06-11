@@ -15,16 +15,6 @@ document.addEventListener("DOMContentLoaded", function () {
   });
   
   
-
-// Close the modal when "I Agree" is clicked
-document.getElementById('agreeButton').addEventListener('click', function() {
-    const modal = document.getElementById('orderModal');
-    modal.classList.remove('show'); // Remove show class to trigger the hiding animation
-    setTimeout(() => {
-        modal.style.display = 'none'; // Hide the modal after animation completes
-    }, 300); // Match the transition duration
-});
-
 document.querySelector('#confirmationMessage a').addEventListener('click', function (e) {
     e.preventDefault();
     navigateToPage('home');
@@ -52,12 +42,6 @@ document.getElementById("agreeButton").addEventListener("click", () => {
   orderModal.classList.remove("show");
   setTimeout(() => (orderModal.style.display = "none"), 300);
 });
-  
-
-let wasRedirectedAfterWarning = false;
-
-
-
     let currentStep = 0;
     window.getOrderCurrentStep = () => currentStep;
     const formSteps = document.querySelectorAll('.form-step');
@@ -167,22 +151,6 @@ let wasRedirectedAfterWarning = false;
             clearFormError();
             currentStep++;
             showStep(currentStep);
-      
-            // // Repopulate dropdowns in Step 2
-            // if (currentStep === 1) {
-            //   const cakeType = document.getElementById("cakeType").value;
-            //   if (cakeType) {
-            //     populateSelect(document.getElementById("flavor"), flavorOptions, "Select a flavor");
-            //     populateSelect(document.getElementById("frosting"), frostingOptions, "Select a frosting");
-            //     populateSelect(document.getElementById("filling"), fillingOptions, "Select a filling (optional)", true);
-            //     populateSelect(document.getElementById("size"), sizeOptions[cakeType] || [], "Select a size");
-      
-            //     const selectedSize = document.getElementById("size").value;
-            //     if (selectedSize && sizeDetails[selectedSize]) {
-            //       document.getElementById("sizeInfo").innerHTML = `${sizeDetails[selectedSize].price} – <em>${sizeDetails[selectedSize].serves}</em>`;
-            //     }
-            //   }
-            // }
           } else {
             if (firstInvalidField) {
               const label = firstInvalidField.closest(".form-group")?.querySelector("label")?.textContent || "a required field";
@@ -244,7 +212,6 @@ pickupDateField.addEventListener("change", function(e) {
 
     const addImageBtn = document.getElementById("addImageBtn");
     const imageInputsContainer = document.getElementById("imageInputsContainer");
-    const previewContainer = document.getElementById("previewContainer");
   
     addImageBtn.addEventListener("click", () => {
       const savedCount = getSavedImageCountForCurrentEdit();
@@ -365,26 +332,6 @@ pickupDateField.addEventListener("change", function(e) {
   
     // Handle first file input preview
     imageInputsContainer.querySelector("input[type='file']").addEventListener("change", updatePreview);
-//   });
-  
-  
-function resetDessertFields() {
-  document.getElementById("dessertType").value = "";
-  document.getElementById("dessertPackage").innerHTML = `<option value="" disabled selected>Select quantity</option>`;
-  document.getElementById("dessertFlavor").innerHTML = "";
-  document.getElementById("dessertFrosting").innerHTML = "";
-  document.getElementById("dessertFilling").innerHTML = "";
-  document.getElementById("dessertFillingGroup").style.display = "none";
-  document.getElementById("dessertPriceInfo").innerHTML = "";
-  document.getElementById("dessertEstimateRow").style.display = "none";
-  document.getElementById("dessertPreviewContainer").innerHTML = "";
-  document.getElementById("dessertImageInputsContainer").innerHTML = `<input type="file" name="dessertInspirationPic" accept="image/*" class="inspo-file">`;
-
-  const firstDessertInput = document.querySelector("input[name='dessertInspirationPic']");
-  if (firstDessertInput) {
-    firstDessertInput.addEventListener("change", updateDessertPreview);
-  }
-}
 
   function validateStepOne() {
     const orderCategory = document.getElementById("orderCategory").value;
@@ -515,12 +462,6 @@ function resetDessertFields() {
     };
 
     return labels[value] || value || "Custom Cake";
-  }
-
-  function getTastingBoxLabel(value) {
-    if (value === "regular") return "Regular Tasting Box";
-    if (value === "deluxe") return "Deluxe Tasting Box";
-    return "Cake Tasting Box";
   }
 
   function getCurrentOrderRequiredLeadTimeDays() {
@@ -845,8 +786,6 @@ document.addEventListener("DOMContentLoaded", () => {
           preservedFlavor = document.getElementById("flavor").value;
           preservedFrosting = document.getElementById("frosting").value;
           preservedFilling = document.getElementById("filling").value;
-          wasRedirectedAfterWarning = true;
-
           document.querySelectorAll(".form-step").forEach((step, idx) =>
             step.classList.toggle("active", idx === 0)
           );
@@ -900,13 +839,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (orderCategory === "tasting_box") {
       const tastingBoxType = document.getElementById("tastingBoxType").value;
-
-      if (tastingBoxType === "regular") {
-        const selectedFillings = Array.from(
-          document.querySelectorAll("input[name='regularBoxSideFillings']:checked")
-        ).map(input => input.value);
-
-      }
 
       if (tastingBoxType === "deluxe") {
         const deluxeSlices = buildDeluxeSlicesData();
