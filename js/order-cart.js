@@ -270,7 +270,6 @@
 
   window.getOrderCartItems = () => cartItems.slice();
   window.hasOrderCartItems = () => cartItems.length > 0;
-  window.getOrderCartItemCount = () => cartItems.length;
   window.getEditingCartItemId = () => editingCartItemId;
   window.isEditingOrderCartItem = () => Boolean(editingCartItemId);
   window.getEditingExistingImages = () => editingExistingImages.slice();

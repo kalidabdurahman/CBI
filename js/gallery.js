@@ -1,31 +1,3 @@
-// // Function to initially reveal gallery items with a staggered animation
-// function revealGalleryItems() {
-//     const galleryItems = document.querySelectorAll('.gallery-item');
-//     galleryItems.forEach((item, index) => {
-//         // Reset each item's visibility to enable animation on each click
-//         item.classList.remove('visible');
-//        
-//         setTimeout(() => {
-//             item.classList.add('visible');
-//         }, index * 200); // Adjust delay as needed
-//     });
-// }
-
-// // Function to handle fade-in on scroll
-// function revealOnScroll() {
-//     const galleryItems = document.querySelectorAll('.gallery-item');
-
-//     galleryItems.forEach(item => {
-//         const itemPosition = item.getBoundingClientRect().top;
-//         const windowHeight = window.innerHeight;
-
-//         // Check if the item is within the viewport
-//         if (itemPosition < windowHeight - 100) {
-//             item.classList.add('visible');
-//         }
-//     });
-// }
-
 let featuredPreviewCards;
 let galleryEmptyMessage;
 let galleryCurrentLabel;
@@ -96,46 +68,6 @@ function applyGalleryFilter(category) {
     revealGalleryItems();
     setTimeout(revealOnScroll, 50);
 }
-
-// let wasRedirectedAfterWarning = false;
-// const galleryImages = document.querySelectorAll('.gallery-item');
-// const lightbox = document.getElementById('lightbox');
-// const lightboxImage = document.querySelector('.lightbox-image');
-// const closeBtn = document.querySelector('.close-lightbox');
-// const prevBtn = document.querySelector('.lightbox-prev');
-// const nextBtn = document.querySelector('.lightbox-next');
-
-// let currentIndex = 0;
-
-// galleryImages.forEach((img, index) => {
-//     img.addEventListener('click', () => {
-//         currentIndex = index;
-//         showLightbox();
-//     });
-// });
-
-// function showLightbox() {
-//     lightboxImage.src = galleryImages[currentIndex].src;
-//     lightbox.style.display = 'flex';
-// }
-
-// function hideLightbox() {
-//     lightbox.style.display = 'none';
-// }
-
-// function showNext() {
-//     currentIndex = (currentIndex + 1) % galleryImages.length;
-//     showLightbox();
-// }
-
-// function showPrev() {
-//     currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
-//     showLightbox();
-// }
-
-// closeBtn.addEventListener('click', hideLightbox);
-// nextBtn.addEventListener('click', showNext);
-// prevBtn.addEventListener('click', showPrev);
 
 function showLightbox() {
     const visibleItems = getVisibleGalleryItems();
