@@ -234,3 +234,28 @@
 }
 
 
+  .addons-grid li {
+    flex-direction: row; /* side-by-side */
+    justify-content: space-between; /* push label left and price right */
+    text-align: left; /* label text aligns left */
+    padding: 0 10px; /* optional: a little padding inside */
+    font-size: 1em; /* smaller size if needed */
+  }
+  
+  .addon-label {
+    white-space: nowrap;
+    padding-right: 10px;
+  }
+  
+  .addon-price {
+    white-space: nowrap;
+  }
+
+  .addon-label, .addon-price {
+    display: inline-block; /* make sure they stay inline */
+    width: auto;
+    white-space: nowrap; /* prevent weird wrapping */
+  }
+  
+  
+  
