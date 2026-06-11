@@ -522,21 +522,13 @@ else if (orderCategory === "dessert") {
         btn.addEventListener('click', () => {
           if (currentStep === 1) {
             const dateVal = document.getElementById("pickupDate").value;
-            const orderCategory = document.getElementById("orderCategory").value;
-            const cakeType = document.getElementById("cakeType").value;
             if (dateVal) {
               const chosen = new Date(dateVal + "T00:00");
               const today = new Date();
               today.setHours(0, 0, 0, 0);
 
               const diffDays = (chosen - today) / (1000 * 60 * 60 * 24);
-              const selectedSize = document.getElementById("size").value;
-
-              let requiredDays = cartItems.length ? getCartRequiredLeadTimeDays() : 7;
-
-              if (!cartItems.length && orderCategory === "custom_cake" && cakeType === "tiered") {
-                requiredDays = getTieredLeadTimeDays(selectedSize);
-              }
+              const requiredDays = getCurrentOrderRequiredLeadTimeDays();
 
               if (chosen.getDay() === 1 || chosen.getDay() === 2 || diffDays < requiredDays) {
                 showFormError(
@@ -1001,16 +993,43 @@ function getCartItemsForStorage() {
   }
 
   function getCartItemLeadTimeDays(item) {
-    if (item.orderCategory === "custom_cake" && item.details.cakeType === "tiered") {
-      return getTieredLeadTimeDays(item.details.size);
+    const details = item.details || {};
+    const storedLeadDays = Number(item.requiredLeadDays) || 7;
+    const isTieredCake =
+      item.orderCategory === "custom_cake" &&
+      (
+        details.cakeTypeValue === "tiered" ||
+        details.cakeType === "tiered" ||
+        details.cakeType === "Tiered Cake" ||
+        (typeof details.size === "string" && details.size.includes("Tiered"))
+      );
+
+    if (isTieredCake) {
+      return Math.max(storedLeadDays, getTieredLeadTimeDays(details.size));
     }
 
-    return 7;
+    return storedLeadDays;
   }
 
   function getCartRequiredLeadTimeDays() {
     if (!cartItems.length) return 7;
     return Math.max(...cartItems.map(getCartItemLeadTimeDays));
+  }
+
+  function getCurrentOrderRequiredLeadTimeDays() {
+    if (cartItems.length) {
+      return getCartRequiredLeadTimeDays();
+    }
+
+    const orderCategory = document.getElementById("orderCategory").value;
+    const cakeType = document.getElementById("cakeType").value;
+    const selectedSize = document.getElementById("size").value;
+
+    if (orderCategory === "custom_cake" && cakeType === "tiered") {
+      return getTieredLeadTimeDays(selectedSize);
+    }
+
+    return 7;
   }
 
   function buildCartPlainTextSummary() {
@@ -1569,9 +1588,10 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
 
-  if (orderCategory === "custom_cake" && cakeType === "tiered") {
+  const requiredLeadDays = getCurrentOrderRequiredLeadTimeDays();
+
+  if (requiredLeadDays > 7) {
     const dateVal = document.getElementById("pickupDate").value;
-    const selectedSize = document.getElementById("size").value;
 
     if (dateVal) {
       const selected = new Date(dateVal + "T00:00");
@@ -1579,11 +1599,11 @@ document.addEventListener("DOMContentLoaded", () => {
       today.setHours(0, 0, 0, 0);
 
       const diffDays = (selected - today) / (1000 * 60 * 60 * 24);
-      const requiredDays = getTieredLeadTimeDays(selectedSize);
 
-      if (diffDays < requiredDays) {
-        showFormError(`⚠️ Tiered cakes require ${getLeadTimeText(requiredDays)} notice. Please choose a later date.`);
+      if (diffDays < requiredLeadDays) {
+        showFormError(`⚠️ Tiered cakes require ${getLeadTimeText(requiredLeadDays)} notice. Please choose a later date.`);
 
+        if (!cartItems.length && orderCategory === "custom_cake" && cakeType === "tiered") {
           preservedSize = document.getElementById("size").value;
           preservedFlavor = document.getElementById("flavor").value;
           preservedFrosting = document.getElementById("frosting").value;
@@ -1608,6 +1628,7 @@ document.addEventListener("DOMContentLoaded", () => {
               updateClearBoxOptions(selectedSize);
             }
           }
+        }
 
           return;
         }
