@@ -1,0 +1,66 @@
+
+@media (max-width: 768px) {
+  .section-heading {
+    font-size: 2.2em;
+    padding: 0 10px;
+  }
+
+  #pricing h2 {
+    font-size: 2.2em; /* shrink CAKE MENU also */
+  }
+}
+
+@media (max-width: 768px) {
+  .pricing-info h3 {
+    font-size: 1.8em; /* smaller title for Heart Cakes, etc */
+  }
+
+  .pricing-info ul {
+    font-size: 1em; /* smaller list text */
+  }
+
+  .pricing-info ul li {
+    flex-direction: column; /* stack name and price vertically if needed */
+    text-align: center; /* center the text */
+  }
+
+  .pricing-info ul li span {
+    margin-top: 5px; /* small gap between name and price */
+  }
+}
+
+
+@media (max-width: 768px) {
+  .addons-info ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+  }
+
+  .addons-info ul li {
+    width: 100%;
+    text-align: center;
+    font-size: 1em;
+    margin-bottom: 15px;
+  }
+
+  .addons-info ul li span {
+    display: block;
+    margin-top: 5px;
+  }
+
+  .addons-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .addons-info div {
+    width: 90%;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 0.2em;
+  }
+  
+}

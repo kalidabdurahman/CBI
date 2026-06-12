@@ -1,0 +1,119 @@
+.cart-panel {
+  margin-top: 28px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(74, 61, 82, 0.12);
+  border-radius: 16px;
+}
+
+.cart-panel h3 {
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.cart-item-card {
+  background: #fff;
+  border: 1px solid rgba(74, 61, 82, 0.15);
+  border-radius: 14px;
+  padding: 14px 16px;
+  margin-bottom: 12px;
+}
+
+.cart-item-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.cart-item-title {
+  font-weight: bold;
+  font-family: 'Viaoda Libre', serif;
+  font-size: 1.1em;
+}
+
+.cart-item-meta {
+  margin-top: 6px;
+  color: #555;
+  font-size: 0.95em;
+  line-height: 1.4;
+}
+
+.cart-item-buttons {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.cart-small-btn {
+  border: none;
+  border-radius: 8px;
+  padding: 7px 10px;
+  cursor: pointer;
+  background: #e1d5f5;
+  font-family: 'Viaoda Libre', serif;
+}
+
+.cart-small-btn:hover {
+  background: #d6c3f0;
+}
+
+.cart-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+#checkoutCartBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.cart-review-item {
+  border: 1px solid rgba(74, 61, 82, 0.15);
+  border-radius: 14px;
+  padding: 14px 16px;
+  margin-bottom: 14px;
+  background: #fff;
+}
+
+.cart-review-item h4 {
+  margin-bottom: 8px;
+}
+
+@media (max-width: 768px) {
+  .cart-item-header {
+    flex-direction: column;
+  }
+
+  .cart-item-buttons {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .cart-actions {
+    flex-direction: column;
+  }
+
+  .cart-actions .order-button {
+    width: 100%;
+  }
+}
+
+.item-builder-actions {
+  margin-top: 22px;
+  margin-bottom: 22px;
+  text-align: center;
+}
+
+.item-builder-actions .order-button {
+  width: 100%;
+  max-width: 520px;
+}
+
+.cart-actions #checkoutCartBtn {
+  width: 100%;
+  max-width: 520px;
+}
