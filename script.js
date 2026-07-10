@@ -48,6 +48,21 @@ document.getElementById("agreeButton").addEventListener("click", () => {
     const nextBtns = document.querySelectorAll('.next-step');
     const backBtns = document.querySelectorAll('.prev-step');
 
+    function getBlockedPickupDateMessage(dateValue) {
+      if (!dateValue) return "";
+
+      const selectedYear = dateValue.slice(0, 4);
+      if (invalidYears.includes(selectedYear)) {
+        return `⚠️ I'm currently not taking orders for ${selectedYear}. Please choose another date.`;
+      }
+
+      if (invalidDates.includes(dateValue)) {
+        return "⚠️ That date is unavailable. Please choose another day.";
+      }
+
+      return "";
+    }
+
     function showStep(step) {
         formSteps.forEach((stepDiv, index) => {
           stepDiv.classList.toggle('active', index === step);
@@ -108,6 +123,12 @@ document.getElementById("agreeButton").addEventListener("click", () => {
           if (currentStep === 1) {
             const dateVal = document.getElementById("pickupDate").value;
             if (dateVal) {
+              const blockedDateMessage = getBlockedPickupDateMessage(dateVal);
+              if (blockedDateMessage) {
+                showFormError(blockedDateMessage);
+                return;
+              }
+
               const chosen = new Date(dateVal + "T00:00");
               const today = new Date();
               today.setHours(0, 0, 0, 0);
@@ -179,10 +200,17 @@ document.getElementById("agreeButton").addEventListener("click", () => {
     minDate.setDate(minDate.getDate() + 7);
     pickupDateField.min = minDate.toISOString().split("T")[0];
 
-// ▽ block out Mondays AND specific dates ▽
+// ▽ block out Mondays, closed years, and specific dates ▽
 pickupDateField.addEventListener("change", function(e) {
   const val = e.target.value;
   if (!val) return; // no date chosen, so do nothing
+
+  const blockedDateMessage = getBlockedPickupDateMessage(val);
+  if (blockedDateMessage) {
+    showFormError(blockedDateMessage);
+    e.target.value = "";
+    return;
+  }
 
   // Parse the chosen date (assumes "YYYY-MM-DD")
   const chosen = new Date(val + "T00:00");
@@ -191,13 +219,6 @@ pickupDateField.addEventListener("change", function(e) {
   // 1) Block all Mondays and Tuesdays
   if (dayOfWeek === 1 || dayOfWeek === 2) {
     showFormError("⚠️ Mondays and Tuesdays are unavailable. Please pick another day.");
-    e.target.value = "";
-    return;
-  }
-
-  // 2) Block exact dates from order data
-  if (invalidDates.includes(val)) {
-    showFormError("⚠️ That date is unavailable. Please choose another day.");
     e.target.value = "";
     return;
   }
@@ -728,6 +749,12 @@ pickupDateField.addEventListener("change", function(e) {
     if (!agreeCheckbox.checked) {
       showFormError("⚠️ You must agree to the Order Rules before submitting.");
       agreeCheckbox.focus();
+      return;
+    }
+
+    const blockedDateMessage = getBlockedPickupDateMessage(document.getElementById("pickupDate").value);
+    if (blockedDateMessage) {
+      showFormError(blockedDateMessage);
       return;
     }
 

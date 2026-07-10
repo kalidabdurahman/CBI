@@ -25,6 +25,10 @@ const invalidDates = [
   "2026-09-12",
 ];
 
+const invalidYears = [
+  "2027",
+];
+
 const flavorOptions = [
   "French Vanilla",
   "Double Chocolate",
