@@ -20,8 +20,8 @@
 
 /* show the burger instead of the full nav at mobile widths */
 @media (max-width: 768px) {
-  .hamburger { display: flex; }
-  nav ul   { display: none !important; } 
+  .site-header .hamburger { display: flex; }
+  .site-header nav ul { display: none; }
 }
 
 /* ====== MOBILE OVERLAY ====== */

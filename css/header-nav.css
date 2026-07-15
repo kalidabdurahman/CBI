@@ -16,7 +16,7 @@
 
 /* Show hamburger on small screens */
 @media (max-width: 768px) {
-  nav ul {
+  .site-header nav ul {
     display: none;
     flex-direction: column;
     background: #e1d5f5;
@@ -27,7 +27,7 @@
     text-align: center;
   }
 
-  nav ul.show {
+  .site-header nav ul.show {
     display: flex;
   }
 
@@ -499,7 +499,7 @@
     display: flex;
   }
 
-  nav ul {
+  .site-header nav ul {
     display: none; /* Hide normal nav links when hamburger is visible */
   }
 }
@@ -519,4 +519,3 @@
     transform: translateY(-20px);
   }
 }
-
