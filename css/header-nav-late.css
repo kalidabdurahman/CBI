@@ -108,56 +108,16 @@
 }
 
 
-/* 1) hide on every page */
 .hero-top-right {
-  display: none !important;
+  display: none;
 }
 
-/* 2) only show on the homepage via your body.home-active hook */
 body.home-active .hero-top-right {
-  display: flex !important;
+  display: flex;
 }
 
-
-@media (max-width: 768px) {
-  /* only show the hero buttons when body has .home-active */
-  body.home-active .hero-top-right {
-    display: flex !important;
-    position: absolute !important;
-    top: 20px !important;
-    left: 55% !important;
-    right: auto !important;
-    transform: translateX(-50%) !important;
-    width: calc(100% - 100px) !important;
-    flex-wrap: wrap;
-    justify-content: center !important;
-    align-items: center;
-    gap: 8px 10px;
-  }
-
-  /* hide on all other pages */
-  body:not(.home-active) .hero-top-right {
-    display: none !important;
-  }
-
-  /* slightly smaller buttons/text */
-  body.home-active .hero-top-right .hero-btn {
-    flex: 0 1 auto !important;
-    margin-bottom: 0 !important;
-    padding: 8px 12px !important;
-    font-size: 0.95rem !important;
-    line-height: 1 !important;
-  }
-
-  /* keep article button on second row but centered */
-  body.home-active #heroArticleBtn {
-    order: 1 !important;
-    flex: 0 1 auto !important;
-    width: auto !important;
-    margin: 2px auto 0 auto !important;
-    transform: none !important;
-    max-width: 100% !important;
-  }
+body:not(.home-active) .hero-top-right {
+  display: none;
 }
 
 /* ====== PHASE 1B HEADER + MOBILE NAV ====== */
