@@ -30,7 +30,7 @@
 
     <div class="container">
         <!-- ================= HEADER ================= -->
-        <header>
+        <header class="site-header">
             <div class="logo-left">
                 <a href="#home">
                     <img src="images/logo.png" alt="Logo" class="top-logo" />
@@ -53,20 +53,16 @@
                     <li><a href="#contact" class="nav-link" data-page="contact">Contact</a></li>
                 </ul>
 
-                <div class="hamburger" id="hamburger">
+                <button class="hamburger" id="hamburger" type="button" aria-controls="mobileMenu" aria-expanded="false" aria-label="Open navigation menu">
                     <span></span>
                     <span></span>
                     <span></span>
-                </div>
+                </button>
             </nav>
 
-            <div class="hero-top-right">
-                <a href="#gallery" class="hero-btn nav-link" data-page="gallery">View Gallery</a>
-                <a href="#order" class="hero-btn nav-link" data-page="order" id="heroOrderBtn">Order Now!</a>
-                <a
-                href="https://voyageminnesota.com/interview/community-highlights-meet-iftu-abdurahman-of-cakesbyiftu" class="hero-btn" id="heroArticleBtn" target="_blank">VoyageMinnesota Interview</a>
-                <a href="https://www.instagram.com/cakesbyiftu" target="_blank">
-                    <img src="images/insta.png" alt="Instagram" class="hero-ig" />
+            <div class="header-actions">
+                <a href="https://www.instagram.com/cakesbyiftu" target="_blank" rel="noopener noreferrer" class="header-instagram-link" aria-label="Visit CakesByIftu on Instagram">
+                    <img src="images/insta.png" alt="Instagram" class="header-instagram-icon" />
                 </a>
             </div>
         </header>
@@ -81,6 +77,13 @@
                 <div class="home-tagline">
                     <h1>Bringing Your Sweetest Vision to Life</h1>
                   </div>
+
+                <div class="hero-top-right">
+                    <a href="#gallery" class="hero-btn nav-link" data-page="gallery">View Gallery</a>
+                    <a href="#order" class="hero-btn nav-link" data-page="order" id="heroOrderBtn">Order Now!</a>
+                    <a
+                    href="https://voyageminnesota.com/interview/community-highlights-meet-iftu-abdurahman-of-cakesbyiftu" class="hero-btn" id="heroArticleBtn" target="_blank">VoyageMinnesota Interview</a>
+                </div>
                   
               <div class="home-hero-fade"></div> <!-- fading overlay -->
               
@@ -1109,8 +1112,8 @@
     </div>
 
     <!-- ================= MOBILE MENU ================= -->
-    <div class="mobile-menu-overlay" id="mobileMenu">
-        <button class="close-menu">×</button>
+    <div class="mobile-menu-overlay" id="mobileMenu" aria-hidden="true">
+        <button class="close-menu" type="button" aria-label="Close navigation menu">×</button>
         <ul class="mobile-nav-links">
           <li><a href="#home">Home</a></li>
           <li><a href="#gallery">Gallery</a></li>
@@ -1122,7 +1125,7 @@
           <li><a href="#contact">Contact</a></li>
         </ul>
         <div class="mobile-socials">
-          <a href="https://www.instagram.com/cakesbyiftu" target="_blank">
+          <a href="https://www.instagram.com/cakesbyiftu" target="_blank" rel="noopener noreferrer" aria-label="Visit CakesByIftu on Instagram">
             <img src="images/insta.png" alt="Instagram" class="hero-ig" />
           </a>
         </div>

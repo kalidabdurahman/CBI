@@ -26,6 +26,19 @@ function navigateToPage(targetPage) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
+  const initialActivePage = document.querySelector('.page.active');
+  const initialPageId = initialActivePage ? initialActivePage.id : "";
+  if (initialPageId === "home") {
+      document.body.classList.add("home-active");
+  } else {
+      document.body.classList.remove("home-active");
+  }
+
+  const initialHeroBtns = document.querySelector(".hero-top-right");
+  if (initialHeroBtns) {
+    initialHeroBtns.style.display = initialPageId === "home" ? "flex" : "none";
+  }
+
   const logo = document.querySelector('.logo-left a');
   if (logo) {
     logo.addEventListener('click', function(event) {
