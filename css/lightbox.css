@@ -1,56 +1,89 @@
 .lightbox {
-    display: none;
-    position: fixed;
-    z-index: 1001;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.9);
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1001;
+  width: 100vw;
+  min-height: 100dvh;
+  padding: 72px 84px;
+  align-items: center;
+  justify-content: center;
+  background: rgba(24, 17, 28, 0.92);
 }
 
 .lightbox-image {
-    max-width: 90%;
-    max-height: 80vh;
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+  display: block;
+  max-width: min(100%, 1120px);
+  max-height: calc(100dvh - 144px);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-lg);
+  object-fit: contain;
 }
 
 .lightbox-nav {
-    position: absolute;
-    top: 50%;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    transform: translateY(-50%);
+  position: absolute;
+  inset: 50% 20px auto;
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-50%);
+  pointer-events: none;
 }
 
 .lightbox-prev,
-.lightbox-next {
-    cursor: pointer;
-    color: white;
-    font-size: 3rem;
-    padding: 20px;
-    user-select: none;
-    transition: color 0.2s ease;
+.lightbox-next,
+.close-lightbox {
+  width: 52px;
+  height: 52px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 50%;
+  background: rgba(36, 26, 42, 0.82);
+  color: var(--color-surface);
+  font-family: var(--font-ui);
+  font-size: 1.75rem;
+  line-height: 1;
+  pointer-events: auto;
+  transition:
+    background-color var(--motion-standard) var(--motion-ease),
+    border-color var(--motion-standard) var(--motion-ease);
 }
 
 .lightbox-prev:hover,
-.lightbox-next:hover {
-    color: #E6D6F2;
+.lightbox-next:hover,
+.close-lightbox:hover {
+  border-color: var(--color-lavender);
+  background: var(--color-accent);
 }
 
 .close-lightbox {
-    position: absolute;
-    top: 20px;
-    right: 30px;
-    font-size: 2.5rem;
-    color: white;
-    cursor: pointer;
-    z-index: 1002;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 1002;
+  font-size: 1.875rem;
 }
 
+@media (max-width: 768px) {
+  .lightbox {
+    padding: 72px 16px 24px;
+  }
 
+  .lightbox-image {
+    max-height: calc(100dvh - 120px);
+  }
+
+  .lightbox-nav {
+    right: 8px;
+    left: 8px;
+  }
+
+  .lightbox-prev,
+  .lightbox-next,
+  .close-lightbox {
+    width: 48px;
+    height: 48px;
+  }
+}

@@ -4,36 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CakesByIftu</title>
-    <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/home.css">
-    <link rel="stylesheet" href="css/contact.css">
-    <link rel="stylesheet" href="css/gallery.css">
-    <link rel="stylesheet" href="css/lightbox.css">
-    <link rel="stylesheet" href="css/tiered-collections.css">
-    <link rel="stylesheet" href="css/reviews.css">
-    <link rel="stylesheet" href="css/flavors.css">
-    <link rel="stylesheet" href="css/pricing.css">
-    <link rel="stylesheet" href="css/order.css">
-    <link rel="stylesheet" href="css/modal.css">
-    <link rel="stylesheet" href="css/shared-transitions.css">
-    <link rel="stylesheet" href="css/header-nav.css">
-    <link rel="stylesheet" href="css/pricing-overrides.css">
-    <link rel="stylesheet" href="css/home-late.css">
-    <link rel="stylesheet" href="css/header-nav-late.css">
-    <link rel="stylesheet" href="css/modal-late.css">
-    <link rel="stylesheet" href="css/order-overrides.css">
-    <link rel="stylesheet" href="css/cart.css">
+    <link rel="stylesheet" href="css/base.css?v=atelier-phase2">
+    <link rel="stylesheet" href="css/home.css?v=atelier-phase2">
+    <link rel="stylesheet" href="css/contact.css?v=atelier-phase2">
+    <link rel="stylesheet" href="css/gallery.css?v=atelier-reviews-gallery">
+    <link rel="stylesheet" href="css/lightbox.css?v=atelier-phase2">
+    <link rel="stylesheet" href="css/tiered-collections.css?v=atelier-availability">
+    <link rel="stylesheet" href="css/reviews.css?v=atelier-reviews-minimal">
+    <link rel="stylesheet" href="css/flavors.css?v=atelier-phase2">
+    <link rel="stylesheet" href="css/pricing.css?v=atelier-phase2">
+    <link rel="stylesheet" href="css/order.css?v=atelier-phase2">
+    <link rel="stylesheet" href="css/modal.css?v=atelier-phase2">
+    <link rel="stylesheet" href="css/shared-transitions.css?v=atelier-phase2">
+    <link rel="stylesheet" href="css/header-nav.css?v=atelier-phase2">
+    <link rel="stylesheet" href="css/home-late.css?v=atelier-press-links">
+    <link rel="stylesheet" href="css/header-nav-late.css?v=atelier-hero-correction">
+    <link rel="stylesheet" href="css/cart.css?v=atelier-phase2">
     <link rel="icon" href="images/logo.png" type="image/png">
-    <link href="https://fonts.googleapis.com/css2?family=Viaoda+Libre&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Viaoda+Libre&display=swap" rel="stylesheet">
 </head>
 <body>
 
     <div class="container">
         <!-- ================= HEADER ================= -->
-        <header>
+        <header class="site-header">
             <div class="logo-left">
-                <a href="#home">
-                    <img src="images/logo.png" alt="Logo" class="top-logo" />
+                <a href="#home" aria-label="CakesByIftu home">
+                    <img src="images/logo.png" alt="" class="top-logo" />
+                    <span class="site-wordmark">CakesByIftu</span>
                 </a>
                 <div class="logo-tagline-wrapper">
                     <p class="logo-tagline">
@@ -53,20 +51,16 @@
                     <li><a href="#contact" class="nav-link" data-page="contact">Contact</a></li>
                 </ul>
 
-                <div class="hamburger" id="hamburger">
+                <button class="hamburger" id="hamburger" type="button" aria-controls="mobileMenu" aria-expanded="false" aria-label="Open navigation menu">
                     <span></span>
                     <span></span>
                     <span></span>
-                </div>
+                </button>
             </nav>
 
-            <div class="hero-top-right">
-                <a href="#gallery" class="hero-btn nav-link" data-page="gallery">View Gallery</a>
-                <a href="#order" class="hero-btn nav-link" data-page="order" id="heroOrderBtn">Order Now!</a>
-                <a
-                href="https://voyageminnesota.com/interview/community-highlights-meet-iftu-abdurahman-of-cakesbyiftu" class="hero-btn" id="heroArticleBtn" target="_blank">VoyageMinnesota Interview</a>
-                <a href="https://www.instagram.com/cakesbyiftu" target="_blank">
-                    <img src="images/insta.png" alt="Instagram" class="hero-ig" />
+            <div class="header-actions">
+                <a href="https://www.instagram.com/cakesbyiftu" target="_blank" rel="noopener noreferrer" class="header-instagram-link" aria-label="Visit CakesByIftu on Instagram">
+                    <img src="images/insta.png" alt="Instagram" class="header-instagram-icon" />
                 </a>
             </div>
         </header>
@@ -78,74 +72,105 @@
           <section id="home" class="page active">
 
             <div class="home-hero-bg">
+              <div class="home-hero-content">
                 <div class="home-tagline">
-                    <h1>Bringing Your Sweetest Vision to Life</h1>
-                  </div>
-                  
-              <div class="home-hero-fade"></div> <!-- fading overlay -->
-              
+                  <h1>
+                    <span>Bringing Your</span>
+                    <span>Sweetest Vision</span>
+                    <span>to Life</span>
+                  </h1>
+                  <p class="home-hero-subtitle">Custom buttercream cakes, handcrafted in Minnesota for celebrations worth remembering.</p>
+                </div>
 
-              
+                <div class="hero-top-right">
+                  <a href="#order" class="hero-btn hero-btn-primary nav-link" data-page="order" id="heroOrderBtn">Order Now</a>
+                  <a href="#gallery" class="hero-btn hero-btn-secondary nav-link" data-page="gallery">View Gallery</a>
+                </div>
+              </div>
+
+              <div class="home-hero-media">
+                <img
+                  src="images/iftu/frosting-desktop.png"
+                  alt="Iftu frosting a cake between two custom celebration cakes"
+                  width="1920"
+                  height="2048"
+                  fetchpriority="high"
+                  decoding="async"
+                />
+              </div>
+
+              <div class="home-hero-fade"></div> <!-- fading overlay -->
             </div>
           
-            <div class="home-info">
-              <div class="home-text">
-                <h2>CakesByIftu</h2>
-                <p>
+            <section class="home-info" aria-labelledby="founder-heading">
+              <div class="home-info-inner">
+                <div class="home-text">
+                  <p class="home-eyebrow">THE STUDIO</p>
+                  <h2 id="founder-heading">Made with care, created for your moment.</h2>
+                  <p class="home-founder-copy">
                     CakesByIftu was established in 2023 with a passion for turning special moments into unforgettable memories. Specializing in birthdays, weddings, graduations, and all your meaningful celebrations, each custom cake is crafted with care, creativity, and attention to detail. Every buttercream design is tailored to your vision — always made with love.
-                    
-                    —Iftu</p>
+                  </p>
+                  <p class="home-signature">— Iftu</p>
+                  <nav class="founder-press-links" aria-label="Press features">
+                    <a
+                      href="https://voyageminnesota.com/interview/community-highlights-meet-iftu-abdurahman-of-cakesbyiftu" class="founder-article-link" id="heroArticleBtn" target="_blank" rel="noopener noreferrer">Read the VoyageMinnesota feature</a>
+                    <a
+                      href="https://canvasrebel.com/meet-iftu-abdurahman/" class="founder-article-link" target="_blank" rel="noopener noreferrer">Read the CanvasRebel feature</a>
+                  </nav>
+                </div>
+                <div class="home-image">
+                  <img src="images/iftu/detail.png" alt="Iftu adding buttercream details to a custom cake" width="1366" height="2048" loading="lazy" decoding="async" />
+                </div>
               </div>
-              <div class="home-image">
-                <img src="images/iftu/detail.png" alt="Frosting Cake" />
-              </div>
-            </div>
+            </section>
 
           </section>
 
         <!-- ================= GALLERY ================= -->
-        <section id="gallery" class="page">
-    <h2 class="section-heading">GALLERY</h2>
-    <p class="section-subtext">Browse by category, or start with a quick visual preview of each style.</p>
+        <section id="gallery" class="page" aria-labelledby="galleryHeading">
+    <div class="page-intro">
+        <h2 class="section-heading" id="galleryHeading">GALLERY</h2>
+        <p class="section-subtext">Browse by category, or start with a quick visual preview of each style.</p>
+    </div>
 
     <div class="gallery-preview-grid">
-        <button class="featured-preview-card" data-filter-target="wedding" type="button">
-            <img src="images/weddingcakes/preview.jpeg" alt="Wedding Cakes">
+        <button class="featured-preview-card" data-filter-target="wedding" type="button" aria-controls="galleryGrid" aria-pressed="false">
+            <img src="images/gallery-thumbs/weddingcakes/preview.jpeg" alt="Wedding Cakes" loading="lazy" decoding="async" width="675" height="900">
             <span class="featured-preview-label">Wedding</span>
         </button>
 
-        <button class="featured-preview-card" data-filter-target="tiered" type="button">
-            <img src="images/tieredcakes/preview.jpeg" alt="Tiered Cakes">
+        <button class="featured-preview-card" data-filter-target="tiered" type="button" aria-controls="galleryGrid" aria-pressed="false">
+            <img src="images/gallery-thumbs/tieredcakes/preview.jpeg" alt="Tiered Cakes" loading="lazy" decoding="async" width="675" height="900">
             <span class="featured-preview-label">Tiered</span>
         </button>
 
-        <button class="featured-preview-card" data-filter-target="vintage" type="button">
-            <img src="images/vintagecakes/preview.jpeg" alt="Vintage Cakes">
+        <button class="featured-preview-card" data-filter-target="vintage" type="button" aria-controls="galleryGrid" aria-pressed="false">
+            <img src="images/gallery-thumbs/vintagecakes/preview.jpeg" alt="Vintage Cakes" loading="lazy" decoding="async" width="675" height="900">
             <span class="featured-preview-label">Vintage</span>
         </button>
 
-        <button class="featured-preview-card" data-filter-target="graduation" type="button">
-            <img src="images/graduation/preview.jpeg" alt="Graduation Cakes">
+        <button class="featured-preview-card" data-filter-target="graduation" type="button" aria-controls="galleryGrid" aria-pressed="false">
+            <img src="images/gallery-thumbs/graduation/preview.jpeg" alt="Graduation Cakes" loading="lazy" decoding="async" width="675" height="900">
             <span class="featured-preview-label">Graduation</span>
         </button>
 
-        <button class="featured-preview-card" data-filter-target="miscellaneous" type="button">
-            <img src="images/misc/prev.jpeg" alt="Miscellaneous Cakes">
+        <button class="featured-preview-card" data-filter-target="miscellaneous" type="button" aria-controls="galleryGrid" aria-pressed="false">
+            <img src="images/gallery-thumbs/misc/prev.jpeg" alt="Miscellaneous Cakes" loading="lazy" decoding="async" width="675" height="900">
             <span class="featured-preview-label">Miscellaneous</span>
         </button>
 
-        <button class="featured-preview-card" data-filter-target="dessert" type="button">
-            <img src="images/dessert/preview.jpeg" alt="dessert">
+        <button class="featured-preview-card" data-filter-target="dessert" type="button" aria-controls="galleryGrid" aria-pressed="false">
+            <img src="images/gallery-thumbs/dessert/preview.jpeg" alt="dessert" loading="lazy" decoding="async" width="675" height="900">
             <span class="featured-preview-label">Desserts</span>
         </button>
 
-        <button class="featured-preview-card" data-filter-target="cake-tasting-box" type="button">
-            <img src="images/caketastebox/cake2.jpeg" alt="Cake Tasting Box">
+        <button class="featured-preview-card" data-filter-target="cake-tasting-box" type="button" aria-controls="galleryGrid" aria-pressed="false">
+            <img src="images/gallery-thumbs/caketastebox/cake2.jpeg" alt="Cake Tasting Box" loading="lazy" decoding="async" width="675" height="900">
             <span class="featured-preview-label">Cake Tasting Box</span>
         </button>
 
-        <button class="featured-preview-card" data-filter-target="me-at-work" type="button">
-            <img src="images/meatwork/preview.jpeg" alt="Me at Work">
+        <button class="featured-preview-card" data-filter-target="me-at-work" type="button" aria-controls="galleryGrid" aria-pressed="false">
+            <img src="images/gallery-thumbs/meatwork/preview.jpeg" alt="Me at Work" loading="lazy" decoding="async" width="675" height="900">
             <span class="featured-preview-label">Me at Work</span>
         </button>
     </div>
@@ -154,100 +179,102 @@
     <span id="galleryCurrentLabel">All Cakes</span>
 </div>
 
-    <div class="gallery" id="galleryGrid">
+    <div class="gallery" id="galleryGrid" aria-label="Cake gallery">
         <!-- Wedding -->
-        <img src="images/weddingcakes/cake1.jpeg" alt="Wedding Cake 1" class="gallery-item" data-category="wedding">
-        <img src="images/weddingcakes/cake2.jpeg" alt="Wedding Cake 2" class="gallery-item" data-category="wedding">
-        <img src="images/weddingcakes/cake3.jpeg" alt="Wedding Cake 3" class="gallery-item" data-category="wedding">
-        <img src="images/weddingcakes/cake4.jpeg" alt="Wedding Cake 4" class="gallery-item" data-category="wedding">
-        <img src="images/weddingcakes/cake5.jpeg" alt="Wedding Cake 5" class="gallery-item" data-category="wedding">
-        <img src="images/weddingcakes/cake6.jpeg" alt="Wedding Cake 6" class="gallery-item" data-category="wedding">
-        <img src="images/weddingcakes/cake7.jpeg" alt="Wedding Cake 7" class="gallery-item" data-category="wedding">
-        <img src="images/weddingcakes/cake8.jpeg" alt="Wedding Cake 8" class="gallery-item" data-category="wedding">
-        <img src="images/weddingcakes/cake9.jpeg" alt="Wedding Cake 9" class="gallery-item" data-category="wedding">
-        <img src="images/weddingcakes/cake10.jpeg" alt="Wedding Cake 10" class="gallery-item" data-category="wedding">
+        <img src="images/gallery-thumbs/weddingcakes/cake1.jpeg" data-full-src="images/weddingcakes/cake1.jpeg" alt="Wedding Cake 1" class="gallery-item" loading="lazy" decoding="async" data-category="wedding" width="675" height="900">
+        <img src="images/gallery-thumbs/weddingcakes/cake2.jpeg" data-full-src="images/weddingcakes/cake2.jpeg" alt="Wedding Cake 2" class="gallery-item" loading="lazy" decoding="async" data-category="wedding" width="675" height="900">
+        <img src="images/gallery-thumbs/weddingcakes/cake3.jpeg" data-full-src="images/weddingcakes/cake3.jpeg" alt="Wedding Cake 3" class="gallery-item" loading="lazy" decoding="async" data-category="wedding" width="675" height="900">
+        <img src="images/gallery-thumbs/weddingcakes/cake4.jpeg" data-full-src="images/weddingcakes/cake4.jpeg" alt="Wedding Cake 4" class="gallery-item" loading="lazy" decoding="async" data-category="wedding" width="675" height="900">
+        <img src="images/gallery-thumbs/weddingcakes/cake5.jpeg" data-full-src="images/weddingcakes/cake5.jpeg" alt="Wedding Cake 5" class="gallery-item" loading="lazy" decoding="async" data-category="wedding" width="675" height="900">
+        <img src="images/gallery-thumbs/weddingcakes/cake6.jpeg" data-full-src="images/weddingcakes/cake6.jpeg" alt="Wedding Cake 6" class="gallery-item" loading="lazy" decoding="async" data-category="wedding" width="675" height="900">
+        <img src="images/gallery-thumbs/weddingcakes/cake7.jpeg" data-full-src="images/weddingcakes/cake7.jpeg" alt="Wedding Cake 7" class="gallery-item" loading="lazy" decoding="async" data-category="wedding" width="675" height="900">
+        <img src="images/gallery-thumbs/weddingcakes/cake8.jpeg" data-full-src="images/weddingcakes/cake8.jpeg" alt="Wedding Cake 8" class="gallery-item" loading="lazy" decoding="async" data-category="wedding" width="675" height="900">
+        <img src="images/gallery-thumbs/weddingcakes/cake9.jpeg" data-full-src="images/weddingcakes/cake9.jpeg" alt="Wedding Cake 9" class="gallery-item" loading="lazy" decoding="async" data-category="wedding" width="675" height="900">
+        <img src="images/gallery-thumbs/weddingcakes/cake10.jpeg" data-full-src="images/weddingcakes/cake10.jpeg" alt="Wedding Cake 10" class="gallery-item" loading="lazy" decoding="async" data-category="wedding" width="675" height="900">
 
 
         <!-- Tiered -->
-        <img src="images/tieredcakes/cake1.jpeg" alt="Tiered Cake 1" class="gallery-item" data-category="tiered">
-        <img src="images/tieredcakes/cake2.jpeg" alt="Tiered Cake 2" class="gallery-item" data-category="tiered">
-        <img src="images/tieredcakes/cake3.jpeg" alt="Tiered Cake 3" class="gallery-item" data-category="tiered">
-        <img src="images/tieredcakes/cake4.jpeg" alt="Tiered Cake 4" class="gallery-item" data-category="tiered">
-        <img src="images/tieredcakes/cake5.jpeg" alt="Tiered Cake 5" class="gallery-item" data-category="tiered">
-        <img src="images/tieredcakes/cake6.jpeg" alt="Tiered Cake 6" class="gallery-item" data-category="tiered">
-        <img src="images/tieredcakes/cake7.jpeg" alt="Tiered Cake 7" class="gallery-item" data-category="tiered">
-        <img src="images/tieredcakes/cake8.jpeg" alt="Tiered Cake 8" class="gallery-item" data-category="tiered">
+        <img src="images/gallery-thumbs/tieredcakes/cake1.jpeg" data-full-src="images/tieredcakes/cake1.jpeg" alt="Tiered Cake 1" class="gallery-item" loading="lazy" decoding="async" data-category="tiered" width="675" height="900">
+        <img src="images/gallery-thumbs/tieredcakes/cake2.jpeg" data-full-src="images/tieredcakes/cake2.jpeg" alt="Tiered Cake 2" class="gallery-item" loading="lazy" decoding="async" data-category="tiered" width="674" height="900">
+        <img src="images/gallery-thumbs/tieredcakes/cake3.jpeg" data-full-src="images/tieredcakes/cake3.jpeg" alt="Tiered Cake 3" class="gallery-item" loading="lazy" decoding="async" data-category="tiered" width="675" height="900">
+        <img src="images/gallery-thumbs/tieredcakes/cake4.jpeg" data-full-src="images/tieredcakes/cake4.jpeg" alt="Tiered Cake 4" class="gallery-item" loading="lazy" decoding="async" data-category="tiered" width="675" height="900">
+        <img src="images/gallery-thumbs/tieredcakes/cake5.jpeg" data-full-src="images/tieredcakes/cake5.jpeg" alt="Tiered Cake 5" class="gallery-item" loading="lazy" decoding="async" data-category="tiered" width="675" height="900">
+        <img src="images/gallery-thumbs/tieredcakes/cake6.jpeg" data-full-src="images/tieredcakes/cake6.jpeg" alt="Tiered Cake 6" class="gallery-item" loading="lazy" decoding="async" data-category="tiered" width="675" height="900">
+        <img src="images/gallery-thumbs/tieredcakes/cake7.jpeg" data-full-src="images/tieredcakes/cake7.jpeg" alt="Tiered Cake 7" class="gallery-item" loading="lazy" decoding="async" data-category="tiered" width="675" height="900">
+        <img src="images/gallery-thumbs/tieredcakes/cake8.jpeg" data-full-src="images/tieredcakes/cake8.jpeg" alt="Tiered Cake 8" class="gallery-item" loading="lazy" decoding="async" data-category="tiered" width="675" height="900">
 
         <!-- Vintage -->
-        <img src="images/vintagecakes/cake1.jpeg" alt="Vintage Cake 1" class="gallery-item" data-category="vintage">
-        <img src="images/vintagecakes/cake2.jpeg" alt="Vintage Cake 2" class="gallery-item" data-category="vintage">
-        <img src="images/vintagecakes/cake3.jpeg" alt="Vintage Cake 3" class="gallery-item" data-category="vintage">
-        <img src="images/vintagecakes/cake4.jpeg" alt="Vintage Cake 4" class="gallery-item" data-category="vintage">
-        <img src="images/vintagecakes/cake5.jpeg" alt="Vintage Cake 5" class="gallery-item" data-category="vintage">
-        <img src="images/vintagecakes/cake6.jpeg" alt="Vintage Cake 6" class="gallery-item" data-category="vintage">
-        <img src="images/vintagecakes/cake7.jpeg" alt="Vintage Cake 7" class="gallery-item" data-category="vintage">
-        <img src="images/vintagecakes/cake8.jpeg" alt="Vintage Cake 8" class="gallery-item" data-category="vintage">
-        <img src="images/vintagecakes/cake9.jpeg" alt="Vintage Cake 9" class="gallery-item" data-category="vintage">
-        <img src="images/vintagecakes/cake10.jpeg" alt="Vintage Cake 10" class="gallery-item" data-category="vintage">
+        <img src="images/gallery-thumbs/vintagecakes/cake1.jpeg" data-full-src="images/vintagecakes/cake1.jpeg" alt="Vintage Cake 1" class="gallery-item" loading="lazy" decoding="async" data-category="vintage" width="675" height="900">
+        <img src="images/gallery-thumbs/vintagecakes/cake2.jpeg" data-full-src="images/vintagecakes/cake2.jpeg" alt="Vintage Cake 2" class="gallery-item" loading="lazy" decoding="async" data-category="vintage" width="675" height="900">
+        <img src="images/gallery-thumbs/vintagecakes/cake3.jpeg" data-full-src="images/vintagecakes/cake3.jpeg" alt="Vintage Cake 3" class="gallery-item" loading="lazy" decoding="async" data-category="vintage" width="675" height="900">
+        <img src="images/gallery-thumbs/vintagecakes/cake4.jpeg" data-full-src="images/vintagecakes/cake4.jpeg" alt="Vintage Cake 4" class="gallery-item" loading="lazy" decoding="async" data-category="vintage" width="675" height="900">
+        <img src="images/gallery-thumbs/vintagecakes/cake5.jpeg" data-full-src="images/vintagecakes/cake5.jpeg" alt="Vintage Cake 5" class="gallery-item" loading="lazy" decoding="async" data-category="vintage" width="675" height="900">
+        <img src="images/gallery-thumbs/vintagecakes/cake6.jpeg" data-full-src="images/vintagecakes/cake6.jpeg" alt="Vintage Cake 6" class="gallery-item" loading="lazy" decoding="async" data-category="vintage" width="675" height="900">
+        <img src="images/gallery-thumbs/vintagecakes/cake7.jpeg" data-full-src="images/vintagecakes/cake7.jpeg" alt="Vintage Cake 7" class="gallery-item" loading="lazy" decoding="async" data-category="vintage" width="675" height="900">
+        <img src="images/gallery-thumbs/vintagecakes/cake8.jpeg" data-full-src="images/vintagecakes/cake8.jpeg" alt="Vintage Cake 8" class="gallery-item" loading="lazy" decoding="async" data-category="vintage" width="675" height="900">
+        <img src="images/gallery-thumbs/vintagecakes/cake9.jpeg" data-full-src="images/vintagecakes/cake9.jpeg" alt="Vintage Cake 9" class="gallery-item" loading="lazy" decoding="async" data-category="vintage" width="675" height="900">
+        <img src="images/gallery-thumbs/vintagecakes/cake10.jpeg" data-full-src="images/vintagecakes/cake10.jpeg" alt="Vintage Cake 10" class="gallery-item" loading="lazy" decoding="async" data-category="vintage" width="675" height="900">
 
 
         <!-- Graduation -->
-        <img src="images/graduation/cake1.jpeg" alt="Graduation Cake 1" class="gallery-item" data-category="graduation">
-        <img src="images/graduation/cake2.jpeg" alt="Graduation Cake 2" class="gallery-item" data-category="graduation">
-        <img src="images/graduation/cake3.jpeg" alt="Graduation Cake 3" class="gallery-item" data-category="graduation">
-        <img src="images/graduation/cake4.jpeg" alt="Graduation Cake 4" class="gallery-item" data-category="graduation">
-        <img src="images/graduation/cake5.jpeg" alt="Graduation Cake 5" class="gallery-item" data-category="graduation">
-        <img src="images/graduation/cake6.jpeg" alt="Graduation Cake 6" class="gallery-item" data-category="graduation">
-        <img src="images/graduation/cake7.jpeg" alt="Graduation Cake 7" class="gallery-item" data-category="graduation">
+        <img src="images/gallery-thumbs/graduation/cake1.jpeg" data-full-src="images/graduation/cake1.jpeg" alt="Graduation Cake 1" class="gallery-item" loading="lazy" decoding="async" data-category="graduation" width="675" height="900">
+        <img src="images/gallery-thumbs/graduation/cake2.jpeg" data-full-src="images/graduation/cake2.jpeg" alt="Graduation Cake 2" class="gallery-item" loading="lazy" decoding="async" data-category="graduation" width="675" height="900">
+        <img src="images/gallery-thumbs/graduation/cake3.jpeg" data-full-src="images/graduation/cake3.jpeg" alt="Graduation Cake 3" class="gallery-item" loading="lazy" decoding="async" data-category="graduation" width="675" height="900">
+        <img src="images/gallery-thumbs/graduation/cake4.jpeg" data-full-src="images/graduation/cake4.jpeg" alt="Graduation Cake 4" class="gallery-item" loading="lazy" decoding="async" data-category="graduation" width="675" height="900">
+        <img src="images/gallery-thumbs/graduation/cake5.jpeg" data-full-src="images/graduation/cake5.jpeg" alt="Graduation Cake 5" class="gallery-item" loading="lazy" decoding="async" data-category="graduation" width="675" height="900">
+        <img src="images/gallery-thumbs/graduation/cake6.jpeg" data-full-src="images/graduation/cake6.jpeg" alt="Graduation Cake 6" class="gallery-item" loading="lazy" decoding="async" data-category="graduation" width="675" height="900">
+        <img src="images/gallery-thumbs/graduation/cake7.jpeg" data-full-src="images/graduation/cake7.jpeg" alt="Graduation Cake 7" class="gallery-item" loading="lazy" decoding="async" data-category="graduation" width="675" height="900">
 
         <!-- Miscellaneous -->
-        <img src="images/misc/cake1.jpeg" alt="Miscellaneous Cake 1" class="gallery-item" data-category="miscellaneous">
-        <img src="images/misc/cake2.jpeg" alt="Miscellaneous Cake 2" class="gallery-item" data-category="miscellaneous">
-        <img src="images/misc/cake3.jpeg" alt="Miscellaneous Cake 3" class="gallery-item" data-category="miscellaneous">
-        <img src="images/misc/cake4.jpeg" alt="Miscellaneous Cake 4" class="gallery-item" data-category="miscellaneous">
-        <img src="images/misc/cake5.jpeg" alt="Miscellaneous Cake 5" class="gallery-item" data-category="miscellaneous">
-        <img src="images/misc/cake6.jpeg" alt="Miscellaneous Cake 6" class="gallery-item" data-category="miscellaneous">
-        <img src="images/misc/cake7.jpeg" alt="Miscellaneous Cake 7" class="gallery-item" data-category="miscellaneous">
-        <img src="images/misc/cake8.jpeg" alt="Miscellaneous Cake 8" class="gallery-item" data-category="miscellaneous">
-        <img src="images/misc/cake9.jpeg" alt="Miscellaneous Cake 9" class="gallery-item" data-category="miscellaneous">
-        <img src="images/misc/cake10.jpeg" alt="Miscellaneous Cake 10" class="gallery-item" data-category="miscellaneous">
-        <img src="images/misc/cake11.jpeg" alt="Miscellaneous Cake 11" class="gallery-item" data-category="miscellaneous">
-        <img src="images/misc/cake12.jpeg" alt="Miscellaneous Cake 12" class="gallery-item" data-category="miscellaneous">
-        <img src="images/misc/cake13.jpeg" alt="Miscellaneous Cake 13" class="gallery-item" data-category="miscellaneous">
-        <img src="images/misc/cake14.jpeg" alt="Miscellaneous Cake 14" class="gallery-item" data-category="miscellaneous">
-        <img src="images/misc/cake15.jpeg" alt="Miscellaneous Cake 15" class="gallery-item" data-category="miscellaneous">
+        <img src="images/gallery-thumbs/misc/cake1.jpeg" data-full-src="images/misc/cake1.jpeg" alt="Miscellaneous Cake 1" class="gallery-item" loading="lazy" decoding="async" data-category="miscellaneous" width="675" height="900">
+        <img src="images/gallery-thumbs/misc/cake2.jpeg" data-full-src="images/misc/cake2.jpeg" alt="Miscellaneous Cake 2" class="gallery-item" loading="lazy" decoding="async" data-category="miscellaneous" width="675" height="900">
+        <img src="images/gallery-thumbs/misc/cake3.jpeg" data-full-src="images/misc/cake3.jpeg" alt="Miscellaneous Cake 3" class="gallery-item" loading="lazy" decoding="async" data-category="miscellaneous" width="675" height="900">
+        <img src="images/gallery-thumbs/misc/cake4.jpeg" data-full-src="images/misc/cake4.jpeg" alt="Miscellaneous Cake 4" class="gallery-item" loading="lazy" decoding="async" data-category="miscellaneous" width="675" height="900">
+        <img src="images/gallery-thumbs/misc/cake5.jpeg" data-full-src="images/misc/cake5.jpeg" alt="Miscellaneous Cake 5" class="gallery-item" loading="lazy" decoding="async" data-category="miscellaneous" width="675" height="900">
+        <img src="images/gallery-thumbs/misc/cake6.jpeg" data-full-src="images/misc/cake6.jpeg" alt="Miscellaneous Cake 6" class="gallery-item" loading="lazy" decoding="async" data-category="miscellaneous" width="675" height="900">
+        <img src="images/gallery-thumbs/misc/cake7.jpeg" data-full-src="images/misc/cake7.jpeg" alt="Miscellaneous Cake 7" class="gallery-item" loading="lazy" decoding="async" data-category="miscellaneous" width="675" height="900">
+        <img src="images/gallery-thumbs/misc/cake8.jpeg" data-full-src="images/misc/cake8.jpeg" alt="Miscellaneous Cake 8" class="gallery-item" loading="lazy" decoding="async" data-category="miscellaneous" width="675" height="900">
+        <img src="images/gallery-thumbs/misc/cake9.jpeg" data-full-src="images/misc/cake9.jpeg" alt="Miscellaneous Cake 9" class="gallery-item" loading="lazy" decoding="async" data-category="miscellaneous" width="675" height="900">
+        <img src="images/gallery-thumbs/misc/cake10.jpeg" data-full-src="images/misc/cake10.jpeg" alt="Miscellaneous Cake 10" class="gallery-item" loading="lazy" decoding="async" data-category="miscellaneous" width="675" height="900">
+        <img src="images/gallery-thumbs/misc/cake11.jpeg" data-full-src="images/misc/cake11.jpeg" alt="Miscellaneous Cake 11" class="gallery-item" loading="lazy" decoding="async" data-category="miscellaneous" width="675" height="900">
+        <img src="images/gallery-thumbs/misc/cake12.jpeg" data-full-src="images/misc/cake12.jpeg" alt="Miscellaneous Cake 12" class="gallery-item" loading="lazy" decoding="async" data-category="miscellaneous" width="675" height="900">
+        <img src="images/gallery-thumbs/misc/cake13.jpeg" data-full-src="images/misc/cake13.jpeg" alt="Miscellaneous Cake 13" class="gallery-item" loading="lazy" decoding="async" data-category="miscellaneous" width="675" height="900">
+        <img src="images/gallery-thumbs/misc/cake14.jpeg" data-full-src="images/misc/cake14.jpeg" alt="Miscellaneous Cake 14" class="gallery-item" loading="lazy" decoding="async" data-category="miscellaneous" width="675" height="900">
+        <img src="images/gallery-thumbs/misc/cake15.jpeg" data-full-src="images/misc/cake15.jpeg" alt="Miscellaneous Cake 15" class="gallery-item" loading="lazy" decoding="async" data-category="miscellaneous" width="675" height="900">
 
         <!-- Dessert -->
-        <img src="images/dessert/cake1.jpeg" alt="Dessert Set 1" class="gallery-item" data-category="dessert">
-        <img src="images/dessert/cake2.jpeg" alt="Dessert Set 2" class="gallery-item" data-category="dessert">
-        <img src="images/dessert/cake3.jpeg" alt="Dessert Set 3" class="gallery-item" data-category="dessert">
-        <img src="images/dessert/cake4.jpeg" alt="Dessert Set 4" class="gallery-item" data-category="dessert">
+        <img src="images/gallery-thumbs/dessert/cake1.jpeg" data-full-src="images/dessert/cake1.jpeg" alt="Dessert Set 1" class="gallery-item" loading="lazy" decoding="async" data-category="dessert" width="675" height="900">
+        <img src="images/gallery-thumbs/dessert/cake2.jpeg" data-full-src="images/dessert/cake2.jpeg" alt="Dessert Set 2" class="gallery-item" loading="lazy" decoding="async" data-category="dessert" width="675" height="900">
+        <img src="images/gallery-thumbs/dessert/cake3.jpeg" data-full-src="images/dessert/cake3.jpeg" alt="Dessert Set 3" class="gallery-item" loading="lazy" decoding="async" data-category="dessert" width="675" height="900">
+        <img src="images/gallery-thumbs/dessert/cake4.jpeg" data-full-src="images/dessert/cake4.jpeg" alt="Dessert Set 4" class="gallery-item" loading="lazy" decoding="async" data-category="dessert" width="675" height="900">
 
         <!-- Cake Tasting Box -->
-        <img src="images/caketastebox/cake1.jpeg" alt="Cake Tasting Box 1" class="gallery-item" data-category="cake-tasting-box">
-        <img src="images/caketastebox/cake2.jpeg" alt="Cake Tasting Box 2" class="gallery-item" data-category="cake-tasting-box">
-        <img src="images/caketastebox/cake3.jpeg" alt="Cake Tasting Box 3" class="gallery-item" data-category="cake-tasting-box">
-        <img src="images/caketastebox/cake4.jpeg" alt="Cake Tasting Box 4" class="gallery-item" data-category="cake-tasting-box">
+        <img src="images/gallery-thumbs/caketastebox/cake1.jpeg" data-full-src="images/caketastebox/cake1.jpeg" alt="Cake Tasting Box 1" class="gallery-item" loading="lazy" decoding="async" data-category="cake-tasting-box" width="675" height="900">
+        <img src="images/gallery-thumbs/caketastebox/cake2.jpeg" data-full-src="images/caketastebox/cake2.jpeg" alt="Cake Tasting Box 2" class="gallery-item" loading="lazy" decoding="async" data-category="cake-tasting-box" width="675" height="900">
+        <img src="images/gallery-thumbs/caketastebox/cake3.jpeg" data-full-src="images/caketastebox/cake3.jpeg" alt="Cake Tasting Box 3" class="gallery-item" loading="lazy" decoding="async" data-category="cake-tasting-box" width="675" height="900">
+        <img src="images/gallery-thumbs/caketastebox/cake4.jpeg" data-full-src="images/caketastebox/cake4.jpeg" alt="Cake Tasting Box 4" class="gallery-item" loading="lazy" decoding="async" data-category="cake-tasting-box" width="675" height="900">
 
         <!-- Me at Work -->
-        <img src="images/meatwork/pic1.jpeg" alt="Me at Work 1" class="gallery-item" data-category="me-at-work">
-        <img src="images/meatwork/pic2.jpeg" alt="Me at Work 2" class="gallery-item" data-category="me-at-work">
-        <img src="images/meatwork/pic3.jpeg" alt="Me at Work 3" class="gallery-item" data-category="me-at-work">
-        <img src="images/meatwork/pic4.jpeg" alt="Me at Work 4" class="gallery-item" data-category="me-at-work">
-        <img src="images/meatwork/pic5.jpeg" alt="Me at Work 5" class="gallery-item" data-category="me-at-work">
+        <img src="images/gallery-thumbs/meatwork/pic1.jpeg" data-full-src="images/meatwork/pic1.jpeg" alt="Me at Work 1" class="gallery-item" loading="lazy" decoding="async" data-category="me-at-work" width="675" height="900">
+        <img src="images/gallery-thumbs/meatwork/pic2.jpeg" data-full-src="images/meatwork/pic2.jpeg" alt="Me at Work 2" class="gallery-item" loading="lazy" decoding="async" data-category="me-at-work" width="675" height="900">
+        <img src="images/gallery-thumbs/meatwork/pic3.jpeg" data-full-src="images/meatwork/pic3.jpeg" alt="Me at Work 3" class="gallery-item" loading="lazy" decoding="async" data-category="me-at-work" width="506" height="900">
+        <img src="images/gallery-thumbs/meatwork/pic4.jpeg" data-full-src="images/meatwork/pic4.jpeg" alt="Me at Work 4" class="gallery-item" loading="lazy" decoding="async" data-category="me-at-work" width="556" height="900">
+        <img src="images/gallery-thumbs/meatwork/pic5.jpeg" data-full-src="images/meatwork/pic5.jpeg" alt="Me at Work 5" class="gallery-item" loading="lazy" decoding="async" data-category="me-at-work" width="675" height="900">
     </div>
 
     <div id="galleryEmptyMessage" class="gallery-empty-message">
         No images in this category yet.
     </div>
 
-    <button id="backToTop" title="Back to Top">↑</button>
+    <button id="backToTop" type="button" aria-label="Back to top">↑</button>
         </section>
 
         <!-- ================= FLAVORS ================= -->
-        <section id="flavors" class="page">
-            <h2 class="section-heading">FLAVORS</h2>
-            <p class="section-subtext">Choose the cake, frosting, and filling combo that fits your style!</p>
+        <section id="flavors" class="page" aria-labelledby="flavorsHeading">
+            <div class="page-intro">
+                <h2 class="section-heading" id="flavorsHeading">FLAVORS</h2>
+                <p class="section-subtext">Choose the cake, frosting, and filling combo that fits your style!</p>
+            </div>
             <div class="flavors-container">
                 <div class="flavor-column">
                     <h3>Cake</h3>
@@ -290,40 +317,42 @@
             </div>
         </section>        
         <!-- ================= MENU ================= -->
-        <section id="pricing" class="page">
-            <h2 class="section-heading">CAKE MENU</h2>
-            <p class="section-subtext">All cakes are made to order with love — pick the type to get started 💜</p>
+        <section id="pricing" class="page" aria-labelledby="pricingHeading">
+            <div class="page-intro">
+                <h2 class="section-heading" id="pricingHeading">CAKE MENU</h2>
+                <p class="section-subtext">All cakes are made to order with love — pick the type to get started.</p>
+            </div>
 
         
             <!-- Cake Type Selection Buttons -->
             <div class="cake-type-buttons">
-                <button class="cake-type-button" data-type="heart-cake">
-                    <img src="images/heart-cake.png" alt="Heart Cake">
+                <button class="cake-type-button" data-type="heart-cake" type="button" aria-controls="heart-cake" aria-expanded="false">
+                    <img src="images/menu/heart-cakes-editorial.jpg" alt="Lavender and ivory heart-shaped buttercream cake" width="1536" height="1024" loading="lazy" decoding="async">
                     <div class="button-overlay"></div>
                     <span class="button-text">Heart Cakes</span>
                 </button>
-                <button class="cake-type-button" data-type="round-cake">
-                    <img src="images/round-cake.png" alt="Round Cake">
+                <button class="cake-type-button" data-type="round-cake" type="button" aria-controls="round-cake" aria-expanded="false">
+                    <img src="images/menu/round-cakes-editorial.jpg" alt="Blush round buttercream cake with vintage piping" width="1536" height="1024" loading="lazy" decoding="async">
                     <div class="button-overlay"></div>
                     <span class="button-text">Round Cakes</span>
                 </button>
-                <button class="cake-type-button" data-type="tiered-cake">
-                    <img src="images/tiered-cake.png" alt="Tiered Cake">
+                <button class="cake-type-button" data-type="tiered-cake" type="button" aria-controls="tiered-cake" aria-expanded="false">
+                    <img src="images/menu/tiered-cakes-editorial.jpg" alt="Ivory two-tier buttercream cake with floral details" width="1536" height="1024" loading="lazy" decoding="async">
                     <div class="button-overlay"></div>
                     <span class="button-text">Tiered Cakes</span>
                 </button>
-                <button class="cake-type-button" data-type="dessert">
-                    <img src="images/cupcake.png" alt="Dessert">
+                <button class="cake-type-button" data-type="dessert" type="button" aria-controls="dessert" aria-expanded="false">
+                    <img src="images/menu/desserts-editorial.jpg" alt="Coordinated cupcakes, cake cups, cake pops, and pretzel rods" width="1536" height="1024" loading="lazy" decoding="async">
                     <div class="button-overlay"></div>
                     <span class="button-text">Desserts</span>
                 </button>
-                <button class="cake-type-button" data-type="cake-tasting-box">
-                  <img src="images/caketastebox.png" alt="Cake Tasting Box">
+                <button class="cake-type-button" data-type="cake-tasting-box" type="button" aria-controls="cake-tasting-box" aria-expanded="false">
+                  <img src="images/menu/tasting-box-editorial.jpg" alt="Open cake tasting box with six assorted slices" width="1536" height="1024" loading="lazy" decoding="async">
                   <div class="button-overlay"></div>
                   <span class="button-text">Cake Tasting Box</span>
               </button>
-                <button class="cake-type-button" data-type="add-ons">
-                    <img src="images/addons.png" alt="Add-Ons">
+                <button class="cake-type-button" data-type="add-ons" type="button" aria-controls="add-ons" aria-expanded="false">
+                    <img src="images/menu/addons-editorial.jpg" alt="Buttercream cake displaying bows, pearls, cherries, flowers, and a topper" width="1536" height="1024" loading="lazy" decoding="async">
                     <div class="button-overlay"></div>
                     <span class="button-text">Add-Ons</span>
                 </button>
@@ -464,18 +493,23 @@
         </section>
 
         <!-- ================= TIERED COLLECTIONS ================= -->
-        <section id="tiered-collections" class="page">
-            <h2 class="section-heading">TIERED COLLECTIONS</h2>
-            <p class="section-subtext"> Current Booked Wedding Days:
-            <br> July 2026: 16-26
-            <br> August 2026: 2, 7-9, 14-16, 19-20
-            <br> September 2026: 4-6, 12
-            <br>DO NOT PLACE AN ORDER FOR A TIERED COLLECTION PACKAGE! <br>All Tiered Collections Packages are ordered through contacting me! If you see any packages deals you like, you can customize it to your liking, don’t hesitate to ask! </p>
+        <section id="tiered-collections" class="page" aria-labelledby="collectionsHeading">
+            <div class="page-intro">
+                <h2 class="section-heading" id="collectionsHeading">TIERED COLLECTIONS</h2>
+                <p class="section-subtext">All Tiered Collections Packages are ordered through contacting me! If you see any packages deals you like, you can customize it to your liking, don’t hesitate to ask!</p>
+            </div>
+
+            <aside class="tiered-availability-notice" id="tieredAvailabilityNotice" aria-labelledby="tieredAvailabilityHeading" hidden>
+                <p class="tiered-availability-eyebrow">Collection availability</p>
+                <h3 id="tieredAvailabilityHeading">Tiered collections are temporarily unavailable.</h3>
+                <p>Our curated wedding cake packages are currently paused. You’re still welcome to explore the collections, or <a href="#contact" class="nav-link" data-page="contact">contact us about a custom cake</a>.</p>
+            </aside>
 
           
             <div class="tiered-grid">
-                <div class="tier-box">
+                <div class="tier-box" data-tier-collection>
                     <div class="tier-text">
+                        <span class="tier-availability-label" hidden>Unavailable</span>
                         <h3>Our Day</h3>
                         <ul>
                             <li>4” + 6” (Feeds 20–30) - <strong>$155</strong> </li>
@@ -484,11 +518,12 @@
                             <li><em>Optional add-ons: Regular tasting box +$30, local delivery</em></li>
                         </ul>
                     </div>
-                    <img src="images/tiered1.png" alt="Our Day Sample">
+                    <img src="images/tiered1.png" alt="Our Day Sample" loading="lazy" decoding="async">
                 </div>
             
-                <div class="tier-box">
+                <div class="tier-box" data-tier-collection>
                     <div class="tier-text">
+                        <span class="tier-availability-label" hidden>Unavailable</span>
                         <h3>Elegance & Simplicity</h3>
                         <ul>
                             <li>6” + 8” - <strong>$250</strong> </li>
@@ -498,11 +533,12 @@
                             <li><em>Optional add-ons: serving cake +$100, local delivery</em></li>
                         </ul>
                     </div>
-                    <img src="images/tiered2.png" alt="Elegance & Simplicity Sample">
+                    <img src="images/tiered2.png" alt="Elegance & Simplicity Sample" loading="lazy" decoding="async">
                 </div>
             
-                <div class="tier-box">
+                <div class="tier-box" data-tier-collection>
                     <div class="tier-text">
+                        <span class="tier-availability-label" hidden>Unavailable</span>
                         <h3>Our Night</h3>
                         <ul>
                             <li>6” + 8” + 10” (Feeds 115–135)  - <strong>$420</strong> </li>
@@ -512,11 +548,12 @@
                             <li><em>Optional add-ons: cake serving +$100</em></li>
                         </ul>
                     </div>
-                    <img src="images/tiered3.png" alt="Our Night Sample">
+                    <img src="images/tiered3.png" alt="Our Night Sample" loading="lazy" decoding="async">
                 </div>
             
-                <div class="tier-box">
+                <div class="tier-box" data-tier-collection>
                     <div class="tier-text">
+                        <span class="tier-availability-label" hidden>Unavailable</span>
                         <h3>Tiered Collection’s</h3>
                         <ul>
                             <li>6” + 8” + 10” + 12” (Feeds 220-260) - <strong>$770</strong></li>
@@ -526,12 +563,12 @@
                             <li>Full delivery, styling, cutting included</li>
                         </ul>
                     </div>
-                    <img src="images/tiered4.png" alt="Tiered Collections Sample">
+                    <img src="images/tiered4.png" alt="Tiered Collections Sample" loading="lazy" decoding="async">
                 </div>
             </div>
             
           
-            <p class="small-note" style="margin-top: 20px; text-align: center;">
+            <p class="small-note">
               ALL PACKAGING – price varies based on design of choice. These are all starter prices. Once I approve your order, I’ll calculate the exact total for you!
             </p>
           </section>
@@ -539,22 +576,34 @@
             
         
         <!-- ================= ORDER FORM ================= -->
-        <section id="order" class="page">
+        <section id="order" class="page" aria-labelledby="orderHeading">
             <div id="orderHeader">
-                <h2 class="section-heading">PLACE YOUR ORDER</h2>
-                <p class="section-subtext">Complete the order form below, and I'll contact you for details and payment!</p>
-                <p class="availability-note">
-                  ⚠️ ⚠️ ⚠️ <br> I'm currently not taking orders for 2027. <br> July 2026 Booked Days: 16-26 <br> August 2026 Booked Days: 2, 7-9, 14-16, 19-20 <br> September 2026 Booked Days: 4-6, 12
-                  </p>
-  
-            </div> 
-            <div id="formError" style="display: none;" class="form-error"></div>
+                <div class="page-intro">
+                    <h2 class="section-heading" id="orderHeading">PLACE YOUR ORDER</h2>
+                    <p class="section-subtext">Complete the order form below, and I'll contact you for details and payment!</p>
+                </div>
+                <p class="availability-note" role="note">
+                    <strong>Current availability</strong>
+                    <span>I'm currently not taking orders for 2027.</span>
+                    <span>July 2026 is fully booked.</span>
+                    <span>August 2026 Booked Days: 2, 7–9, and 16–20 are also booked.</span>
+                    <span>September 2026 Booked Days: 4-6, 12</span>
+                </p>
+            </div>
+
+            <ol class="order-progress" id="orderProgress" aria-label="Order progress">
+                <li data-step="0" aria-current="step"><span>1</span>Order details</li>
+                <li data-step="1"><span>2</span>Contact</li>
+                <li data-step="2"><span>3</span>Review</li>
+            </ol>
+
+            <div id="formError" style="display: none;" class="form-error" role="alert" aria-live="assertive"></div>
             <form id="orderForm" novalidate>
 
              <!-- CAKE DETAILS: now the first, active step, with formErrorStep1 -->
                           <!-- STEP 1: ORDER DETAILS -->
-            <div class="form-step active">
-                <div id="formErrorStep1" class="form-error" style="display: none;"></div>
+            <div class="form-step order-builder-step active">
+                <div id="formErrorStep1" class="form-error" style="display: none;" role="alert" aria-live="assertive"></div>
 
                 <div class="form-group">
                     <label for="orderCategory">What would you like to order? <span class="required-asterisk">*</span></label>
@@ -576,7 +625,7 @@
                             <option value="round">Round Cake</option>
                             <option value="tiered">Tiered Cake</option>
                         </select>
-                      <div id="tieredNotice" style="display: none; color: #b30000; font-weight: bold; margin-top: 8px;">
+                      <div id="tieredNotice" style="display: none;">
                           ⚠️ ⚠️ ⚠️<br>
                           2-tier cakes must be ordered at least 2 weeks in advance.<br>
                           3-tier cakes must be ordered at least 1 month in advance.
@@ -626,14 +675,14 @@
 
                     <div class="form-group">
                         <label>Upload Inspiration Picture(s)<span class="required-asterisk">*</span> <span style="font-size: 0.8em;">(up to 3)</span></label>
-                            <p class="small-note" style="margin-top: 6px;">
+                            <p class="small-note">
                                 No profanity, no horoscopes, and no AI-generated inspiration pictures.
                             </p>
                         <div id="imageInputsContainer">
                             <input type="file" name="inspirationPic" accept="image/*" class="inspo-file" required>
                         </div>
-                        <button type="button" id="addImageBtn" class="order-button" style="margin-top: 10px;">+ Add Another Image</button>
-                        <div id="previewContainer" class="preview-container" style="margin-top: 10px;"></div>
+                        <button type="button" id="addImageBtn" class="order-button">+ Add Another Image</button>
+                        <div id="previewContainer" class="preview-container"></div>
                     </div>
 
                     <div class="form-group">
@@ -671,7 +720,7 @@
                         <textarea id="notes" name="notes" rows="4" placeholder="Anything else you'd like to include?"></textarea>
                     </div>
 
-                <div id="customEstimateRow" class="estimate-row" style="margin-top: 8px; display: none;">
+                <div id="customEstimateRow" class="estimate-row" style="display: none;">
                     <div id="customPriceInfo" class="size-info"></div>
                     <span class="estimate-note">
                         (Note: This is only an estimated cost & serving size. Total cost will be provided in invoice!)
@@ -768,7 +817,7 @@
                     <div class="form-group" id="dessertFillingGroup">
                         <label for="dessertFilling">Filling</label>
                         <select id="dessertFilling" name="dessertFilling"></select>
-                        <p class="small-note" style="margin-top: 6px;">
+                        <p class="small-note">
                             Optional for cupcakes only — no additional cost.
                         </p>
                     </div>
@@ -797,8 +846,8 @@
                             <input type="file" name="dessertInspirationPic" accept="image/*" class="inspo-file">
                         </div>
 
-                        <button type="button" id="addDessertImageBtn" class="order-button" style="margin-top: 10px;">+ Add Another Image</button>
-                        <div id="dessertPreviewContainer" class="preview-container" style="margin-top: 10px;"></div>
+                        <button type="button" id="addDessertImageBtn" class="order-button">+ Add Another Image</button>
+                        <div id="dessertPreviewContainer" class="preview-container"></div>
                     </div>
 
                     <div class="form-group">
@@ -806,7 +855,7 @@
                         <textarea id="dessertNotes" name="dessertNotes" rows="4" placeholder="Anything else you'd like to include?"></textarea>
                     </div>
 
-                    <div id="dessertEstimateRow" class="estimate-row" style="margin-top: 8px; display: none;">
+                    <div id="dessertEstimateRow" class="estimate-row" style="display: none;">
                         <div id="dessertPriceInfo" class="size-info"></div>
                         <span class="estimate-note">
                             (Note: This is only an estimated cost. Total cost will be provided in invoice!)
@@ -814,7 +863,7 @@
                     </div>
                 </div>
 
-                <div id="tastingEstimateRow" class="estimate-row" style="margin-top: 8px; display: none;">
+                <div id="tastingEstimateRow" class="estimate-row" style="display: none;">
                   <div id="tastingBoxPriceInfo" class="size-info"></div>
                   <span class="estimate-note">
                       (Note: This is only an estimated cost. Total cost will be provided in invoice!)
@@ -838,35 +887,33 @@
             
 
             <!-- PERSONAL INFO: second step, no active, with formErrorStep2 -->
-            <div class="form-step">
-                <div id="formErrorStep2" class="form-error" style="display: none;"></div>
+            <div class="form-step contact-step">
+                <div id="formErrorStep2" class="form-error" style="display: none;" role="alert" aria-live="assertive"></div>
 
                 <!-- Customer Name -->
                 <div class="form-group">
                     <label for="firstName">First Name<span class="required-asterisk">*</span> </label>
-                    <input type="text" id="firstName" name="firstName" placeholder="Your First Name" required>
+                    <input type="text" id="firstName" name="firstName" placeholder="Your First Name" autocomplete="given-name" required>
                 </div>
                 <div class="form-group">
                     <label for="lastName">Last Name<span class="required-asterisk">*</span> </label>
-                    <input type="text" id="lastName" name="lastName" placeholder="Your Last Name" required>
+                    <input type="text" id="lastName" name="lastName" placeholder="Your Last Name" autocomplete="family-name" required>
                 </div>
         
                 <!-- Preferred Form of Contact -->
                 <div class="form-group">
                     <label for="phoneNumber">Phone Number<span class="required-asterisk">*</span> </label>
-                    <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="Your Phone Number" required>
+                    <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="Your Phone Number" autocomplete="tel" required>
                 </div>
                 <div class="form-group">
                     <label for="email">Email Address<span class="required-asterisk">*</span> </label>
-                    <input type="email" id="email" name="email" placeholder="Your Email Address" required>
+                    <input type="email" id="email" name="email" placeholder="Your Email Address" autocomplete="email" required>
                 </div>
         
                 <!-- Pickup or Delivery -->
-                <div class="form-group">
+                <div class="form-group form-group-wide">
                     <label for="deliveryOption">Would you like your order picked up or delivered?<span class="required-asterisk">*</span> </label>
-                    <div id="deliveryInfo" 
-                      class="delivery-info" 
-                      style="font-size:0.8em; color:#666; margin-top:4px;">
+                    <div id="deliveryInfo" class="delivery-info">
                       Pickup location: New Brighton / Mounds View — $3/mile if delivery <br>
                   </div>
                     <select id="deliveryOption" name="deliveryOption" required>
@@ -878,7 +925,7 @@
 
         
                 <!-- Pickup Date -->
-                <div class="form-group">
+                <div class="form-group form-group-wide">
                     <label for="pickupDate">
                         What day would you like your order?
                         <span class="required-asterisk">*</span>
@@ -904,26 +951,27 @@
                 </div>
         
                 <!-- How Did You Hear About Cakes by Iftu -->
-                <div class="form-group">
+                <div class="form-group form-group-wide">
                     <label for="referralSource">How did you hear about CakesByIftu?</label>
                     <input type="text" id="referralSource" name="referralSource" placeholder="e.g., Instagram, Friend, etc.">
                 </div>
 
                 <!-- here  -->
-                 <div id="contactEstimateRow" class="estimate-row" style="margin-top: 8px; display: none;">
+                 <div id="contactEstimateRow" class="estimate-row" style="display: none;">
                   <div id="contactEstimateInfo" class="size-info"></div>
                   <span id="contactEstimateNote" class="estimate-note"></span>
               </div>
 
-                <button type="button" class="order-button prev-step">Back - Order Details</button>
-                <!-- Next Button -->
-                <button type="button" id="nextButton" class="order-button next-step">Next - Review Your Order</button>
+                <div class="step-actions">
+                    <button type="button" class="order-button prev-step">Back - Order Details</button>
+                    <button type="button" id="nextButton" class="order-button next-step">Next - Review Your Order</button>
+                </div>
 
             </div> <!-- ✅ CLOSE the step -->
 
 
             <!-- ===== STEP 3: REVIEW YOUR ORDER ===== -->
-            <div class="form-step">
+            <div class="form-step review-step">
                 <h3>Review Your Order</h3>
             
                 <!-- summary will go here -->
@@ -938,8 +986,10 @@
                 </div>
           
                 <div id="submitStatusMessage" class="submit-status-message" style="display: none;"></div>
-                <button type="button" class="order-button prev-step">Back - Contact Info</button>
-                <button type="submit" class="order-button">Submit</button>
+                <div class="step-actions">
+                    <button type="button" class="order-button prev-step">Back - Contact Info</button>
+                    <button type="submit" class="order-button">Submit</button>
+                </div>
             </div>
             <!-- ===== end STEP 3 ===== -->
             </form>
@@ -954,29 +1004,41 @@
         
 
           <!-- ================= REVIEWS ================= -->
-          <section id="reviews" class="page">
-            <h2 class="section-heading">CUSTOMER REVIEWS</h2>
-            <p class="section-subtext">Thank you to everyone who’s left kind words! Your support means the world 💜</p>
-          
-            <div class="four-review-grid">
-              <!-- Top Left -->
-              <div class="review-corner" id="review1">
-                <img src="images/reviews/review1.png" class="review-image" data-index="0" />
-              </div>
-          
-              <!-- Top Right -->
-              <div class="review-corner" id="review2">
-                <img src="images/reviews/review1.png" class="review-image" data-index="0" />
-              </div>
-          
-              <!-- Bottom Left -->
-              <div class="review-corner" id="review3">
-                <img src="images/reviews/review1.png" class="review-image" data-index="0" />
-              </div>
-          
-              <!-- Bottom Right -->
-              <div class="review-corner" id="review4">
-                <img src="images/reviews/review1.png" class="review-image" data-index="0" />
+          <section id="reviews" class="page" aria-labelledby="reviewsHeading">
+            <div class="page-intro">
+              <h2 class="section-heading" id="reviewsHeading">CUSTOMER REVIEWS</h2>
+              <p class="section-subtext">Thank you to everyone who’s left kind words! Your support means the world.</p>
+            </div>
+
+            <div class="reviews-journal">
+              <section class="testimonial-carousel" id="testimonialCarousel" aria-label="Customer testimonials" aria-roledescription="carousel" tabindex="0">
+                <p class="testimonial-kicker">Kind words from our customers</p>
+
+                <div class="testimonial-stage" id="testimonialStage">
+                  <span class="testimonial-quote-mark" aria-hidden="true">“</span>
+                  <blockquote class="testimonial-quote">
+                    <p id="testimonialQuote"></p>
+                    <footer>
+                      <cite id="testimonialAttribution">Verified customer</cite>
+                    </footer>
+                  </blockquote>
+                </div>
+
+                <div class="testimonial-controls" aria-label="Testimonial controls">
+                  <button class="testimonial-arrow testimonial-previous" id="testimonialPrevious" type="button" aria-label="Previous testimonial">
+                    <span aria-hidden="true">←</span>
+                  </button>
+
+                  <button class="testimonial-arrow testimonial-next" id="testimonialNext" type="button" aria-label="Next testimonial">
+                    <span aria-hidden="true">→</span>
+                  </button>
+                </div>
+
+                <p class="testimonial-live-region" id="testimonialAnnouncement" aria-live="polite" aria-atomic="true"></p>
+              </section>
+
+              <div class="reviews-order-action">
+                <a href="#order" class="reviews-order-cta nav-link" data-page="order">Order Your Cake</a>
               </div>
             </div>
           </section>
@@ -985,17 +1047,19 @@
               
         
         <!-- ================= CONTACT ================= -->
-        <section id="contact" class="page">
-            <h2 class="section-heading">CONTACT ME</h2>
-            <p class="section-subtext">Don't hesitate to reach out for anything!!</p>
+        <section id="contact" class="page" aria-labelledby="contactHeading">
+            <div class="page-intro contact-intro">
+                <h2 class="section-heading" id="contactHeading">CONTACT ME</h2>
+                <p class="section-subtext">Don't hesitate to reach out for anything!!</p>
+            </div>
             <div class="contact-stack">
                 <div class="contact-item">
                     <img src="images/insta.png" alt="Instagram Icon" class="contact-icon">
-                    <a href="https://www.instagram.com/cakesbyiftu" target="_blank">@CakesByIftu</a>
+                    <a href="https://www.instagram.com/cakesbyiftu" target="_blank" rel="noopener noreferrer">@CakesByIftu</a>
                 </div>
                 <div class="contact-item">
                     <img src="images/text.png" alt="Text Icon" class="contact-icon">
-                    <span>(651) 399-9465</span>
+                    <a href="tel:+16513999465">(651) 399-9465</a>
                 </div>
                 <div class="contact-item">
                     <img src="images/mail.png" alt="Email Icon" class="contact-icon">
@@ -1007,14 +1071,44 @@
     </main>
 
         <!-- ================= FOOTER ================= -->
-        <footer>
-            <p>&copy; 2026 CakesByIftu. All rights reserved.</p>
+        <footer class="site-footer">
+            <div class="site-footer-inner">
+                <div class="site-footer-brand">
+                    <a href="#home" class="site-footer-logo nav-link" data-page="home">CakesByIftu</a>
+                    <p>Custom buttercream cakes for celebrations worth remembering.</p>
+                </div>
+
+                <nav class="site-footer-nav" aria-label="Footer navigation">
+                    <h2>Explore</h2>
+                    <ul>
+                        <li><a href="#gallery" class="nav-link" data-page="gallery">Gallery</a></li>
+                        <li><a href="#flavors" class="nav-link" data-page="flavors">Flavors</a></li>
+                        <li><a href="#pricing" class="nav-link" data-page="pricing">Menu</a></li>
+                        <li><a href="#tiered-collections" class="nav-link" data-page="tiered-collections">Tiered Collections</a></li>
+                        <li><a href="#order" class="nav-link" data-page="order">Order</a></li>
+                        <li><a href="#reviews" class="nav-link" data-page="reviews">Reviews</a></li>
+                        <li><a href="#contact" class="nav-link" data-page="contact">Contact</a></li>
+                    </ul>
+                </nav>
+
+                <div class="site-footer-contact">
+                    <h2>Get in touch</h2>
+                    <ul>
+                        <li><a href="mailto:cakesbyiftu@gmail.com">cakesbyiftu@gmail.com</a></li>
+                        <li><a href="tel:+16513999465">(651) 399-9465</a></li>
+                        <li><a href="https://www.instagram.com/cakesbyiftu" target="_blank" rel="noopener noreferrer">Instagram <span aria-hidden="true">↗</span></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="site-footer-bottom">
+                <p>&copy; 2026 CakesByIftu. All rights reserved.</p>
+            </div>
         </footer>
 
     <!-- ================= ORDER POLICIES MODAL ================= -->
-    <div id="orderModal" class="modal">
-      <div class="modal-content">
-          <h3>CakesByIftu LLC Policies</h3>
+    <div id="orderModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="policiesHeading" aria-hidden="true">
+      <div class="modal-content" tabindex="-1">
+          <h3 id="policiesHeading">CakesByIftu LLC Policies</h3>
           <ol>
               <li>
                   Booking &amp; Payment
@@ -1099,55 +1193,74 @@
   </div>
 
     <!-- ================= GALLERY LIGHTBOX ================= -->
-    <div id="lightbox" class="lightbox">
-        <span class="close-lightbox">&times;</span>
+    <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Gallery image viewer" aria-hidden="true">
+        <button class="close-lightbox" type="button" aria-label="Close gallery image">&times;</button>
         <img class="lightbox-image" src="" alt="Full Image">
         <div class="lightbox-nav">
-            <span class="lightbox-prev">&#10094;</span>
-            <span class="lightbox-next">&#10095;</span>
+            <button class="lightbox-prev" type="button" aria-label="Previous gallery image">&#10094;</button>
+            <button class="lightbox-next" type="button" aria-label="Next gallery image">&#10095;</button>
         </div>
     </div>
 
     <!-- ================= MOBILE MENU ================= -->
-    <div class="mobile-menu-overlay" id="mobileMenu">
-        <button class="close-menu">×</button>
-        <ul class="mobile-nav-links">
-          <li><a href="#home">Home</a></li>
-          <li><a href="#gallery">Gallery</a></li>
-          <li><a href="#flavors">Flavors</a></li>
-          <li><a href="#pricing">Menu</a></li>
-          <li><a href="#tiered-collections">Tiered Collections</a></li>
-          <li><a href="#order">Order</a></li>
-          <li><a href="#reviews">Reviews</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-        <div class="mobile-socials">
-          <a href="https://www.instagram.com/cakesbyiftu" target="_blank">
-            <img src="images/insta.png" alt="Instagram" class="hero-ig" />
-          </a>
+    <div class="mobile-menu-overlay" id="mobileMenu" aria-hidden="true">
+        <div class="mobile-menu-panel" role="dialog" aria-modal="true" aria-labelledby="mobileMenuTitle">
+          <div class="mobile-menu-header">
+            <div class="mobile-menu-brand">
+              <img src="images/logo.png" alt="" width="500" height="500" />
+              <span id="mobileMenuTitle">CakesByIftu</span>
+            </div>
+            <button class="close-menu" type="button" aria-label="Close navigation menu">×</button>
+          </div>
+
+          <nav class="mobile-menu-nav" aria-label="Mobile navigation">
+            <ul class="mobile-nav-links">
+              <li><a href="#home">Home</a></li>
+              <li><a href="#gallery">Gallery</a></li>
+              <li><a href="#flavors">Flavors</a></li>
+              <li><a href="#pricing">Menu</a></li>
+              <li><a href="#tiered-collections">Tiered Collections</a></li>
+              <li><a href="#order">Order</a></li>
+              <li><a href="#reviews">Reviews</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </nav>
+
+          <div class="mobile-socials">
+            <a href="https://www.instagram.com/cakesbyiftu" target="_blank" rel="noopener noreferrer" aria-label="Visit CakesByIftu on Instagram">
+              <img src="images/insta.png" alt="" class="hero-ig mobile-social-icon" />
+              <span>Instagram</span>
+            </a>
+            <a href="https://www.tiktok.com/@cakesbyiftu" target="_blank" rel="noopener noreferrer" aria-label="Visit CakesByIftu on TikTok">
+              <img src="images/tiktok.png" alt="" class="mobile-social-icon" />
+              <span>TikTok</span>
+            </a>
+          </div>
         </div>
-      </div>
+    </div>
       
     
     <!-- ================= SCRIPTS ================= -->
-    <script src="js/navigation.js"></script>
-    <script src="js/gallery.js"></script>
-    <script src="js/reviews.js"></script>
-    <script src="js/pricing.js"></script>
-    <script src="js/order-data.js"></script>
-    <script src="js/order-pricing.js"></script>
-    <script src="js/order-ui-renderers.js"></script>
-    <script src="js/order-dessert-ui.js"></script>
-    <script src="js/order-form-feedback.js"></script>
-    <script src="js/order-tasting-ui.js"></script>
-    <script src="js/order-panel-ui.js"></script>
-    <script src="js/order-cart.js"></script>
-    <script src="js/order-review-summary.js"></script>
-    <script src="js/order-image-preview.js"></script>
-    <script src="js/order-image-submit.js"></script>
-    <script src="js/order-submit.js"></script>
-    <script src="script.js"></script>
-    <script src="js/header-ui.js"></script>
+    <script src="js/site-config.js?v=atelier-availability"></script>
+    <script src="js/tiered-collections.js?v=atelier-availability"></script>
+    <script src="js/navigation.js?v=atelier-reviews-gallery"></script>
+    <script src="js/gallery.js?v=atelier-reviews-gallery"></script>
+    <script src="js/reviews.js?v=atelier-reviews-minimal"></script>
+    <script src="js/pricing.js?v=atelier-phase2"></script>
+    <script src="js/order-data.js?v=availability-2026-07-aug"></script>
+    <script src="js/order-pricing.js?v=atelier-phase2"></script>
+    <script src="js/order-ui-renderers.js?v=atelier-phase2"></script>
+    <script src="js/order-dessert-ui.js?v=atelier-phase2"></script>
+    <script src="js/order-form-feedback.js?v=atelier-phase2"></script>
+    <script src="js/order-tasting-ui.js?v=atelier-phase2"></script>
+    <script src="js/order-panel-ui.js?v=atelier-phase2"></script>
+    <script src="js/order-cart.js?v=atelier-phase2"></script>
+    <script src="js/order-review-summary.js?v=atelier-phase2"></script>
+    <script src="js/order-image-preview.js?v=atelier-phase2"></script>
+    <script src="js/order-image-submit.js?v=atelier-phase2"></script>
+    <script src="js/order-submit.js?v=atelier-phase2"></script>
+    <script src="script.js?v=atelier-phase2"></script>
+    <script src="js/header-ui.js?v=atelier-hero-correction"></script>
     
 
     <script>
