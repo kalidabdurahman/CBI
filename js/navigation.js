@@ -1,3 +1,27 @@
+function syncNavigationState(targetPage) {
+  document.querySelectorAll('.nav-link[data-page]').forEach(link => {
+    const isCurrent = link.getAttribute('data-page') === targetPage;
+    link.classList.toggle('is-current', isCurrent);
+
+    if (isCurrent) {
+      link.setAttribute('aria-current', 'page');
+    } else {
+      link.removeAttribute('aria-current');
+    }
+  });
+
+  document.querySelectorAll('.mobile-nav-links a').forEach(link => {
+    const isCurrent = link.getAttribute('href') === `#${targetPage}`;
+    link.classList.toggle('is-current', isCurrent);
+
+    if (isCurrent) {
+      link.setAttribute('aria-current', 'page');
+    } else {
+      link.removeAttribute('aria-current');
+    }
+  });
+}
+
 function navigateToPage(targetPage) {
   const activePage = document.querySelector('.page.active');
   if (activePage) {
@@ -5,6 +29,8 @@ function navigateToPage(targetPage) {
   }
 
   const newPage = document.getElementById(targetPage);
+  if (!newPage) return;
+
   newPage.classList.add('active');
 
   if (targetPage === 'home') {
@@ -15,13 +41,22 @@ function navigateToPage(targetPage) {
 
   if (targetPage !== 'gallery') {
       newPage.classList.add('animate-in');
-  } else {
-      revealGalleryItems();
+  } else if (typeof activateGallery === 'function') {
+      activateGallery();
   }
 
   const heroBtns = document.querySelector(".hero-top-right");
   if (heroBtns) {
     heroBtns.style.display = targetPage === "home" ? "flex" : "none";
+  }
+
+  syncNavigationState(targetPage);
+  window.scrollTo({ top: 0, behavior: 'auto' });
+
+  const pageHeading = newPage.querySelector('h1, h2');
+  if (pageHeading) {
+    pageHeading.setAttribute('tabindex', '-1');
+    pageHeading.focus({ preventScroll: true });
   }
 }
 
@@ -38,6 +73,8 @@ document.addEventListener("DOMContentLoaded", function () {
   if (initialHeroBtns) {
     initialHeroBtns.style.display = initialPageId === "home" ? "flex" : "none";
   }
+
+  syncNavigationState(initialPageId);
 
   const logo = document.querySelector('.logo-left a');
   if (logo) {

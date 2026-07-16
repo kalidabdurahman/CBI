@@ -149,22 +149,6 @@ body.home-active .logo-tagline-wrapper {
   
   
 
-  .page:not(#home) {
-    padding-top: 100px; /* normal buffer for most pages */
-  }
-
-  #gallery.page,
-#pricing.page,
-#order.page {
-  padding-top: 50px; /* extra space for these specific ones */
-}
-
-#order #orderHeader p {
-    margin-bottom: 25px; /* adjust as needed */
-  }
-
-  
-
 #home.page {
     display: none; /* hidden by default */
     opacity: 0;
@@ -257,46 +241,13 @@ body.home-active .logo-tagline-wrapper {
 }
 
 
-/* Section Headers */
+/* Display typography */
 h2, h3 {
     font-family: 'Viaoda Libre', serif;
     font-weight: 700;
     color: #333;
 }
 
-.section-heading {
-    font-family: 'Viaoda Libre', serif;
-    font-size: 3.25em;
-    text-transform: uppercase;
-    text-align: center;
-    margin-top: 10px;
-    color: #333;
-  }
-
-  .section-subtext {
-    font-family: 'Viaoda Libre', serif;
-    font-size: 1.1em;
-    color: #000;
-    text-align: center;
-    margin-bottom: 25px;
-}
-
-@media (max-width: 768px) {
-  .section-heading {
-    font-size: 2.0em; /* smaller on mobile */
-    padding: 0 10px; /* optional: adds a little breathing room on sides */
-  }
-}
-
-@media (max-width: 768px) {
-  .section-subtext {
-    font-size: 1.0em; /* smaller on mobile */
-    padding: 0 10px; /* optional: adds a little breathing room on sides */
-  }
-}
-
 
 
   
-
-

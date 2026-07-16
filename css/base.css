@@ -3,6 +3,7 @@
     --color-bg: #fff8ef;
     --color-surface: #ffffff;
     --color-surface-warm: #f6efe7;
+    --color-surface-lavender: #f1ebf8;
     --color-lavender: #e1d5f5;
     --color-lavender-strong: #d9c7ee;
     --color-plum: #241a2a;
@@ -11,8 +12,10 @@
     --color-text-muted: #5b4a60;
     --color-accent: #7a5ca8;
     --color-border: #e7dccf;
+    --color-border-strong: #cdbfd7;
     --color-disabled-bg: #e9e0d6;
     --color-focus: #7a5ca8;
+    --color-danger: #9f3030;
 
     --font-display: 'Viaoda Libre', serif;
     --font-ui: 'Inter', Arial, sans-serif;
@@ -41,6 +44,9 @@
     --motion-standard: 200ms;
     --motion-slow: 300ms;
     --motion-ease: ease;
+
+    --content-max: 1180px;
+    --reading-max: 68ch;
   }
 
   
@@ -72,9 +78,10 @@ html, body {
 /* General Styles */
 
 body {
-    background-color: var(--iftu-lilac);
+    background-color: var(--color-bg);
     color: var(--color-text);
     font-family: var(--font-ui);
+    line-height: 1.6;
 }
 
 button,
@@ -82,6 +89,21 @@ input,
 select,
 textarea {
     font-family: var(--font-ui);
+}
+
+button,
+a,
+input,
+select,
+textarea {
+    touch-action: manipulation;
+}
+
+button,
+select,
+input[type="checkbox"],
+input[type="radio"] {
+    cursor: pointer;
 }
 
 a:focus-visible,
@@ -92,6 +114,11 @@ textarea:focus-visible,
 [tabindex]:focus-visible {
     outline: 3px solid var(--color-focus);
     outline-offset: 3px;
+}
+
+/* Route headings receive programmatic focus for screen-reader context. */
+.page :is(h1, h2)[tabindex="-1"]:focus {
+    outline: none;
 }
 
 /* Fullscreen background image at the top */
@@ -107,21 +134,6 @@ textarea:focus-visible,
   align-items: center;
   justify-content: center;
 }
-
-
-
-.pricing-info li,
-.pricing-info li span,
-.addons-grid li,
-.addons-grid li span {
-    font-family: 'Viaoda Libre', serif;
-}
-
-
-.pricing-info h3 {
-    font-family: 'Viaoda Libre', serif !important;
-}
-
 
 
 
@@ -219,6 +231,99 @@ main {
     display: flex;
     flex-direction: column; /* Stack children vertically */
     justify-content: space-between; /* Push sections down */
+}
+
+/* Shared secondary-page system */
+.page:not(#home) {
+    width: 100%;
+    min-height: calc(100svh - 80px);
+    padding: 152px max(24px, calc((100vw - var(--content-max)) / 2)) var(--space-10);
+    overflow: clip;
+    background: var(--color-bg);
+}
+
+.page-intro {
+    width: min(100%, 760px);
+    margin: 0 auto var(--space-8);
+    text-align: center;
+}
+
+.page-intro::after {
+    content: "";
+    display: block;
+    width: 56px;
+    height: 2px;
+    margin: var(--space-5) auto 0;
+    background: var(--color-lavender-strong);
+}
+
+.section-heading {
+    margin: 0;
+    color: var(--color-plum);
+    font-family: var(--font-display);
+    font-size: 4.5rem;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 0.98;
+    text-align: center;
+    text-transform: none;
+}
+
+.section-subtext {
+    width: min(100%, var(--reading-max));
+    margin: var(--space-4) auto 0;
+    color: var(--color-text-muted);
+    font-family: var(--font-ui);
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    text-align: center;
+}
+
+.small-note {
+    color: var(--color-text-muted);
+    font-family: var(--font-ui);
+    font-size: 0.875rem;
+    line-height: 1.6;
+}
+
+@media (max-width: 1024px) {
+    .page:not(#home) {
+        padding: 136px 32px var(--space-9);
+    }
+
+    .section-heading {
+        font-size: 3.75rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .page:not(#home) {
+        padding: 112px 20px var(--space-8);
+    }
+
+    .page-intro {
+        margin-bottom: var(--space-7);
+    }
+
+    .section-heading {
+        font-size: 3rem;
+        line-height: 1;
+    }
+
+    .section-subtext {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 420px) {
+    .page:not(#home) {
+        padding-right: 16px;
+        padding-left: 16px;
+    }
+
+    .section-heading {
+        font-size: 2.5rem;
+    }
 }
 
 /* Footer */
@@ -321,6 +426,13 @@ main {
     text-underline-offset: 5px;
 }
 
+.site-footer a.is-current {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 5px;
+}
+
 .site-footer-contact a[href^="http"] {
     gap: var(--space-1);
     text-decoration: underline;
@@ -377,18 +489,22 @@ main {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background-color: #D8BFD8;    /* lilac shade */
-  color: #fff;
-  border: none;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  background-color: var(--color-plum);
+  color: var(--color-surface);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 50%;
-  padding: 0.5rem;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   cursor: pointer;
   display: none;               /* hidden by default */
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  box-shadow: var(--shadow-md);
   z-index: 1000;
-  transition: opacity 0.3s ease;
+  transition:
+    opacity var(--motion-standard) var(--motion-ease),
+    background-color var(--motion-standard) var(--motion-ease);
 }
 #backToTop:hover {
-  opacity: 0.8;
+  background-color: var(--color-accent);
 }

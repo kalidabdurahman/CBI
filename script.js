@@ -25,28 +25,69 @@ document.querySelector('#confirmationMessage a').addEventListener('click', funct
     document.getElementById("orderHeader").style.display = "block";
 
     currentStep = 0;
+    showStep(currentStep);
 });
 
 // ▼ open “Order Rules” modal when clicking the inline link ▼
 const showRulesLink = document.getElementById("showRulesLink");
 const orderModal    = document.getElementById("orderModal");
+const orderModalContent = orderModal.querySelector('.modal-content');
+let policiesBodyOverflow = "";
+
+function closeOrderPolicies() {
+  orderModal.classList.remove("show");
+  orderModal.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = policiesBodyOverflow;
+
+  setTimeout(() => {
+    orderModal.style.display = "none";
+    showRulesLink.focus();
+  }, 300);
+}
 
 showRulesLink.addEventListener("click", e => {
   e.preventDefault();
+  policiesBodyOverflow = document.body.style.overflow;
+  document.body.style.overflow = 'hidden';
   orderModal.style.display = "flex";
-  setTimeout(() => orderModal.classList.add("show"), 10);
+  orderModal.setAttribute('aria-hidden', 'false');
+  setTimeout(() => {
+    orderModal.classList.add("show");
+    orderModalContent.focus();
+  }, 10);
 });
 
-// reuse your existing “I Agree” button to close the modal
-document.getElementById("agreeButton").addEventListener("click", () => {
-  orderModal.classList.remove("show");
-  setTimeout(() => (orderModal.style.display = "none"), 300);
+document.getElementById("agreeButton").addEventListener("click", closeOrderPolicies);
+
+orderModal.addEventListener('click', event => {
+  if (event.target === orderModal) closeOrderPolicies();
+});
+
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape' && orderModal.classList.contains('show')) {
+    event.preventDefault();
+    closeOrderPolicies();
+  }
 });
     let currentStep = 0;
     window.getOrderCurrentStep = () => currentStep;
     const formSteps = document.querySelectorAll('.form-step');
     const nextBtns = document.querySelectorAll('.next-step');
     const backBtns = document.querySelectorAll('.prev-step');
+    const progressItems = document.querySelectorAll('#orderProgress [data-step]');
+
+    function updateOrderProgress(step) {
+      progressItems.forEach((item, index) => {
+        const isCurrent = index === step;
+        item.classList.toggle('is-complete', index < step);
+
+        if (isCurrent) {
+          item.setAttribute('aria-current', 'step');
+        } else {
+          item.removeAttribute('aria-current');
+        }
+      });
+    }
 
     function getBlockedPickupDateMessage(dateValue) {
       if (!dateValue) return "";
@@ -67,6 +108,8 @@ document.getElementById("agreeButton").addEventListener("click", () => {
         formSteps.forEach((stepDiv, index) => {
           stepDiv.classList.toggle('active', index === step);
         });
+
+        updateOrderProgress(step);
       
         if (step === 0) {
           const cakeType = document.getElementById("cakeType").value;

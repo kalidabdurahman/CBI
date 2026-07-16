@@ -1,86 +1,128 @@
-/* Contact Section */
-#contact {
-  position: relative;
-  /* background: url('../images/iftu/heart-desktop.png') no-repeat center bottom; */
-  background-size: cover;
-  background-attachment: scroll;
-  background-color: #eadaf8;
-  min-height: 100vh;
-  text-align: center;
-  overflow: hidden;
+#contact.page.active {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(360px, 1.1fr);
+  align-content: start;
+  align-items: center;
+  gap: var(--space-9);
 }
 
-/* Haze overlay */
-#contact::before {
-  content: "";
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background-color: rgba(255, 255, 255, 0.6); /* Adjust opacity if needed */
-  z-index: 1;
+#contact .page-intro {
+  width: 100%;
+  margin: 0;
+  text-align: left;
 }
 
-/* Keep text above the haze */
-#contact > * {
-  position: relative;
-  z-index: 2;
+#contact .page-intro::after {
+  margin-right: 0;
+  margin-left: 0;
 }
 
-/* Mobile: still cover the whole screen */
-@media (max-width: 768px) {
-  #contact {
-    /* background: url('../images/iftu/heart.png') no-repeat center center; */
-    background-size: cover; /* 🔥 switch back to full screen for mobile */
-    background-attachment: scroll;
-    background-position: center center;
-    min-height: 100vh;
-    text-align: center;
-  }
-  .contact-stack {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    align-items: center;
-    margin-top: 30px;
-}
+#contact .section-heading,
+#contact .section-subtext {
+  margin-left: 0;
+  text-align: left;
 }
 
 .contact-stack {
-    display: flex;
-    flex-direction: column;
-    gap: 35px;
-    align-items: center;
-    margin-top: 30px;
+  margin: 0;
+  padding: var(--space-4) var(--space-7);
+  display: grid;
+  border-top: 1px solid var(--color-border-strong);
+  border-bottom: 1px solid var(--color-border-strong);
+  background: var(--color-surface-lavender);
 }
 
 .contact-item {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    font-size: 1.4em;
-    color: #333;
+  min-width: 0;
+  min-height: 88px;
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr);
+  align-items: center;
+  gap: var(--space-4);
+  border-bottom: 1px solid var(--color-border-strong);
+  color: var(--color-plum);
 }
 
-.contact-item a {
-    color: #333;
-    text-decoration: none;
-    font-weight: bold;
-    transition: color 0.2s ease;
+.contact-item:last-child {
+  border-bottom: 0;
+}
+
+.contact-item a,
+.contact-item span {
+  min-width: 0;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  color: var(--color-plum);
+  font-family: var(--font-ui);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  line-height: 1.45;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+  transition: color var(--motion-standard) var(--motion-ease);
 }
 
 .contact-item a:hover {
-    color: #b89ae2;
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 5px;
 }
 
 .contact-icon {
-    width: 30px;
-    height: 30px;
+  width: 32px;
+  height: 32px;
+  display: block;
+  object-fit: contain;
 }
 
-.contact-item,
-.contact-item a,
-.contact-item span {
-    font-family: 'Viaoda Libre', serif;
+@media (max-width: 860px) {
+  #contact.page.active {
+    display: block;
+  }
+
+  #contact .page-intro {
+    width: min(100%, 680px);
+    margin: 0 auto var(--space-7);
+    text-align: center;
+  }
+
+  #contact .page-intro::after {
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  #contact .section-heading,
+  #contact .section-subtext {
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+  }
+
+  .contact-stack {
+    width: min(100%, 680px);
+    margin: 0 auto;
+  }
 }
 
+@media (max-width: 560px) {
+  .contact-stack {
+    padding: var(--space-2) var(--space-4);
+  }
 
+  .contact-item {
+    min-height: 76px;
+    grid-template-columns: 36px minmax(0, 1fr);
+  }
 
+  .contact-item a,
+  .contact-item span {
+    font-size: 1rem;
+  }
+
+  .contact-icon {
+    width: 28px;
+    height: 28px;
+  }
+}
