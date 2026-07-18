@@ -236,6 +236,25 @@ document.addEventListener('keydown', event => {
         });
     });
 
+    const deliveryOptionField = document.getElementById("deliveryOption");
+    const deliveryLocationGroup = document.getElementById("deliveryLocationGroup");
+    const deliveryLocationField = document.getElementById("deliveryLocation");
+
+    function syncDeliveryLocationField() {
+      const isDelivery = deliveryOptionField.value === "delivery";
+
+      deliveryLocationGroup.hidden = !isDelivery;
+      deliveryLocationField.disabled = !isDelivery;
+      deliveryLocationField.required = isDelivery;
+
+      if (!isDelivery) {
+        deliveryLocationField.value = "";
+      }
+    }
+
+    deliveryOptionField.addEventListener("change", syncDeliveryLocationField);
+    syncDeliveryLocationField();
+
     // Auto-set the minimum pickup date (6 days from today)
     const pickupDateField = document.getElementById("pickupDate");
     const today = new Date();
@@ -900,7 +919,7 @@ pickupDateField.addEventListener("change", function(e) {
       }
     }
 
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbyaMidrMaJuA8VTty6vAIs6jnDBJb_PA-ifsw1cFJcyf7TF52Vf7iU4wWDcypcYhAWUfQ/exec';
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbwEiBOvY9sTCOdelD8IYU0OEF6q5ZMdv6D8EQY8i7z5eY2wIhdi4mXiwsWSR900dppRVA/exec';
 
     const submitBtn = form.querySelector("button[type='submit']");
     submitBtn.disabled = true;
@@ -937,6 +956,7 @@ pickupDateField.addEventListener("change", function(e) {
       }
 
       form.reset();
+      syncDeliveryLocationField();
 
       preservedSize = "";
       preservedFlavor = "";

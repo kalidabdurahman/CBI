@@ -47,6 +47,13 @@ function doPost(e) {
     const firstName = (formData.firstName || "Unknown").trim();
     const lastName = (formData.lastName || "User").trim();
 
+    const deliveryOption = formData.deliveryOption || "";
+    const deliveryLocation = (formData.deliveryLocation || "").trim();
+
+    if (deliveryOption === "delivery" && !deliveryLocation) {
+      throw new Error("A delivery address is required for delivery orders.");
+    }
+
     const now = new Date();
     const orderId = getNextOrderId(customSheet, tastingSheet, dessertSheet, batchSheet);
 
@@ -66,7 +73,8 @@ function doPost(e) {
         lastName,
         formData.phoneNumber || "",
         formData.email || "",
-        formData.deliveryOption || "",
+        deliveryOption,
+        deliveryLocation,
         formData.pickupDate || "",
         formData.paymentType || "",
         formData.occasion || "",
@@ -91,7 +99,8 @@ function doPost(e) {
         lastName,
         phoneNumber: formData.phoneNumber || "",
         email: formData.email || "",
-        deliveryOption: formData.deliveryOption || "",
+        deliveryOption,
+        deliveryLocation,
         pickupDate: formData.pickupDate || "",
         paymentType: formData.paymentType || "",
         occasion: formData.occasion || "",
@@ -113,7 +122,8 @@ function doPost(e) {
         lastName,
         formData.phoneNumber || "",
         formData.email || "",
-        formData.deliveryOption || "",
+        deliveryOption,
+        deliveryLocation,
         formData.pickupDate || "",
         formData.paymentType || "",
         formData.occasion || "",
@@ -143,7 +153,8 @@ function doPost(e) {
         lastName,
         phoneNumber: formData.phoneNumber || "",
         email: formData.email || "",
-        deliveryOption: formData.deliveryOption || "",
+        deliveryOption,
+        deliveryLocation,
         pickupDate: formData.pickupDate || "",
         paymentType: formData.paymentType || "",
         occasion: formData.occasion || "",
@@ -176,7 +187,8 @@ function doPost(e) {
         lastName,
         formData.phoneNumber || "",
         formData.email || "",
-        formData.deliveryOption || "",
+        deliveryOption,
+        deliveryLocation,
         formData.pickupDate || "",
         formData.paymentType || "",
         formData.occasion || "",
@@ -194,7 +206,8 @@ function doPost(e) {
         lastName,
         phoneNumber: formData.phoneNumber || "",
         email: formData.email || "",
-        deliveryOption: formData.deliveryOption || "",
+        deliveryOption,
+        deliveryLocation,
         pickupDate: formData.pickupDate || "",
         paymentType: formData.paymentType || "",
         occasion: formData.occasion || "",
@@ -221,7 +234,8 @@ function doPost(e) {
         lastName,
         formData.phoneNumber || "",
         formData.email || "",
-        formData.deliveryOption || "",
+        deliveryOption,
+        deliveryLocation,
         formData.pickupDate || "",
         formData.paymentType || "",
         formData.occasion || "",
@@ -251,7 +265,8 @@ function doPost(e) {
         lastName,
         phoneNumber: formData.phoneNumber || "",
         email: formData.email || "",
-        deliveryOption: formData.deliveryOption || "",
+        deliveryOption,
+        deliveryLocation,
         pickupDate: formData.pickupDate || "",
         paymentType: formData.paymentType || "",
         occasion: formData.occasion || "",
@@ -514,6 +529,11 @@ function buildOrderEmailPlainText(order) {
     `Phone Number: ${order.phoneNumber || "—"}`,
     `Email: ${order.email || "—"}`,
     `Delivery Option: ${order.deliveryOption || "—"}`,
+    `Delivery Address: ${
+      order.deliveryOption === "delivery"
+        ? (order.deliveryLocation || "—")
+        : "N/A"
+    }`,
     `Pickup Date: ${order.pickupDate || "—"}`,
     `Payment Type: ${order.paymentType || "—"}`,
     `Occasion: ${order.occasion || "—"}`,
@@ -622,7 +642,8 @@ function testNotificationEmail() {
     lastName: "Customer",
     phoneNumber: "(651) 555-1212",
     email: "cakesbyiftu@example.com",
-    deliveryOption: "pickup",
+    deliveryOption: "delivery",
+    deliveryLocation: "123 Example Street, Minneapolis, MN 55401",
     pickupDate: "2026-03-25",
     paymentType: "cashapp",
     occasion: "Birthday",

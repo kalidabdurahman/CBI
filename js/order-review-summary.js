@@ -55,6 +55,7 @@ function generateReviewSummary() {
           ${row("Phone Number", formData.get("phoneNumber"))}
           ${row("Email", formData.get("email"))}
           ${row("Delivery Option", formData.get("deliveryOption"))}
+          ${formData.get("deliveryOption") === "delivery" ? row("Delivery Address", formData.get("deliveryLocation")) : ""}
           ${row("Pickup Date", formData.get("pickupDate"))}
           ${row("Payment Type", formData.get("paymentType"))}
           ${row("Occasion", formData.get("occasion"))}
@@ -216,6 +217,7 @@ else if (orderCategory === "dessert") {
         ${row("Phone Number", formData.get("phoneNumber"))}
         ${row("Email", formData.get("email"))}
         ${row("Delivery Option", formData.get("deliveryOption"))}
+        ${formData.get("deliveryOption") === "delivery" ? row("Delivery Address", formData.get("deliveryLocation")) : ""}
         ${row("Pickup Date", formData.get("pickupDate"))}
         ${row("Payment Type", formData.get("paymentType"))}
         ${row("Occasion", formData.get("occasion"))}

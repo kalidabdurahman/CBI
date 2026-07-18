@@ -6,11 +6,11 @@
     <title>CakesByIftu</title>
     <link rel="stylesheet" href="css/base.css?v=atelier-phase2">
     <link rel="stylesheet" href="css/home.css?v=atelier-phase2">
-    <link rel="stylesheet" href="css/contact.css?v=atelier-phase2">
+    <link rel="stylesheet" href="css/contact.css?v=atelier-contact-direct">
     <link rel="stylesheet" href="css/gallery.css?v=atelier-reviews-gallery">
     <link rel="stylesheet" href="css/lightbox.css?v=atelier-phase2">
     <link rel="stylesheet" href="css/tiered-collections.css?v=atelier-availability">
-    <link rel="stylesheet" href="css/reviews.css?v=atelier-reviews-minimal">
+    <link rel="stylesheet" href="css/reviews.css?v=atelier-yelp-feature">
     <link rel="stylesheet" href="css/flavors.css?v=atelier-phase2">
     <link rel="stylesheet" href="css/pricing.css?v=atelier-phase2">
     <link rel="stylesheet" href="css/order.css?v=atelier-phase2">
@@ -586,7 +586,7 @@
                     <strong>Current availability</strong>
                     <span>I'm currently not taking orders for 2027.</span>
                     <span>July 2026 is fully booked.</span>
-                    <span>August 2026 Booked Days: 2, 7–9, and 16–20 are also booked.</span>
+                    <span>August 2026 Booked Days: 2, 8, and 15–23.</span>
                     <span>September 2026 Booked Days: 4-6, 12</span>
                 </p>
             </div>
@@ -914,13 +914,26 @@
                 <div class="form-group form-group-wide">
                     <label for="deliveryOption">Would you like your order picked up or delivered?<span class="required-asterisk">*</span> </label>
                     <div id="deliveryInfo" class="delivery-info">
-                      Pickup location: New Brighton / Mounds View — $3/mile if delivery <br>
+                      Pickup location: North New Brighton — $3/mile if delivery <br>
                   </div>
                     <select id="deliveryOption" name="deliveryOption" required>
                         <option value="" disabled selected>Select an Option</option>
                         <option value="pickup">Pick Up</option>
                         <option value="delivery">Delivery</option>
                     </select>
+                </div>
+
+                <div class="form-group form-group-wide" id="deliveryLocationGroup" hidden>
+                    <label for="deliveryLocation">Delivery Address<span class="required-asterisk">*</span></label>
+                    <input
+                        type="text"
+                        id="deliveryLocation"
+                        name="deliveryLocation"
+                        placeholder="Street address, city, state, ZIP"
+                        autocomplete="street-address"
+                        required
+                        disabled
+                    >
                 </div>
 
         
@@ -1038,6 +1051,18 @@
               </section>
 
               <div class="reviews-order-action">
+                <div class="reviews-event-feature">
+                  <p>Community spotlight</p>
+                  <a
+                    href="https://www.yelp.com/biz/elite-event-bound-nolo-minneapolis?uid=NWLpHwZME28NJ3r7I5GXXw&amp;utm_source=ishare&amp;start=10"
+                    class="reviews-event-link"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <span>CakesByIftu at Yelp Elite Event @ BOUND Nolo - Minneapolis</span>
+                    <span class="reviews-event-arrow" aria-hidden="true">↗</span>
+                  </a>
+                </div>
                 <a href="#order" class="reviews-order-cta nav-link" data-page="order">Order Your Cake</a>
               </div>
             </div>
@@ -1049,21 +1074,75 @@
         <!-- ================= CONTACT ================= -->
         <section id="contact" class="page" aria-labelledby="contactHeading">
             <div class="page-intro contact-intro">
-                <h2 class="section-heading" id="contactHeading">CONTACT ME</h2>
-                <p class="section-subtext">Don't hesitate to reach out for anything!!</p>
+                <h2 class="section-heading" id="contactHeading">GET IN TOUCH</h2>
+                <p class="section-subtext">Questions, ideas, or something sweet in mind? Send a message below.</p>
             </div>
-            <div class="contact-stack">
-                <div class="contact-item">
-                    <img src="images/insta.png" alt="Instagram Icon" class="contact-icon">
-                    <a href="https://www.instagram.com/cakesbyiftu" target="_blank" rel="noopener noreferrer">@CakesByIftu</a>
+
+            <div class="contact-layout">
+                <div class="contact-details">
+                    <div class="contact-location" aria-label="Location: Twin Cities, Minnesota, Minneapolis and Saint Paul">
+                        <span>Twin Cities, MN</span>
+                        <small>Minneapolis / St. Paul</small>
+                    </div>
+
+                    <div class="contact-stack">
+                        <div class="contact-item">
+                            <img src="images/insta.png" alt="" class="contact-icon">
+                            <a href="https://www.instagram.com/cakesbyiftu" target="_blank" rel="noopener noreferrer">@CakesByIftu</a>
+                        </div>
+                        <div class="contact-item">
+                            <img src="images/text.png" alt="" class="contact-icon">
+                            <a href="tel:+16513999465">(651) 399-9465</a>
+                        </div>
+                        <div class="contact-item">
+                            <img src="images/mail.png" alt="" class="contact-icon">
+                            <a href="mailto:cakesbyiftu@gmail.com">cakesbyiftu@gmail.com</a>
+                        </div>
+                    </div>
                 </div>
-                <div class="contact-item">
-                    <img src="images/text.png" alt="Text Icon" class="contact-icon">
-                    <a href="tel:+16513999465">(651) 399-9465</a>
-                </div>
-                <div class="contact-item">
-                    <img src="images/mail.png" alt="Email Icon" class="contact-icon">
-                    <a href="mailto:cakesbyiftu@gmail.com">cakesbyiftu@gmail.com</a>
+
+                <div class="contact-form-wrap">
+                    <form
+                        id="contactForm"
+                        action="https://formsubmit.co/ajax/cakesbyiftu@gmail.com"
+                        method="post"
+                    >
+                        <input type="hidden" name="_subject" value="New CakesByIftu Website Message">
+                        <input type="hidden" name="_template" value="table">
+                        <div class="contact-honeypot" aria-hidden="true">
+                            <label for="contactWebsite">Website</label>
+                            <input id="contactWebsite" name="_honey" type="text" tabindex="-1" autocomplete="off">
+                        </div>
+
+                        <div class="contact-name-fields">
+                            <div class="contact-field">
+                                <label for="contactFirstName">First name <span aria-hidden="true">*</span></label>
+                                <input id="contactFirstName" name="first_name" type="text" autocomplete="given-name" required>
+                            </div>
+                            <div class="contact-field">
+                                <label for="contactLastName">Last name <span aria-hidden="true">*</span></label>
+                                <input id="contactLastName" name="last_name" type="text" autocomplete="family-name" required>
+                            </div>
+                        </div>
+
+                        <div class="contact-field">
+                            <label for="contactEmail">Email <span aria-hidden="true">*</span></label>
+                            <input id="contactEmail" name="email" type="email" autocomplete="email" required>
+                        </div>
+
+                        <div class="contact-field">
+                            <label for="contactPhone">Phone number <span aria-hidden="true">*</span></label>
+                            <input id="contactPhone" name="phone_number" type="tel" autocomplete="tel" required>
+                        </div>
+
+                        <div class="contact-field">
+                            <label for="contactMessage">Message <span aria-hidden="true">*</span></label>
+                            <textarea id="contactMessage" name="message" rows="6" required></textarea>
+                        </div>
+
+                        <button class="contact-submit" type="submit">Send Message</button>
+                        <p class="contact-form-status" id="contactFormStatus" role="status" aria-live="polite"></p>
+                    </form>
                 </div>
             </div>
         </section>
@@ -1246,8 +1325,9 @@
     <script src="js/navigation.js?v=atelier-reviews-gallery"></script>
     <script src="js/gallery.js?v=atelier-reviews-gallery"></script>
     <script src="js/reviews.js?v=atelier-reviews-minimal"></script>
+    <script src="js/contact.js?v=atelier-contact-direct"></script>
     <script src="js/pricing.js?v=atelier-phase2"></script>
-    <script src="js/order-data.js?v=availability-2026-07-aug"></script>
+    <script src="js/order-data.js?v=availability-2026-08-update"></script>
     <script src="js/order-pricing.js?v=atelier-phase2"></script>
     <script src="js/order-ui-renderers.js?v=atelier-phase2"></script>
     <script src="js/order-dessert-ui.js?v=atelier-phase2"></script>
@@ -1255,11 +1335,11 @@
     <script src="js/order-tasting-ui.js?v=atelier-phase2"></script>
     <script src="js/order-panel-ui.js?v=atelier-phase2"></script>
     <script src="js/order-cart.js?v=atelier-phase2"></script>
-    <script src="js/order-review-summary.js?v=atelier-phase2"></script>
+    <script src="js/order-review-summary.js?v=delivery-location"></script>
     <script src="js/order-image-preview.js?v=atelier-phase2"></script>
     <script src="js/order-image-submit.js?v=atelier-phase2"></script>
     <script src="js/order-submit.js?v=atelier-phase2"></script>
-    <script src="script.js?v=atelier-phase2"></script>
+    <script src="script.js?v=delivery-location"></script>
     <script src="js/header-ui.js?v=atelier-hero-correction"></script>
     
 
