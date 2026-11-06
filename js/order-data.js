@@ -1,11 +1,4 @@
-const invalidDates = [
-  "2026-10-20",
-  "2026-10-21",
-  "2026-10-22",
-  "2026-10-23",
-  "2026-10-24",
-  "2026-10-25",
-];
+const invalidDates = [];
 
 const invalidYears = [
   "2027",
