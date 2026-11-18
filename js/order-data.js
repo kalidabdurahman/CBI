@@ -1,11 +1,13 @@
-const invalidDates = [
-  "2026-11-13",
-  "2026-11-14",
-  "2026-11-15",
+const pickupClosures = [
+  { start: "2026-11-13", end: "2026-11-15" },
+  { start: "2026-11-17", end: "2026-11-30" },
+  { start: "2027-02-08", end: "2027-03-11" },
 ];
 
-const invalidYears = [
-  "2027",
+const pickupSchedule2027 = [
+  { start: "2027-01-01", end: "2027-05-09", weekdays: [0, 5, 6], daysLabel: "Friday through Sunday" },
+  { start: "2027-05-12", end: "2027-08-22", weekdays: [0, 3, 4, 5, 6], daysLabel: "Wednesday through Sunday" },
+  { start: "2027-08-27", end: "2027-12-12", weekdays: [0, 5, 6], daysLabel: "Friday through Sunday" },
 ];
 
 const flavorOptions = [

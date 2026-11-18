@@ -598,10 +598,12 @@
                     <h2 class="section-heading" id="orderHeading">PLACE YOUR ORDER</h2>
                     <p class="section-subtext">Complete the order form below, and I'll contact you for details and payment!</p>
                 </div>
-                <p class="availability-note" role="note">
+                <p class="availability-note" id="pickupAvailability" role="note">
                     <strong>Current availability</strong>
-                    <span>I'm currently not taking orders for 2027. <i>(Orders for 2027 will open soon!)</i></span>
-                    <span>November 13–15, 2026 is fully booked.</span>
+                    <span>Closed November 17–30, 2026.</span>
+                    <span>January 1–May 9, 2027<br>Friday–Sunday<br>Closed February 8–March 11</span>
+                    <span>May 12–August 22, 2027<br>Wednesday–Sunday</span>
+                    <span>August 27–December 12, 2027<br>Friday–Sunday</span>
                 </p>
             </div>
 
@@ -956,9 +958,8 @@
                     <label for="pickupDate">
                         What day would you like your order?
                         <span class="required-asterisk">*</span>
-                        <span style="font-size: 0.8em;"><i>Mondays &amp; Tuesdays Unavailable</i></span>
                       </label>                      
-                    <input type="date" id="pickupDate" name="pickupDate" min="" required>
+                    <input type="date" id="pickupDate" name="pickupDate" min="" aria-describedby="pickupAvailability" required>
                 </div>
 
                 <!-- Payment Type -->
@@ -1341,7 +1342,7 @@
     <script src="js/reviews.js?v=atelier-reviews-minimal"></script>
     <script src="js/contact.js?v=atelier-contact-direct"></script>
     <script src="js/pricing.js?v=atelier-phase2"></script>
-    <script src="js/order-data.js?v=availability-2026-11-06"></script>
+    <script src="js/order-data.js?v=availability-2026-11-17"></script>
     <script src="js/order-pricing.js?v=atelier-phase2"></script>
     <script src="js/order-ui-renderers.js?v=atelier-phase2"></script>
     <script src="js/order-dessert-ui.js?v=atelier-phase2"></script>
@@ -1353,7 +1354,7 @@
     <script src="js/order-image-preview.js?v=atelier-phase2"></script>
     <script src="js/order-image-submit.js?v=atelier-phase2"></script>
     <script src="js/order-submit.js?v=atelier-phase2"></script>
-    <script src="script.js?v=delivery-location"></script>
+    <script src="script.js?v=availability-2026-11-17"></script>
     <script src="js/header-ui.js?v=atelier-hero-correction"></script>
     
 

@@ -92,13 +92,21 @@ document.addEventListener('keydown', event => {
     function getBlockedPickupDateMessage(dateValue) {
       if (!dateValue) return "";
 
-      const selectedYear = dateValue.slice(0, 4);
-      if (invalidYears.includes(selectedYear)) {
-        return `⚠️ I'm currently not taking orders for ${selectedYear}. Please choose another date.`;
+      if (pickupClosures.some(({ start, end }) => dateValue >= start && dateValue <= end)) {
+        return "⚠️ That date is unavailable. Please choose another day.";
       }
 
-      if (invalidDates.includes(dateValue)) {
-        return "⚠️ That date is unavailable. Please choose another day.";
+      const weekday = new Date(`${dateValue}T00:00:00Z`).getUTCDay();
+      if (dateValue.startsWith("2027-")) {
+        const period = pickupSchedule2027.find(({ start, end }) => dateValue >= start && dateValue <= end);
+        if (!period) {
+          return "⚠️ That date is unavailable. Please choose another day.";
+        }
+        if (!period.weekdays.includes(weekday)) {
+          return `⚠️ Orders are available ${period.daysLabel} during this period. Please choose another day.`;
+        }
+      } else if (weekday === 1 || weekday === 2) {
+        return "⚠️ Mondays and Tuesdays are unavailable. Please pick another day.";
       }
 
       return "";
@@ -179,9 +187,9 @@ document.addEventListener('keydown', event => {
               const diffDays = (chosen - today) / (1000 * 60 * 60 * 24);
               const requiredDays = getCurrentOrderRequiredLeadTimeDays();
 
-              if (chosen.getDay() === 1 || chosen.getDay() === 2 || diffDays < requiredDays) {
+              if (diffDays < requiredDays) {
                 showFormError(
-                  `⚠️ Please choose a valid date: ${getLeadTimeText(requiredDays)} notice and not a Monday or Tuesday.`
+                  `⚠️ Please choose a date with ${getLeadTimeText(requiredDays)} notice.`
                 );
                 return;
               }
@@ -262,35 +270,18 @@ document.addEventListener('keydown', event => {
     minDate.setDate(minDate.getDate() + 7);
     pickupDateField.min = minDate.toISOString().split("T")[0];
 
-// ▽ block out Mondays, closed years, and specific dates ▽
-pickupDateField.addEventListener("change", function(e) {
-  const val = e.target.value;
-  if (!val) return; // no date chosen, so do nothing
+    pickupDateField.addEventListener("change", function () {
+      if (!pickupDateField.value) return;
 
-  const blockedDateMessage = getBlockedPickupDateMessage(val);
-  if (blockedDateMessage) {
-    showFormError(blockedDateMessage);
-    e.target.value = "";
-    return;
-  }
+      const blockedDateMessage = getBlockedPickupDateMessage(pickupDateField.value);
+      if (blockedDateMessage) {
+        showFormError(blockedDateMessage);
+        pickupDateField.value = "";
+        return;
+      }
 
-  // Parse the chosen date (assumes "YYYY-MM-DD")
-  const chosen = new Date(val + "T00:00");
-  const dayOfWeek = chosen.getDay(); // 0=Sunday, 1=Monday, …, 6=Saturday
-
-  // 1) Block all Mondays and Tuesdays
-  if (dayOfWeek === 1 || dayOfWeek === 2) {
-    showFormError("⚠️ Mondays and Tuesdays are unavailable. Please pick another day.");
-    e.target.value = "";
-    return;
-  }
-
-  // If we reach here, the date is allowed—clear any previous error
-  clearFormError();
-});
-// ▲ end Monday & specific-date blocker ▲
-
-
+      clearFormError();
+    });
 
 
     const addImageBtn = document.getElementById("addImageBtn");
