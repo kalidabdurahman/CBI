@@ -118,12 +118,12 @@
   background: rgba(255, 248, 239, 0.55);
 }
 
-#contactForm {
+.email-form {
   display: grid;
   gap: var(--space-4);
 }
 
-.contact-name-fields {
+.contact-field-row {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--space-4);
@@ -148,6 +148,7 @@
 }
 
 .contact-field input,
+.contact-field select,
 .contact-field textarea {
   width: 100%;
   min-height: 48px;
@@ -170,6 +171,7 @@
 }
 
 .contact-field input:focus,
+.contact-field select:focus,
 .contact-field textarea:focus {
   border-color: var(--color-accent);
   outline: 0;
@@ -251,7 +253,7 @@
     padding-left: var(--space-4);
   }
 
-  .contact-name-fields {
+  .contact-field-row {
     grid-template-columns: 1fr;
   }
 
@@ -260,6 +262,7 @@
 @media (prefers-reduced-motion: reduce) {
   .contact-item a,
   .contact-field input,
+  .contact-field select,
   .contact-field textarea,
   .contact-submit {
     transition: none;

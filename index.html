@@ -6,10 +6,10 @@
     <title>CakesByIftu</title>
     <link rel="stylesheet" href="css/base.css?v=atelier-phase2">
     <link rel="stylesheet" href="css/home.css?v=atelier-phase2">
-    <link rel="stylesheet" href="css/contact.css?v=atelier-contact-direct">
+    <link rel="stylesheet" href="css/contact.css?v=wedding-inquiries">
+    <link rel="stylesheet" href="css/wedding-guide.css?v=wedding-submit">
     <link rel="stylesheet" href="css/gallery.css?v=atelier-reviews-gallery">
     <link rel="stylesheet" href="css/lightbox.css?v=atelier-phase2">
-    <link rel="stylesheet" href="css/tiered-collections.css?v=atelier-availability">
     <link rel="stylesheet" href="css/reviews.css?v=atelier-yelp-feature">
     <link rel="stylesheet" href="css/flavors.css?v=atelier-phase2">
     <link rel="stylesheet" href="css/pricing.css?v=atelier-phase2">
@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="css/shared-transitions.css?v=atelier-phase2">
     <link rel="stylesheet" href="css/header-nav.css?v=atelier-phase2">
     <link rel="stylesheet" href="css/home-late.css?v=atelier-press-links">
-    <link rel="stylesheet" href="css/header-nav-late.css?v=atelier-hero-correction">
+    <link rel="stylesheet" href="css/header-nav-late.css?v=wedding-guide-revisions">
     <link rel="stylesheet" href="css/cart.css?v=atelier-phase2">
     <link rel="icon" href="images/logo.png" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Viaoda+Libre&display=swap" rel="stylesheet">
@@ -45,7 +45,7 @@
                     <li><a href="#gallery" class="nav-link" data-page="gallery">Gallery</a></li>
                     <li><a href="#flavors" class="nav-link" data-page="flavors">Flavors</a></li>
                     <li><a href="#pricing" class="nav-link" data-page="pricing">Menu</a></li>
-                    <li><a href="#tiered-collections" class="nav-link" data-page="tiered-collections">Tiered Collections</a></li>
+                    <li><a href="#wedding-cake-inquiry" class="nav-link" data-page="wedding-cake-inquiry">Wedding Cake Inquiries</a></li>
                     <li><a href="#order" class="nav-link" data-page="order">Order</a></li>
                     <li><a href="#reviews" class="nav-link" data-page="reviews">Reviews</a></li>
                     <li><a href="#contact" class="nav-link" data-page="contact">Contact</a></li>
@@ -508,89 +508,448 @@
             
         </section>
 
-        <!-- ================= TIERED COLLECTIONS ================= -->
-        <section id="tiered-collections" class="page" aria-labelledby="collectionsHeading">
+        <!-- ================= WEDDING CAKE INQUIRIES ================= -->
+        <section id="wedding-cake-inquiry" class="page" aria-labelledby="weddingCakeInquiryHeading">
             <div class="page-intro">
-                <h2 class="section-heading" id="collectionsHeading">TIERED COLLECTIONS</h2>
-                <p class="section-subtext">All Tiered Collections Packages are ordered through contacting me! If you see any packages deals you like, you can customize it to your liking, don’t hesitate to ask!</p>
+                <h2 class="section-heading" id="weddingCakeInquiryHeading">Wedding Cake Inquiries</h2>
+                <p class="section-subtext">Explore the wedding cake guide or <a href="#weddingFormHeading">go straight to the inquiry form</a>.</p>
             </div>
 
-            <aside class="tiered-availability-notice" id="tieredAvailabilityNotice" aria-labelledby="tieredAvailabilityHeading" hidden>
-                <p class="tiered-availability-eyebrow">Collection availability</p>
-                <h3 id="tieredAvailabilityHeading">Tiered collections are temporarily unavailable.</h3>
-                <p>Our curated wedding cake packages are currently paused. You’re still welcome to explore the collections, or <a href="#contact" class="nav-link" data-page="contact">contact us about a custom cake</a>.</p>
-            </aside>
-
-          
-            <div class="tiered-grid">
-                <div class="tier-box" data-tier-collection>
-                    <div class="tier-text">
-                        <span class="tier-availability-label" hidden>Unavailable</span>
-                        <h3>Our Day</h3>
-                        <ul>
-                            <li>4” + 6” (Feeds 20–30) - <strong>$155</strong> </li>
-                            <li>Elegant custom design</li>
-                            <li>Any flavor + filling</li>
-                            <li><em>Optional add-ons: Regular tasting box +$30, local delivery</em></li>
-                        </ul>
-                    </div>
-                    <img src="images/tiered1.png" alt="Our Day Sample" loading="lazy" decoding="async">
+            <div class="wedding-widget" id="wedding-guide">
+              <div class="guide-topline"><a href="#home" class="brand nav-link" data-page="home">CakesByIftu</a><span class="top-note">Wedding Cake 101 • 10 Pages</span></div>
+              <div class="carousel-shell" id="weddingCarousel" role="region" aria-roledescription="carousel" aria-label="CakesByIftu Wedding Cake 101 guide" tabindex="0">
+                <button class="round-arrow" type="button" data-dir="-1" aria-label="Previous slide" disabled>‹</button>
+                <div class="carousel-viewport" id="weddingViewport">
+                  <div class="carousel-track" id="weddingTrack">
+                    <section class="guide-slide cover-slide" role="group" aria-roledescription="slide" aria-label="Slide 1 of 10: Wedding Cake 101 Cover" data-title="Wedding Cake 101 Cover" id="guide-slide-1">
+                      <div class="cover-grid">
+                        <div class="cover-art"><img src="images/wedding-cake-101.webp" width="654" height="372" loading="lazy" alt="CakesByIftu Wedding Cake 101 original lilac cover, Going back to the basics, featuring the baker holding a cake and a whisk" /></div>
+                        <div class="cover-right">
+                          <p class="eyebrow">CakesByIftu Presents</p>
+                          <h2>Wedding Cake<br><em>101</em></h2>
+                          <p class="cover-script">Going Back to the Basics.</p>
+                          <div class="cover-rule"></div>
+                          <p>A guide to tiers, servings, prices, flavors, delivery and booking.</p>
+                          <p class="cover-hint">Scroll thru to begin <span aria-hidden="true">→</span></p>
+                        </div>
+                      </div>
+                      <div class="slide-foot cover-foot"><span>CAKESBYIFTU LLC</span><span>01 / 10</span></div>
+                    </section>
+                    <section class="guide-slide process-slide" role="group" aria-roledescription="slide" aria-label="Slide 2 of 10: What Is the Real Process?" data-title="What Is the Real Process?" id="guide-slide-2">
+                      <div class="slide-head">
+                        <p class="eyebrow"><span class="accent-line"></span> Wedding Cake 101 <span class="eyebrow-number">/ 02</span></p>
+                        <h2>What Is the Real Process?</h2>
+                        <p class="subhead">A Quick Guide to Booking With CakesByIftu</p>
+                      </div>
+                      <div class="slide-main">
+                        <p class="process-welcome">First off, thank you so much for choosing CakesByIftu to make your wedding cake and for trusting me with such a special day!</p>
+                        <div class="steps">
+                          <div class="step"><span class="step-number">01</span>
+                            <div>
+                              <h3>Inquire</h3>
+                              <p>Send your wedding date, venue, guest count, and inspiration photos.</p>
+                            </div>
+                          </div>
+                          <div class="step"><span class="step-number">02</span>
+                            <div>
+                              <h3>Choose Your Cake</h3>
+                              <p>Review your serving needs, tier sizes, flavors, and design details. CakesByIftu specializes in custom designs. We can pull from different cake designs or even your Pinterest board to make your vision come to life!</p>
+                            </div>
+                          </div>
+                          <div class="step"><span class="step-number">03</span>
+                            <div>
+                              <h3>Review Your Invoice</h3>
+                              <p>Once the details are confirmed, your invoice will be sent.</p>
+                            </div>
+                          </div>
+                          <div class="step"><span class="step-number">04</span>
+                            <div>
+                              <h3>Secure Your Date</h3>
+                              <p>A deposit reserves your date. Wedding cakes require at least 3 weeks’ notice.</p>
+                            </div>
+                          </div>
+                          <div class="step"><span class="step-number">05</span>
+                            <div>
+                              <h3>Final Details</h3>
+                              <p>Complete the final payment on time and confirm delivery and setup.</p>
+                            </div>
+                          </div>
+                        </div>
+                        <p class="ribbon">Your date is not reserved until required payment is received.</p>
+                      </div>
+                      <div class="slide-foot"><span>CAKESBYIFTU LLC</span><span>GOING BACK TO THE BASICS</span></div>
+                    </section>
+                    <section class="guide-slide pricing-slide" role="group" aria-roledescription="slide" aria-label="Slide 3 of 10: Cake Sizes &amp; Pricing" data-title="Cake Sizes &amp; Pricing" id="guide-slide-3">
+                      <div class="slide-head">
+                        <p class="eyebrow"><span class="accent-line"></span> Wedding Cake 101 <span class="eyebrow-number">/ 03</span></p>
+                        <h2>Cake Sizes & Pricing</h2>
+                        <p class="subhead">2 and 3 Tier Wedding Cakes • Prices Are Starting Prices</p>
+                      </div>
+                      <div class="slide-main">
+                        <div class="tier-size-group">
+                          <article class="option">
+                            <span class="option-tier">2 Tiers</span>
+                            <svg class="tier-cake" viewBox="0 0 218 130" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="2 tier cake, 4 inch, 6 inch from top to bottom"><defs><linearGradient id="weddingCakeShade1" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#E5E1E0"/><stop offset=".25" stop-color="#FDFBF7"/><stop offset=".82" stop-color="#FFF"/><stop offset="1" stop-color="#DFDBD7"/></linearGradient></defs><ellipse cx="109" cy="121" rx="57.0" ry="8" fill="#DDD9DD"/><rect x="77.0" y="12" width="64" height="49" rx="5" fill="url(#weddingCakeShade1)" stroke="#C8C0C5" stroke-width="1.1"/><ellipse cx="109" cy="14" rx="32.0" ry="5.5" fill="#FFF" stroke="#D3CCD0" stroke-width=".9"/><text x="109" y="41.0" fill="#201A22" font-size="16" font-weight="600" text-anchor="middle">4″</text><rect x="67.0" y="60" width="84" height="49" rx="5" fill="url(#weddingCakeShade1)" stroke="#C8C0C5" stroke-width="1.1"/><ellipse cx="109" cy="62" rx="42.0" ry="5.5" fill="#FFF" stroke="#D3CCD0" stroke-width=".9"/><text x="109" y="89.0" fill="#201A22" font-size="16" font-weight="600" text-anchor="middle">6″</text></svg>
+                            <div class="option-detail"><strong class="option-sizes">4″ + 6″</strong><span class="option-servings">Feeds 20–30</span><span class="option-price">$160 <small>base price</small></span></div>
+                          </article>
+                          <article class="option">
+                            <span class="option-tier">2 Tiers</span>
+                            <svg class="tier-cake" viewBox="0 0 218 130" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="2 tier cake, 6 inch, 8 inch from top to bottom"><defs><linearGradient id="weddingCakeShade2" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#E5E1E0"/><stop offset=".25" stop-color="#FDFBF7"/><stop offset=".82" stop-color="#FFF"/><stop offset="1" stop-color="#DFDBD7"/></linearGradient></defs><ellipse cx="109" cy="121" rx="67.0" ry="8" fill="#DDD9DD"/><rect x="67.0" y="12" width="84" height="49" rx="5" fill="url(#weddingCakeShade2)" stroke="#C8C0C5" stroke-width="1.1"/><ellipse cx="109" cy="14" rx="42.0" ry="5.5" fill="#FFF" stroke="#D3CCD0" stroke-width=".9"/><text x="109" y="41.0" fill="#201A22" font-size="16" font-weight="600" text-anchor="middle">6″</text><rect x="57.0" y="60" width="104" height="49" rx="5" fill="url(#weddingCakeShade2)" stroke="#C8C0C5" stroke-width="1.1"/><ellipse cx="109" cy="62" rx="52.0" ry="5.5" fill="#FFF" stroke="#D3CCD0" stroke-width=".9"/><text x="109" y="89.0" fill="#201A22" font-size="16" font-weight="600" text-anchor="middle">8″</text></svg>
+                            <div class="option-detail"><strong class="option-sizes">6″ + 8″</strong><span class="option-servings">Feeds 50–60</span><span class="option-price">$240 <small>base price</small></span></div>
+                          </article>
+                          <article class="option">
+                            <span class="option-tier">2 Tiers</span>
+                            <svg class="tier-cake" viewBox="0 0 218 130" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="2 tier cake, 8 inch, 10 inch from top to bottom"><defs><linearGradient id="weddingCakeShade3" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#E5E1E0"/><stop offset=".25" stop-color="#FDFBF7"/><stop offset=".82" stop-color="#FFF"/><stop offset="1" stop-color="#DFDBD7"/></linearGradient></defs><ellipse cx="109" cy="121" rx="77.5" ry="8" fill="#DDD9DD"/><rect x="57.0" y="12" width="104" height="49" rx="5" fill="url(#weddingCakeShade3)" stroke="#C8C0C5" stroke-width="1.1"/><ellipse cx="109" cy="14" rx="52.0" ry="5.5" fill="#FFF" stroke="#D3CCD0" stroke-width=".9"/><text x="109" y="41.0" fill="#201A22" font-size="16" font-weight="600" text-anchor="middle">8″</text><rect x="46.5" y="60" width="125" height="49" rx="5" fill="url(#weddingCakeShade3)" stroke="#C8C0C5" stroke-width="1.1"/><ellipse cx="109" cy="62" rx="62.5" ry="5.5" fill="#FFF" stroke="#D3CCD0" stroke-width=".9"/><text x="109" y="89.0" fill="#201A22" font-size="16" font-weight="600" text-anchor="middle">10″</text></svg>
+                            <div class="option-detail"><strong class="option-sizes">8″ + 10″</strong><span class="option-servings">Feeds 90–100</span><span class="option-price">$300 <small>base price</small></span></div>
+                          </article>
+                        </div>
+                        <div class="tier-size-group">
+                          <article class="option">
+                            <span class="option-tier">3 Tiers</span>
+                            <svg class="tier-cake" viewBox="0 0 218 145" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="3 tier cake, 4 inch, 6 inch, 8 inch from top to bottom"><defs><linearGradient id="weddingCakeShade4" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#E5E1E0"/><stop offset=".25" stop-color="#FDFBF7"/><stop offset=".82" stop-color="#FFF"/><stop offset="1" stop-color="#DFDBD7"/></linearGradient></defs><ellipse cx="109" cy="136" rx="67.0" ry="8" fill="#DDD9DD"/><rect x="77.0" y="12" width="64" height="38" rx="5" fill="url(#weddingCakeShade4)" stroke="#C8C0C5" stroke-width="1.1"/><ellipse cx="109" cy="14" rx="32.0" ry="5.5" fill="#FFF" stroke="#D3CCD0" stroke-width=".9"/><text x="109" y="35.5" fill="#201A22" font-size="16" font-weight="600" text-anchor="middle">4″</text><rect x="67.0" y="49" width="84" height="38" rx="5" fill="url(#weddingCakeShade4)" stroke="#C8C0C5" stroke-width="1.1"/><ellipse cx="109" cy="51" rx="42.0" ry="5.5" fill="#FFF" stroke="#D3CCD0" stroke-width=".9"/><text x="109" y="72.5" fill="#201A22" font-size="16" font-weight="600" text-anchor="middle">6″</text><rect x="57.0" y="86" width="104" height="38" rx="5" fill="url(#weddingCakeShade4)" stroke="#C8C0C5" stroke-width="1.1"/><ellipse cx="109" cy="88" rx="52.0" ry="5.5" fill="#FFF" stroke="#D3CCD0" stroke-width=".9"/><text x="109" y="109.5" fill="#201A22" font-size="16" font-weight="600" text-anchor="middle">8″</text></svg>
+                            <div class="option-detail"><strong class="option-sizes">4″ + 6″ + 8″</strong><span class="option-servings">Feeds 70–80</span><span class="option-price">$310 <small>base price</small></span></div>
+                          </article>
+                          <article class="option">
+                            <span class="option-tier">3 Tiers</span>
+                            <svg class="tier-cake" viewBox="0 0 218 145" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="3 tier cake, 6 inch, 8 inch, 10 inch from top to bottom"><defs><linearGradient id="weddingCakeShade5" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#E5E1E0"/><stop offset=".25" stop-color="#FDFBF7"/><stop offset=".82" stop-color="#FFF"/><stop offset="1" stop-color="#DFDBD7"/></linearGradient></defs><ellipse cx="109" cy="136" rx="77.5" ry="8" fill="#DDD9DD"/><rect x="67.0" y="12" width="84" height="38" rx="5" fill="url(#weddingCakeShade5)" stroke="#C8C0C5" stroke-width="1.1"/><ellipse cx="109" cy="14" rx="42.0" ry="5.5" fill="#FFF" stroke="#D3CCD0" stroke-width=".9"/><text x="109" y="35.5" fill="#201A22" font-size="16" font-weight="600" text-anchor="middle">6″</text><rect x="57.0" y="49" width="104" height="38" rx="5" fill="url(#weddingCakeShade5)" stroke="#C8C0C5" stroke-width="1.1"/><ellipse cx="109" cy="51" rx="52.0" ry="5.5" fill="#FFF" stroke="#D3CCD0" stroke-width=".9"/><text x="109" y="72.5" fill="#201A22" font-size="16" font-weight="600" text-anchor="middle">8″</text><rect x="46.5" y="86" width="125" height="38" rx="5" fill="url(#weddingCakeShade5)" stroke="#C8C0C5" stroke-width="1.1"/><ellipse cx="109" cy="88" rx="62.5" ry="5.5" fill="#FFF" stroke="#D3CCD0" stroke-width=".9"/><text x="109" y="109.5" fill="#201A22" font-size="16" font-weight="600" text-anchor="middle">10″</text></svg>
+                            <div class="option-detail"><strong class="option-sizes">6″ + 8″ + 10″</strong><span class="option-servings">Feeds 115–135</span><span class="option-price">$410 <small>base price</small></span></div>
+                          </article>
+                        </div>
+                        <p class="compact-note">Every tier is made with <strong>3 layers of cake</strong> and <strong>2 layers of filling</strong>. Serving estimates depend on how the cake is cut.</p>
+                      </div>
+                      <div class="slide-foot"><span>CAKESBYIFTU LLC</span><span>GOING BACK TO THE BASICS</span></div>
+                    </section>
+                    <section class="guide-slide pricing-slide dense-pricing" role="group" aria-roledescription="slide" aria-label="Slide 4 of 10: Four &amp; Five Tier Cakes" data-title="Four &amp; Five Tier Cakes" id="guide-slide-4">
+                      <div class="slide-head">
+                        <p class="eyebrow"><span class="accent-line"></span> Wedding Cake 101 <span class="eyebrow-number">/ 04</span></p>
+                        <h2>Four & Five Tier Cakes</h2>
+                        <p class="subhead">Larger Tier Combinations • Starting Prices</p>
+                      </div>
+                      <div class="slide-main">
+                        <div class="option-grid">
+                          <article class="option">
+                            <span class="option-tier">4 Tiers</span>
+                            <svg class="tier-cake" viewBox="0 0 218 154" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="4 tier cake, 4 inch, 6 inch, 8 inch, 10 inch from top to bottom"><defs><linearGradient id="weddingCakeShade6" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#E5E1E0"/><stop offset=".25" stop-color="#FDFBF7"/><stop offset=".82" stop-color="#FFF"/><stop offset="1" stop-color="#DFDBD7"/></linearGradient></defs><ellipse cx="109" cy="145" rx="77.5" ry="8" fill="#DDD9DD"/><rect x="77.0" y="12" width="64" height="31" rx="5" fill="url(#weddingCakeShade6)" stroke="#C8C0C5" stroke-width="1.1"/><ellipse cx="109" cy="14" rx="32.0" ry="5.5" fill="#FFF" stroke="#D3CCD0" stroke-width=".9"/><text x="109" y="32.0" fill="#201A22" font-size="15" font-weight="600" text-anchor="middle">4″</text><rect x="67.0" y="42" width="84" height="31" rx="5" fill="url(#weddingCakeShade6)" stroke="#C8C0C5" stroke-width="1.1"/><ellipse cx="109" cy="44" rx="42.0" ry="5.5" fill="#FFF" stroke="#D3CCD0" stroke-width=".9"/><text x="109" y="62.0" fill="#201A22" font-size="15" font-weight="600" text-anchor="middle">6″</text><rect x="57.0" y="72" width="104" height="31" rx="5" fill="url(#weddingCakeShade6)" stroke="#C8C0C5" stroke-width="1.1"/><ellipse cx="109" cy="74" rx="52.0" ry="5.5" fill="#FFF" stroke="#D3CCD0" stroke-width=".9"/><text x="109" y="92.0" fill="#201A22" font-size="15" font-weight="600" text-anchor="middle">8″</text><rect x="46.5" y="102" width="125" height="31" rx="5" fill="url(#weddingCakeShade6)" stroke="#C8C0C5" stroke-width="1.1"/><ellipse cx="109" cy="104" rx="62.5" ry="5.5" fill="#FFF" stroke="#D3CCD0" stroke-width=".9"/><text x="109" y="122.0" fill="#201A22" font-size="15" font-weight="600" text-anchor="middle">10″</text></svg>
+                            <div class="option-detail"><strong class="option-sizes">4″ + 6″ + 8″ + 10″</strong><span class="option-servings">Feeds 135–150</span><span class="option-price">$500 <small>base price</small></span></div>
+                          </article>
+                          <article class="option">
+                            <span class="option-tier">4 Tiers</span>
+                            <svg class="tier-cake" viewBox="0 0 218 154" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="4 tier cake, 6 inch, 8 inch, 10 inch, 12 inch from top to bottom"><defs><linearGradient id="weddingCakeShade7" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#E5E1E0"/><stop offset=".25" stop-color="#FDFBF7"/><stop offset=".82" stop-color="#FFF"/><stop offset="1" stop-color="#DFDBD7"/></linearGradient></defs><ellipse cx="109" cy="145" rx="87.5" ry="8" fill="#DDD9DD"/><rect x="67.0" y="12" width="84" height="31" rx="5" fill="url(#weddingCakeShade7)" stroke="#C8C0C5" stroke-width="1.1"/><ellipse cx="109" cy="14" rx="42.0" ry="5.5" fill="#FFF" stroke="#D3CCD0" stroke-width=".9"/><text x="109" y="32.0" fill="#201A22" font-size="15" font-weight="600" text-anchor="middle">6″</text><rect x="57.0" y="42" width="104" height="31" rx="5" fill="url(#weddingCakeShade7)" stroke="#C8C0C5" stroke-width="1.1"/><ellipse cx="109" cy="44" rx="52.0" ry="5.5" fill="#FFF" stroke="#D3CCD0" stroke-width=".9"/><text x="109" y="62.0" fill="#201A22" font-size="15" font-weight="600" text-anchor="middle">8″</text><rect x="46.5" y="72" width="125" height="31" rx="5" fill="url(#weddingCakeShade7)" stroke="#C8C0C5" stroke-width="1.1"/><ellipse cx="109" cy="74" rx="62.5" ry="5.5" fill="#FFF" stroke="#D3CCD0" stroke-width=".9"/><text x="109" y="92.0" fill="#201A22" font-size="15" font-weight="600" text-anchor="middle">10″</text><rect x="36.5" y="102" width="145" height="31" rx="5" fill="url(#weddingCakeShade7)" stroke="#C8C0C5" stroke-width="1.1"/><ellipse cx="109" cy="104" rx="72.5" ry="5.5" fill="#FFF" stroke="#D3CCD0" stroke-width=".9"/><text x="109" y="122.0" fill="#201A22" font-size="15" font-weight="600" text-anchor="middle">12″</text></svg>
+                            <div class="option-detail"><strong class="option-sizes">6″ + 8″ + 10″ + 12″</strong><span class="option-servings">Feeds 190–210</span><span class="option-price">$680 <small>base price</small></span></div>
+                          </article>
+                          <article class="option">
+                            <span class="option-tier">4 Tiers</span>
+                            <svg class="tier-cake" viewBox="0 0 218 154" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="4 tier cake, 8 inch, 10 inch, 12 inch, 14 inch from top to bottom"><defs><linearGradient id="weddingCakeShade8" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#E5E1E0"/><stop offset=".25" stop-color="#FDFBF7"/><stop offset=".82" stop-color="#FFF"/><stop offset="1" stop-color="#DFDBD7"/></linearGradient></defs><ellipse cx="109" cy="145" rx="98.0" ry="8" fill="#DDD9DD"/><rect x="57.0" y="12" width="104" height="31" rx="5" fill="url(#weddingCakeShade8)" stroke="#C8C0C5" stroke-width="1.1"/><ellipse cx="109" cy="14" rx="52.0" ry="5.5" fill="#FFF" stroke="#D3CCD0" stroke-width=".9"/><text x="109" y="32.0" fill="#201A22" font-size="15" font-weight="600" text-anchor="middle">8″</text><rect x="46.5" y="42" width="125" height="31" rx="5" fill="url(#weddingCakeShade8)" stroke="#C8C0C5" stroke-width="1.1"/><ellipse cx="109" cy="44" rx="62.5" ry="5.5" fill="#FFF" stroke="#D3CCD0" stroke-width=".9"/><text x="109" y="62.0" fill="#201A22" font-size="15" font-weight="600" text-anchor="middle">10″</text><rect x="36.5" y="72" width="145" height="31" rx="5" fill="url(#weddingCakeShade8)" stroke="#C8C0C5" stroke-width="1.1"/><ellipse cx="109" cy="74" rx="72.5" ry="5.5" fill="#FFF" stroke="#D3CCD0" stroke-width=".9"/><text x="109" y="92.0" fill="#201A22" font-size="15" font-weight="600" text-anchor="middle">12″</text><rect x="26.0" y="102" width="166" height="31" rx="5" fill="url(#weddingCakeShade8)" stroke="#C8C0C5" stroke-width="1.1"/><ellipse cx="109" cy="104" rx="83.0" ry="5.5" fill="#FFF" stroke="#D3CCD0" stroke-width=".9"/><text x="109" y="122.0" fill="#201A22" font-size="15" font-weight="600" text-anchor="middle">14″</text></svg>
+                            <div class="option-detail"><strong class="option-sizes">8″ + 10″ + 12″ + 14″</strong><span class="option-servings">Feeds 240–280</span><span class="option-price">$820 <small>base price</small></span></div>
+                          </article>
+                          <article class="option">
+                            <span class="option-tier">5 Tiers</span>
+                            <svg class="tier-cake" viewBox="0 0 218 159" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="5 tier cake, 4 inch, 6 inch, 8 inch, 10 inch, 12 inch from top to bottom"><defs><linearGradient id="weddingCakeShade9" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#E5E1E0"/><stop offset=".25" stop-color="#FDFBF7"/><stop offset=".82" stop-color="#FFF"/><stop offset="1" stop-color="#DFDBD7"/></linearGradient></defs><ellipse cx="109" cy="150" rx="87.5" ry="8" fill="#DDD9DD"/><rect x="77.0" y="12" width="64" height="26" rx="5" fill="url(#weddingCakeShade9)" stroke="#C8C0C5" stroke-width="1.1"/><ellipse cx="109" cy="14" rx="32.0" ry="5.5" fill="#FFF" stroke="#D3CCD0" stroke-width=".9"/><text x="109" y="29.5" fill="#201A22" font-size="15" font-weight="600" text-anchor="middle">4″</text><rect x="67.0" y="37" width="84" height="26" rx="5" fill="url(#weddingCakeShade9)" stroke="#C8C0C5" stroke-width="1.1"/><ellipse cx="109" cy="39" rx="42.0" ry="5.5" fill="#FFF" stroke="#D3CCD0" stroke-width=".9"/><text x="109" y="54.5" fill="#201A22" font-size="15" font-weight="600" text-anchor="middle">6″</text><rect x="57.0" y="62" width="104" height="26" rx="5" fill="url(#weddingCakeShade9)" stroke="#C8C0C5" stroke-width="1.1"/><ellipse cx="109" cy="64" rx="52.0" ry="5.5" fill="#FFF" stroke="#D3CCD0" stroke-width=".9"/><text x="109" y="79.5" fill="#201A22" font-size="15" font-weight="600" text-anchor="middle">8″</text><rect x="46.5" y="87" width="125" height="26" rx="5" fill="url(#weddingCakeShade9)" stroke="#C8C0C5" stroke-width="1.1"/><ellipse cx="109" cy="89" rx="62.5" ry="5.5" fill="#FFF" stroke="#D3CCD0" stroke-width=".9"/><text x="109" y="104.5" fill="#201A22" font-size="15" font-weight="600" text-anchor="middle">10″</text><rect x="36.5" y="112" width="145" height="26" rx="5" fill="url(#weddingCakeShade9)" stroke="#C8C0C5" stroke-width="1.1"/><ellipse cx="109" cy="114" rx="72.5" ry="5.5" fill="#FFF" stroke="#D3CCD0" stroke-width=".9"/><text x="109" y="129.5" fill="#201A22" font-size="15" font-weight="600" text-anchor="middle">12″</text></svg>
+                            <div class="option-detail"><strong class="option-sizes">4″ + 6″ + 8″ + 10″ + 12″</strong><span class="option-servings">Feeds 200–220</span><span class="option-price">$750 <small>base price</small></span></div>
+                          </article>
+                          <article class="option">
+                            <span class="option-tier">5 Tiers</span>
+                            <svg class="tier-cake" viewBox="0 0 218 159" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="5 tier cake, 6 inch, 8 inch, 10 inch, 12 inch, 14 inch from top to bottom"><defs><linearGradient id="weddingCakeShade10" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#E5E1E0"/><stop offset=".25" stop-color="#FDFBF7"/><stop offset=".82" stop-color="#FFF"/><stop offset="1" stop-color="#DFDBD7"/></linearGradient></defs><ellipse cx="109" cy="150" rx="98.0" ry="8" fill="#DDD9DD"/><rect x="67.0" y="12" width="84" height="26" rx="5" fill="url(#weddingCakeShade10)" stroke="#C8C0C5" stroke-width="1.1"/><ellipse cx="109" cy="14" rx="42.0" ry="5.5" fill="#FFF" stroke="#D3CCD0" stroke-width=".9"/><text x="109" y="29.5" fill="#201A22" font-size="15" font-weight="600" text-anchor="middle">6″</text><rect x="57.0" y="37" width="104" height="26" rx="5" fill="url(#weddingCakeShade10)" stroke="#C8C0C5" stroke-width="1.1"/><ellipse cx="109" cy="39" rx="52.0" ry="5.5" fill="#FFF" stroke="#D3CCD0" stroke-width=".9"/><text x="109" y="54.5" fill="#201A22" font-size="15" font-weight="600" text-anchor="middle">8″</text><rect x="46.5" y="62" width="125" height="26" rx="5" fill="url(#weddingCakeShade10)" stroke="#C8C0C5" stroke-width="1.1"/><ellipse cx="109" cy="64" rx="62.5" ry="5.5" fill="#FFF" stroke="#D3CCD0" stroke-width=".9"/><text x="109" y="79.5" fill="#201A22" font-size="15" font-weight="600" text-anchor="middle">10″</text><rect x="36.5" y="87" width="145" height="26" rx="5" fill="url(#weddingCakeShade10)" stroke="#C8C0C5" stroke-width="1.1"/><ellipse cx="109" cy="89" rx="72.5" ry="5.5" fill="#FFF" stroke="#D3CCD0" stroke-width=".9"/><text x="109" y="104.5" fill="#201A22" font-size="15" font-weight="600" text-anchor="middle">12″</text><rect x="26.0" y="112" width="166" height="26" rx="5" fill="url(#weddingCakeShade10)" stroke="#C8C0C5" stroke-width="1.1"/><ellipse cx="109" cy="114" rx="83.0" ry="5.5" fill="#FFF" stroke="#D3CCD0" stroke-width=".9"/><text x="109" y="129.5" fill="#201A22" font-size="15" font-weight="600" text-anchor="middle">14″</text></svg>
+                            <div class="option-detail"><strong class="option-sizes">6″ + 8″ + 10″ + 12″ + 14″</strong><span class="option-servings">Feeds 290–310</span><span class="option-price">$900 <small>base price</small></span></div>
+                          </article>
+                          <article class="option">
+                            <span class="option-tier">5 Tiers</span>
+                            <svg class="tier-cake" viewBox="0 0 218 159" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="5 tier cake, 8 inch, 10 inch, 12 inch, 14 inch, 16 inch from top to bottom"><defs><linearGradient id="weddingCakeShade11" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#E5E1E0"/><stop offset=".25" stop-color="#FDFBF7"/><stop offset=".82" stop-color="#FFF"/><stop offset="1" stop-color="#DFDBD7"/></linearGradient></defs><ellipse cx="109" cy="150" rx="106" ry="8" fill="#DDD9DD"/><rect x="57.0" y="12" width="104" height="26" rx="5" fill="url(#weddingCakeShade11)" stroke="#C8C0C5" stroke-width="1.1"/><ellipse cx="109" cy="14" rx="52.0" ry="5.5" fill="#FFF" stroke="#D3CCD0" stroke-width=".9"/><text x="109" y="29.5" fill="#201A22" font-size="15" font-weight="600" text-anchor="middle">8″</text><rect x="46.5" y="37" width="125" height="26" rx="5" fill="url(#weddingCakeShade11)" stroke="#C8C0C5" stroke-width="1.1"/><ellipse cx="109" cy="39" rx="62.5" ry="5.5" fill="#FFF" stroke="#D3CCD0" stroke-width=".9"/><text x="109" y="54.5" fill="#201A22" font-size="15" font-weight="600" text-anchor="middle">10″</text><rect x="36.5" y="62" width="145" height="26" rx="5" fill="url(#weddingCakeShade11)" stroke="#C8C0C5" stroke-width="1.1"/><ellipse cx="109" cy="64" rx="72.5" ry="5.5" fill="#FFF" stroke="#D3CCD0" stroke-width=".9"/><text x="109" y="79.5" fill="#201A22" font-size="15" font-weight="600" text-anchor="middle">12″</text><rect x="26.0" y="87" width="166" height="26" rx="5" fill="url(#weddingCakeShade11)" stroke="#C8C0C5" stroke-width="1.1"/><ellipse cx="109" cy="89" rx="83.0" ry="5.5" fill="#FFF" stroke="#D3CCD0" stroke-width=".9"/><text x="109" y="104.5" fill="#201A22" font-size="15" font-weight="600" text-anchor="middle">14″</text><rect x="16.0" y="112" width="186" height="26" rx="5" fill="url(#weddingCakeShade11)" stroke="#C8C0C5" stroke-width="1.1"/><ellipse cx="109" cy="114" rx="93.0" ry="5.5" fill="#FFF" stroke="#D3CCD0" stroke-width=".9"/><text x="109" y="129.5" fill="#201A22" font-size="15" font-weight="600" text-anchor="middle">16″</text></svg>
+                            <div class="option-detail"><strong class="option-sizes">8″ + 10″ + 12″ + 14″ + 16″</strong><span class="option-servings">Feeds 340–380</span><span class="option-price">$1,100 <small>base price</small></span></div>
+                          </article>
+                        </div>
+                        <p class="compact-note">These cakes are designed for larger celebrations and require professional delivery.</p>
+                      </div>
+                      <div class="slide-foot"><span>CAKESBYIFTU LLC</span><span>GOING BACK TO THE BASICS</span></div>
+                    </section>
+                    <section class="guide-slide layer-slide" role="group" aria-roledescription="slide" aria-label="Slide 5 of 10: Layers vs. Tiers" data-title="Layers vs. Tiers" id="guide-slide-5">
+                      <div class="slide-head">
+                        <p class="eyebrow"><span class="accent-line"></span> Wedding Cake 101 <span class="eyebrow-number">/ 05</span></p>
+                        <h2>Layers vs. Tiers</h2>
+                        <p class="subhead">A Small Distinction That Makes Cake Sizing Much Easier.</p>
+                      </div>
+                      <div class="slide-main">
+                        <div class="two-feature">
+                          <article class="feature">
+                            <div class="feature-art">
+                              <div class="cake-cut" aria-label="Cross-section: cake, filling, cake, filling, cake">
+                                <div class="cut-cake">CAKE</div>
+                                <div class="cut-filling">FILLING</div>
+                                <div class="cut-cake">CAKE</div>
+                                <div class="cut-filling">FILLING</div>
+                                <div class="cut-cake">CAKE</div>
+                              </div>
+                            </div>
+                            <div>
+                              <p class="label-tag">The Inside</p>
+                              <h3>What Is a Layer?</h3>
+                              <p>Every CakesByIftu tier contains <strong>3 layers of cake</strong> separated by <strong>2 layers of filling</strong>.</p>
+                            </div>
+                          </article>
+                          <article class="feature">
+                            <div class="feature-art">
+                              <svg class="tier-cake big-cake" viewBox="0 0 218 145" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="3 tier cake, 6 inch, 8 inch, 10 inch from top to bottom"><defs><linearGradient id="weddingCakeShade12" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#E5E1E0"/><stop offset=".25" stop-color="#FDFBF7"/><stop offset=".82" stop-color="#FFF"/><stop offset="1" stop-color="#DFDBD7"/></linearGradient></defs><ellipse cx="109" cy="136" rx="77.5" ry="8" fill="#DDD9DD"/><rect x="67.0" y="12" width="84" height="38" rx="5" fill="url(#weddingCakeShade12)" stroke="#C8C0C5" stroke-width="1.1"/><ellipse cx="109" cy="14" rx="42.0" ry="5.5" fill="#FFF" stroke="#D3CCD0" stroke-width=".9"/><text x="109" y="35.5" fill="#201A22" font-size="16" font-weight="600" text-anchor="middle">6″</text><rect x="57.0" y="49" width="104" height="38" rx="5" fill="url(#weddingCakeShade12)" stroke="#C8C0C5" stroke-width="1.1"/><ellipse cx="109" cy="51" rx="52.0" ry="5.5" fill="#FFF" stroke="#D3CCD0" stroke-width=".9"/><text x="109" y="72.5" fill="#201A22" font-size="16" font-weight="600" text-anchor="middle">8″</text><rect x="46.5" y="86" width="125" height="38" rx="5" fill="url(#weddingCakeShade12)" stroke="#C8C0C5" stroke-width="1.1"/><ellipse cx="109" cy="88" rx="62.5" ry="5.5" fill="#FFF" stroke="#D3CCD0" stroke-width=".9"/><text x="109" y="109.5" fill="#201A22" font-size="16" font-weight="600" text-anchor="middle">10″</text></svg>
+                            </div>
+                            <div>
+                              <p class="label-tag">The Stack</p>
+                              <h3>What Is a Tier?</h3>
+                              <p>A tier is <strong>one complete cake</strong>. A three-tier wedding cake has three separate cakes stacked together — each with 3 cake layers.</p>
+                            </div>
+                          </article>
+                        </div>
+                        <p class="ribbon">Layers are <strong>inside</strong> a cake. Tiers are the <strong>cakes stacked</strong> on top of one another.</p>
+                      </div>
+                      <div class="slide-foot"><span>CAKESBYIFTU LLC</span><span>GOING BACK TO THE BASICS</span></div>
+                    </section>
+                    <section class="guide-slide extra-slide" role="group" aria-roledescription="slide" aria-label="Slide 6 of 10: Additional Cake Options" data-title="Additional Cake Options" id="guide-slide-6">
+                      <div class="slide-head">
+                        <p class="eyebrow"><span class="accent-line"></span> Wedding Cake 101 <span class="eyebrow-number">/ 06</span></p>
+                        <h2>Additional Cake Options</h2>
+                        <p class="subhead">Wedding Servings Only</p>
+                      </div>
+                      <div class="slide-main">
+                        <div class="two-feature extras">
+                          <article class="feature">
+                            <div class="sheet-icon" aria-hidden="true">
+                              <div class="sheet-rect"><span>WEDDING<br>CAKE</span></div>
+                            </div>
+                            <div>
+                              <p class="label-tag">Additional Servings</p>
+                              <h3>Sheet Cakes</h3>
+                              <div class="sheet-prices">
+                                <div><span>Quarter Sheet</span><strong>$100</strong><small>Feeds 40–45</small></div>
+                                <div><span>Half Sheet</span><strong>$160</strong><small>Feeds 90–100</small></div>
+                              </div>
+                            </div>
+                          </article>
+                          <article class="feature">
+                            <div class="feature-art">
+                              <svg class="tier-cake" viewBox="0 0 218 145" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="3 tier cake, 4 inch, 6 inch, 8 inch from top to bottom"><defs><linearGradient id="weddingCakeShade13" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#E5E1E0"/><stop offset=".25" stop-color="#FDFBF7"/><stop offset=".82" stop-color="#FFF"/><stop offset="1" stop-color="#DFDBD7"/></linearGradient></defs><ellipse cx="109" cy="136" rx="67.0" ry="8" fill="#DDD9DD"/><rect x="77.0" y="12" width="64" height="38" rx="5" fill="url(#weddingCakeShade13)" stroke="#C8C0C5" stroke-width="1.1"/><ellipse cx="109" cy="14" rx="32.0" ry="5.5" fill="#FFF" stroke="#D3CCD0" stroke-width=".9"/><text x="109" y="35.5" fill="#201A22" font-size="16" font-weight="600" text-anchor="middle">4″</text><rect x="67.0" y="49" width="84" height="38" rx="5" fill="url(#weddingCakeShade13)" stroke="#C8C0C5" stroke-width="1.1"/><ellipse cx="109" cy="51" rx="42.0" ry="5.5" fill="#FFF" stroke="#D3CCD0" stroke-width=".9"/><text x="109" y="72.5" fill="#201A22" font-size="16" font-weight="600" text-anchor="middle">6″</text><rect x="57.0" y="86" width="104" height="38" rx="5" fill="url(#weddingCakeShade13)" stroke="#C8C0C5" stroke-width="1.1"/><ellipse cx="109" cy="88" rx="52.0" ry="5.5" fill="#FFF" stroke="#D3CCD0" stroke-width=".9"/><text x="109" y="109.5" fill="#201A22" font-size="16" font-weight="600" text-anchor="middle">8″</text></svg>
+                            </div>
+                            <div>
+                              <p class="label-tag">Decorative Options</p>
+                              <h3>Real vs. Dummy Tiers</h3>
+                              <p>Real tiers are fully edible. Dummy tiers are decorative, non-edible tiers used to create height or a larger appearance. A combination of both is also possible. Please mention that in your initial inquiry.</p>
+                              <p>Dummy tiers still require materials, decorating, and labor, so they are not automatically cheaper.</p>
+                            </div>
+                          </article>
+                        </div>
+                      </div>
+                      <div class="slide-foot"><span>CAKESBYIFTU LLC</span><span>GOING BACK TO THE BASICS</span></div>
+                    </section>
+                    <section class="guide-slide flavor-slide" role="group" aria-roledescription="slide" aria-label="Slide 7 of 10: Flavors &amp; Fillings" data-title="Flavors &amp; Fillings" id="guide-slide-7">
+                      <div class="slide-head">
+                        <p class="eyebrow"><span class="accent-line"></span> Wedding Cake 101 <span class="eyebrow-number">/ 07</span></p>
+                        <h2>Flavors & Fillings</h2>
+                        <p class="subhead">Beautiful Cakes Need Flavors That Work Well Together — and Stay Stable.</p>
+                      </div>
+                      <div class="slide-main">
+                        <div class="two-feature flavors">
+                          <article class="feature text-first">
+                            <div>
+                              <p class="label-tag">Make It Yours</p>
+                              <h3>Your Flavor Options</h3>
+                              <p>Cake flavors and fillings can be selected for different tiers, depending on the design and structural needs of the cake.</p>
+                              <p>Buttercream fillings are often more stable for stacked cakes.</p>
+                              <p>Under <a class="text-link nav-link" href="#flavors" data-page="flavors">Flavors</a> are all the available cake flavors and filling options. You are also able to mix and match each of the tiers.</p>
+                            </div>
+                          </article>
+                          <article class="feature important-feature">
+                            <div>
+                              <p class="label-tag">Important to Know</p>
+                              <h3>A Note About Softer Fillings</h3>
+                              <p>Slippery or soft fillings—such as loose fruit compotes, jams, and some cream fillings—may <strong>not be recommended for the bottom tiers</strong> of tall wedding cakes.</p>
+                              <p>Under pressure, they can shift if not properly stabilized. Filling placement is chosen with stability and food safety in mind.</p>
+                            </div>
+                          </article>
+                        </div>
+                      </div>
+                      <div class="slide-foot"><span>CAKESBYIFTU LLC</span><span>GOING BACK TO THE BASICS</span></div>
+                    </section>
+                    <section class="guide-slide delivery-slide" role="group" aria-roledescription="slide" aria-label="Slide 8 of 10: Delivery &amp; Setup" data-title="Delivery &amp; Setup" id="guide-slide-8">
+                      <div class="slide-head">
+                        <p class="eyebrow"><span class="accent-line"></span> Wedding Cake 101 <span class="eyebrow-number">/ 08</span></p>
+                        <h2>Delivery & Setup</h2>
+                        <p class="subhead">What to Expect on Your Wedding Day</p>
+                      </div>
+                      <div class="slide-main">
+                        <div class="fee-grid">
+                          <div class="fee-box">
+                            <p class="label-tag">Delivery</p>
+                            <strong>$3 <small>per mile</small></strong>
+                            <p>From CakesByIftu’s location in 55112.</p>
+                            <p class="fee-note">Typical delivery fees: $15–$200</p>
+                          </div>
+                          <div class="fee-box">
+                            <p class="label-tag">On-Site Setup</p>
+                            <strong>$40–$60</strong>
+                            <p>Setup depends on the size and needs of your cake.</p>
+                            <p class="fee-note">A sturdy, level table is required.</p>
+                          </div>
+                          <div class="fee-box">
+                            <p class="label-tag">Design Pricing</p>
+                            <p>Base cake prices do not include every design detail. Intricate piping, fondant work, florals, toppers, and other custom elements will be added to the total.</p>
+                          </div>
+                        </div>
+                        <p class="ribbon">Large tiered cakes must be delivered. Please confirm venue access and appropriate temperature-controlled storage.</p>
+                      </div>
+                      <div class="slide-foot"><span>CAKESBYIFTU LLC</span><span>GOING BACK TO THE BASICS</span></div>
+                    </section>
+                    <section class="guide-slide policies-slide" role="group" aria-roledescription="slide" aria-label="Slide 9 of 10: Booking &amp; Payment Policies" data-title="Booking &amp; Payment Policies" id="guide-slide-9">
+                      <div class="slide-head">
+                        <p class="eyebrow"><span class="accent-line"></span> Wedding Cake 101 <span class="eyebrow-number">/ 09</span></p>
+                        <h2>Booking & Payment Policies</h2>
+                        <p class="subhead">The Most Important Details Before Placing Your Order.</p>
+                      </div>
+                      <div class="slide-main">
+                        <div class="policies">
+                          <article class="policy">
+                            <h3>Booking</h3>
+                            <p>At least 3 weeks’ notice is required for wedding cakes. The non-refundable deposit is due no later than 3 weeks before the event. Unpaid orders are canceled and the date released.</p>
+                          </article>
+                          <article class="policy">
+                            <h3>Payment</h3>
+                            <p>Most orders require a 50% non-refundable deposit. Wedding cakes $400 and under are paid in full when booked. Invoices are due within 48 hours. Orders $400 and over have a remaining balance due 2 weeks before the event.</p>
+                          </article>
+                          <article class="policy">
+                            <h3>Cancellations</h3>
+                            <p>Deposits are non-refundable. Cancellations within 2 weeks of the event are not eligible for a refund. Earlier cancellations may be eligible under the full policy.</p>
+                          </article>
+                          <article class="policy">
+                            <h3>Pickup & Delivery</h3>
+                            <p>All orders must be paid in full before pickup or delivery. A cake with 6″ + 8″ + 10″ tiers or larger must be delivered.</p>
+                          </article>
+                          <article class="policy">
+                            <h3>Allergies</h3>
+                            <p>Please share any allergies before booking. This is not an allergen-free kitchen, and cross-contact cannot be ruled out.</p>
+                          </article>
+                        </div>
+                        <p class="compact-note">This is a summary. View the complete CakesByIftu policies when placing an order.</p>
+                        <p class="inspection-note"><em>These products are homemade and are not subject to state inspection.</em></p>
+                      </div>
+                      <div class="slide-foot"><span>CAKESBYIFTU LLC</span><span>GOING BACK TO THE BASICS</span></div>
+                    </section>
+                    <section class="guide-slide final-slide" role="group" aria-roledescription="slide" aria-label="Slide 10 of 10: Let’s Bring Your Vision to Life" data-title="Let’s Bring Your Vision to Life" id="guide-slide-10">
+                      <div class="slide-head">
+                        <p class="eyebrow"><span class="accent-line"></span> Wedding Cake 101 <span class="eyebrow-number">/ 10</span></p>
+                        <h2>Let’s Bring Your Vision to Life</h2>
+                      </div>
+                      <div class="slide-main">
+                        <div class="finish-wrap">
+                          <div class="finish-text">
+                            <h3>Ready to Plan Your Wedding Cake?</h3>
+                            <p>Start with your wedding date, venue, estimated guest count, and a few inspiration photos of what you would like so we are able to customize your wedding cake to your big day!!</p>
+                            <p>I can’t wait to hear what you have in mind!</p>
+                            <p class="finish-signature">x,<br>Iftu</p>
+                            <a class="cta-link" href="#weddingFormHeading">Start your inquiry <span aria-hidden="true">↓</span></a>
+                            <p class="site-note">cakesbyiftu.com&nbsp; • &nbsp;@cakesbyiftu</p>
+                          </div>
+                          <div class="finish-photos">
+                            <img src="images/weddingcakes/cake15.jpeg" srcset="images/gallery-thumbs/weddingcakes/cake15.jpeg 675w, images/weddingcakes/cake15.jpeg 2831w" sizes="(max-width: 700px) 120px, 180px" alt="White piped wedding cake topped with raspberries beneath a floral arch" loading="lazy" decoding="async">
+                            <img src="images/weddingcakes/cake19.jpeg" srcset="images/gallery-thumbs/weddingcakes/cake19.jpeg 675w, images/weddingcakes/cake19.jpeg 3024w" sizes="(max-width: 700px) 120px, 180px" alt="Three-tier white wedding cake with draped detailing, sugar flowers, and a gold monogram" loading="lazy" decoding="async">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="slide-foot"><span>CAKESBYIFTU LLC</span><span>GOING BACK TO THE BASICS</span></div>
+                    </section>
+                  </div>
                 </div>
-            
-                <div class="tier-box" data-tier-collection>
-                    <div class="tier-text">
-                        <span class="tier-availability-label" hidden>Unavailable</span>
-                        <h3>Elegance & Simplicity</h3>
-                        <ul>
-                            <li>6” + 8” - <strong>$250</strong> </li>
-                            <li>4” + 6” + 8”  - <strong>$310</strong></li>
-                            <li>Fully custom design</li>
-                            <li>Regular tasting box for 2</li>
-                            <li><em>Optional add-ons: serving cake +$100, local delivery</em></li>
-                        </ul>
-                    </div>
-                    <img src="images/tiered2.png" alt="Elegance & Simplicity Sample" loading="lazy" decoding="async">
+                <button class="round-arrow" type="button" data-dir="1" aria-label="Next slide">›</button>
+              </div>
+              <div class="control-row" aria-label="Slide navigation">
+                <div class="control-left">
+                  <div class="slide-control-mobile">
+                    <button class="round-arrow" type="button" data-dir="-1" aria-label="Previous slide" disabled>‹</button>
+                    <button class="round-arrow" type="button" data-dir="1" aria-label="Next slide">›</button>
+                  </div>
+                  <span class="page-count" id="weddingPageCount">1 of 10</span><span class="slide-current-name" id="weddingSlideName">Wedding Cake 101 Cover</span>
                 </div>
-            
-                <div class="tier-box" data-tier-collection>
-                    <div class="tier-text">
-                        <span class="tier-availability-label" hidden>Unavailable</span>
-                        <h3>Our Night</h3>
-                        <ul>
-                            <li>6” + 8” + 10” (Feeds 115–135)  - <strong>$420</strong> </li>
-                            <li>Custom luxury design</li>
-                            <li>Deluxe tasting box for 4</li>
-                            <li>Full delivery, setup, and styling</li>
-                            <li><em>Optional add-ons: cake serving +$100</em></li>
-                        </ul>
-                    </div>
-                    <img src="images/tiered3.png" alt="Our Night Sample" loading="lazy" decoding="async">
-                </div>
-            
-                <div class="tier-box" data-tier-collection>
-                    <div class="tier-text">
-                        <span class="tier-availability-label" hidden>Unavailable</span>
-                        <h3>Tiered Collection’s</h3>
-                        <ul>
-                            <li>6” + 8” + 10” + 12” (Feeds 220-260) - <strong>$770</strong></li>
-                            <li>6” + 8” + 10” + 12” + 14” (Feeds 350-400)  - <strong>$800+</strong></li>
-                            <li>Show-stopping custom design</li>
-                            <li>Deluxe tasting box for 6</li>
-                            <li>Full delivery, styling, cutting included</li>
-                        </ul>
-                    </div>
-                    <img src="images/tiered4.png" alt="Tiered Collections Sample" loading="lazy" decoding="async">
-                </div>
+                <div class="dots" id="weddingDots" aria-label="Choose a slide"></div>
+              </div>
+              <div class="sr-only" role="status" aria-live="polite" aria-atomic="true" id="carouselAnnounce"></div>
             </div>
-            
-          
-            <p class="small-note">
-              ALL PACKAGING – price varies based on design of choice. These are all starter prices. Once I approve your order, I’ll calculate the exact total for you!
-            </p>
-          </section>
-          
-            
-        
+
+            <div class="wedding-inquiry-wrap contact-form-wrap">
+                <h3 id="weddingFormHeading" tabindex="-1">Tell me about your wedding</h3>
+                <p>Share your plans and I’ll follow up about availability and cake options.</p>
+                <form id="weddingInquiryForm" class="email-form" aria-labelledby="weddingFormHeading"
+                      action="https://formsubmit.co/cakesbyiftu@gmail.com" method="post" enctype="multipart/form-data"
+                      data-ajax-action="https://formsubmit.co/ajax/cakesbyiftu@gmail.com"
+                      data-sending-label="Sending inquiry…"
+                      data-success-message="Wedding inquiry sent. I’ll be in touch about your plans.">
+                    <input type="hidden" name="_subject" value="New CakesByIftu Wedding Cake Inquiry">
+                    <input type="hidden" name="_template" value="table">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_next">
+                    <div class="contact-honeypot" aria-hidden="true">
+                        <label for="weddingWebsite">Website</label>
+                        <input id="weddingWebsite" name="_honey" type="text" tabindex="-1" autocomplete="off">
+                    </div>
+                    <fieldset>
+                        <legend>Wedding details</legend>
+                        <div class="contact-field-row">
+                            <div class="contact-field">
+                                <label for="weddingDate">Wedding date <span aria-hidden="true">*</span></label>
+                                <input id="weddingDate" name="Wedding date" type="date" required aria-describedby="weddingDateHint weddingDateError">
+                                <small id="weddingDateHint">Please allow at least 3 weeks before your wedding.</small>
+                                <small id="weddingDateError" aria-live="polite"></small>
+                            </div>
+                            <div class="contact-field">
+                                <label for="weddingGuests">Estimated guest count <span aria-hidden="true">*</span></label>
+                                <input id="weddingGuests" name="Estimated guest count" type="number" min="1" step="1" inputmode="numeric" required>
+                            </div>
+                        </div>
+                        <div class="contact-field">
+                            <label for="weddingVenue">Venue and city <span aria-hidden="true">*</span></label>
+                            <input id="weddingVenue" name="Venue and city" type="text" placeholder="Venue name, or city if undecided" required>
+                        </div>
+                        <div class="contact-field">
+                            <label for="weddingCakes">What cake or cakes do you have in mind? <span aria-hidden="true">*</span></label>
+                            <textarea id="weddingCakes" name="Cake preferences" rows="4" required
+                                      placeholder="A tiered cake, a small cutting cake with sheet cakes, or help choosing a size? Include any flavors or design details you love."></textarea>
+                        </div>
+                        <div class="contact-field">
+                            <label for="weddingInspiration">Inspiration link (optional)</label>
+                            <input id="weddingInspiration" name="Inspiration link" type="url" placeholder="https://" inputmode="url">
+                        </div>
+                        <div class="contact-field wedding-photo">
+                            <label for="weddingPhoto">Inspiration photo (optional)</label>
+                            <input id="weddingPhoto" name="attachment" type="file" accept="image/*,.heic,.heif"
+                                   aria-describedby="weddingPhotoHint">
+                            <small id="weddingPhotoHint">One photo up to 10 MB.</small>
+                            <button type="button" id="removeWeddingPhoto" hidden>Remove photo</button>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Contact details</legend>
+                        <div class="contact-field">
+                            <label for="weddingName">Your name <span aria-hidden="true">*</span></label>
+                            <input id="weddingName" name="Name" type="text" autocomplete="name" required>
+                        </div>
+                        <div class="contact-field-row">
+                            <div class="contact-field">
+                                <label for="weddingReplyMethod">How should I reach you?</label>
+                                <select id="weddingReplyMethod" name="Preferred contact method">
+                                    <option value="Email">Email</option>
+                                    <option value="Text">Text message</option>
+                                </select>
+                            </div>
+                            <div class="contact-field">
+                                <label for="weddingEmail">Email address <span aria-hidden="true">*</span></label>
+                                <input id="weddingEmail" name="email" type="email" autocomplete="email" required>
+                            </div>
+                            <div class="contact-field" hidden>
+                                <label for="weddingPhone">Mobile number <span aria-hidden="true">*</span></label>
+                                <input id="weddingPhone" name="Mobile number" type="tel" autocomplete="tel" required disabled>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <button class="contact-submit" type="submit" autocomplete="off">Send wedding inquiry</button>
+                    <p id="weddingInquirySent" class="contact-form-status" role="status" aria-live="polite" tabindex="-1"></p>
+                </form>
+            </div>
+        </section>
+
         <!-- ================= ORDER FORM ================= -->
         <section id="order" class="page" aria-labelledby="orderHeading">
             <div id="orderHeader">
@@ -1117,7 +1476,7 @@
 
                 <div class="contact-form-wrap">
                     <form
-                        id="contactForm"
+                        id="contactForm" class="email-form"
                         action="https://formsubmit.co/ajax/cakesbyiftu@gmail.com"
                         method="post"
                     >
@@ -1128,7 +1487,7 @@
                             <input id="contactWebsite" name="_honey" type="text" tabindex="-1" autocomplete="off">
                         </div>
 
-                        <div class="contact-name-fields">
+                        <div class="contact-field-row">
                             <div class="contact-field">
                                 <label for="contactFirstName">First name <span aria-hidden="true">*</span></label>
                                 <input id="contactFirstName" name="first_name" type="text" autocomplete="given-name" required>
@@ -1177,7 +1536,7 @@
                         <li><a href="#gallery" class="nav-link" data-page="gallery">Gallery</a></li>
                         <li><a href="#flavors" class="nav-link" data-page="flavors">Flavors</a></li>
                         <li><a href="#pricing" class="nav-link" data-page="pricing">Menu</a></li>
-                        <li><a href="#tiered-collections" class="nav-link" data-page="tiered-collections">Tiered Collections</a></li>
+                        <li><a href="#wedding-cake-inquiry" class="nav-link" data-page="wedding-cake-inquiry">Wedding Cake Inquiries</a></li>
                         <li><a href="#order" class="nav-link" data-page="order">Order</a></li>
                         <li><a href="#reviews" class="nav-link" data-page="reviews">Reviews</a></li>
                         <li><a href="#contact" class="nav-link" data-page="contact">Contact</a></li>
@@ -1218,7 +1577,7 @@
               <li>
                   Wedding Cake Booking
                   <ul>
-                      <li>A minimum of 1 month (4 weeks) notice is required for all wedding cake bookings.</li>
+                      <li>Wedding cakes must be booked at least 3 weeks before the event.</li>
                       <li>A <strong>non-refundable</strong> deposit must be paid no later than 3 weeks before the event date to secure your order.</li>
                       <li>Orders without a paid deposit by the 3-week deadline will be automatically canceled and the date released. <strong>No exceptions.</strong></li>
                   </ul>
@@ -1312,7 +1671,7 @@
               <li><a href="#gallery">Gallery</a></li>
               <li><a href="#flavors">Flavors</a></li>
               <li><a href="#pricing">Menu</a></li>
-              <li><a href="#tiered-collections">Tiered Collections</a></li>
+              <li><a href="#wedding-cake-inquiry">Wedding Cake Inquiries</a></li>
               <li><a href="#order">Order</a></li>
               <li><a href="#reviews">Reviews</a></li>
               <li><a href="#contact">Contact</a></li>
@@ -1334,14 +1693,13 @@
       
     
     <!-- ================= SCRIPTS ================= -->
-    <script src="js/site-config.js?v=atelier-availability"></script>
-    <script src="js/tiered-collections.js?v=atelier-availability"></script>
-    <script src="js/navigation.js?v=atelier-reviews-gallery"></script>
+    <script src="js/navigation.js?v=wedding-cake-inquiry"></script>
     <script src="js/gallery.js?v=atelier-reviews-gallery"></script>
     <script src="js/reviews.js?v=atelier-reviews-minimal"></script>
-    <script src="js/contact.js?v=atelier-contact-direct"></script>
+    <script src="js/contact.js?v=wedding-submit"></script>
+    <script src="js/order-data.js?v=shared-availability"></script>
+    <script src="js/wedding-guide.js?v=wedding-availability"></script>
     <script src="js/pricing.js?v=atelier-phase2"></script>
-    <script src="js/order-data.js?v=availability-2026-11-23"></script>
     <script src="js/order-pricing.js?v=atelier-phase2"></script>
     <script src="js/order-ui-renderers.js?v=atelier-phase2"></script>
     <script src="js/order-dessert-ui.js?v=atelier-phase2"></script>
@@ -1353,7 +1711,7 @@
     <script src="js/order-image-preview.js?v=atelier-phase2"></script>
     <script src="js/order-image-submit.js?v=atelier-phase2"></script>
     <script src="js/order-submit.js?v=atelier-phase2"></script>
-    <script src="script.js?v=availability-2026-11-17"></script>
+    <script src="script.js?v=shared-availability"></script>
     <script src="js/header-ui.js?v=atelier-hero-correction"></script>
     
 
