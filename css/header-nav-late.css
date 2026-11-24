@@ -116,6 +116,11 @@ body:not(.home-active) .hero-top-right {
 }
 
 @media (min-width: 1025px) {
+  .site-header nav a {
+    font: 400 clamp(1.0625rem, 1.4vw, 1.1875rem)/1.25 var(--font-display);
+    white-space: nowrap;
+  }
+
   .site-header nav a:hover,
   .site-header nav a:focus-visible,
   .site-header nav a.is-current {

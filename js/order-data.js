@@ -8,6 +8,29 @@ const pickupSchedule2027 = [
   { start: "2027-08-27", end: "2027-12-12", weekdays: [0, 5, 6], daysLabel: "Friday through Sunday" },
 ];
 
+function getBlockedPickupDateMessage(dateValue) {
+  if (!dateValue) return "";
+
+  if (pickupClosures.some(({ start, end }) => dateValue >= start && dateValue <= end)) {
+    return "⚠️ That date is unavailable. Please choose another day.";
+  }
+
+  const weekday = new Date(`${dateValue}T00:00:00Z`).getUTCDay();
+  if (dateValue.startsWith("2027-")) {
+    const period = pickupSchedule2027.find(({ start, end }) => dateValue >= start && dateValue <= end);
+    if (!period) {
+      return "⚠️ That date is unavailable. Please choose another day.";
+    }
+    if (!period.weekdays.includes(weekday)) {
+      return `⚠️ Orders are available ${period.daysLabel} during this period. Please choose another day.`;
+    }
+  } else if (weekday === 1 || weekday === 2) {
+    return "⚠️ Mondays and Tuesdays are unavailable. Please pick another day.";
+  }
+
+  return "";
+}
+
 const flavorOptions = [
   "French Vanilla",
   "Double Chocolate",

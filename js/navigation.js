@@ -101,12 +101,4 @@ document.addEventListener("DOMContentLoaded", function () {
           document.body.classList.remove("scrolled");
       }
   });
-
-  const heroTierLink = document.querySelector('.hero-btn.nav-link[data-page="tiered-collections"]');
-  if (heroTierLink) {
-    heroTierLink.addEventListener('click', e => {
-      e.preventDefault();
-      navigateToPage('tiered-collections');
-    });
-  }
 });
